@@ -14,8 +14,11 @@
         android:theme="@style/Theme.ImOKApp"
         tools:targetApi="31">
         <activity
-            android:name=".PatientProfile"
+            android:name=".ManualInput"
             android:exported="false" />
+        <activity
+            android:name=".PatientProfile"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
