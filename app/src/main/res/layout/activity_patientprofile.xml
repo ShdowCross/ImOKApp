@@ -10,38 +10,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
-        android:background="@color/design_default_color_secondary"
+        android:background="@color/MainBackground"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginBottom="3px"
             android:orientation="horizontal">
             <LinearLayout
                 android:id="@+id/patientImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_weight="0.2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
                 <ImageView
                     android:id="@+id/profile"
-                    android:layout_width="400px"
-                    android:layout_height="400px"
-                    android:src="C:\Users\ASUS\AndroidStudioProjects\ImOKApp\app\src\main\res\drawable-24\profilepicture.jpg" />
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:src="@mipmap/profile" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/patientBrief"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:padding="21px"
+                android:layout_weight="0.8"
                 android:orientation="horizontal"
-                android:background="@color/cardview_dark_background"
                 >
                 <LinearLayout
                     android:layout_weight="0.4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@drawable/bubble_border"
+                    android:layout_margin="20px">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,7 +113,8 @@
                     android:id="@+id/patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_margin="20px">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -133,11 +139,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="BMI: "/>
+
                         <TextView
                             android:id="@+id/patientBMIData"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="24.7 (Normal)"/>
+                            android:layout_height="match_parent"
+                            android:text="24.7 (Normal)" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -165,39 +172,54 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
-            android:background="@color/cardview_dark_background">
+            android:layout_weight="0.7"
+            android:background="@drawable/bubble_border">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="0.5"
+                android:padding="20px">
                 <TextView
                     android:id="@+id/patientMedicalHistoryTitle"
-                    android:layout_width="141dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10px"
                     android:padding="20px"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
                     android:text="Medical History:" />
 
                 <TextView
                     android:id="@+id/patientMedicalHistoryData"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
                     android:padding="20px"
+                    android:gravity="center_vertical"
+                    android:layout_weight="0.8"
                     android:text="Hypertension (diagnosed in 2010) Type 2 diabetes (diagnosed in 2012) High cholesterol levels (diagnosed in 2014) Seasonal allergies (mild)" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:padding="20px"
+                android:layout_weight="0.5">
                 <TextView
                     android:id="@+id/VaccinationHistoryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10px"
                     android:padding="20px"
+                    android:gravity="center_vertical"
                     android:text="Vaccination History:" />
                 <TextView
                     android:id="@+id/patientVaccinationHistoryData"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
                     android:padding="20px"
+                    android:gravity="center_vertical"
                     android:text="COVID-19 Vaccine: Pfizer-BioNTech (2 doses, completed on April 1, 2023) Influenza Vaccine: Received annually (last received on October 15, 2022)"/>
             </LinearLayout>
         </LinearLayout>

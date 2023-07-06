@@ -3,8 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Sin Yan Chong/Documents/GitHub/ImOKApp/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
-        <entry key="..\:/Users/Sin Yan Chong/Documents/GitHub/ImOKApp/app/src/main/res/layout/activity_patientprofile.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/bubble_border.xml" value="0.104" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/custom_border.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.8" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/profilePicture_background.xml" value="0.121" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/profile_background.xml" value="0.121" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/drawable/profile_picture_background.xml" value="0.121" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/layout/activity_patientprofile.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1215" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1215" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/mipmap-anydpi-v26/profile.xml" value="0.121" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/ImOKApp/app/src/main/res/mipmap-anydpi-v26/profilePicture.xml" value="0.121" />
       </map>
     </option>
   </component>
