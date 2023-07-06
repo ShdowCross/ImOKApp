@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManualInput"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/manualInputTV"
+        android:gravity="center"
+        android:padding="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manual Input"/>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fullNameTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Full Name"/>
+
+        <TextView
+            android:id="@+id/heartRateTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Heart Rate (bpm)"/>
+
+        <TextView
+            android:id="@+id/glucoseLevelTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Glucose Level (mmol/L)"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/fullNameET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"/>
+
+        <EditText
+            android:id="@+id/heartRateET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Heart Rate"/>
+
+        <EditText
+            android:id="@+id/glucoseLevelET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Glucose Level"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/bodyTempTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Body Temperature (\u2103)"/>
+
+        <TextView
+            android:id="@+id/respirationRateTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Respiration Rate (bpm)"/>
+
+        <TextView
+            android:id="@+id/cholesterolLevelTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cholesterol Level (mmol/L)"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/bodyTempET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Body Temperature"/>
+
+        <EditText
+            android:id="@+id/respirationRateET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Respiration Rate "/>
+
+        <EditText
+            android:id="@+id/cholesterolLevelET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Cholesterol Level"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/bloodPressureTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Blood Pressure (mmHg)"/>
+
+        <TextView
+            android:id="@+id/spO2TV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SpO2 Level (%)"/>
+
+        <TextView
+            android:id="@+id/painLevelTV"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pain Level "/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1.5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/bloodPressureET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Blood Pressure"/>
+
+        <EditText
+            android:id="@+id/spO2ET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="SPO2 Level"/>
+
+        <EditText
+            android:id="@+id/painLevelET"
+            android:gravity="center"
+            android:padding="40dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Pain Level"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -27,7 +27,7 @@
                     android:id="@+id/profile"
                     android:layout_width="400px"
                     android:layout_height="400px"
-                    android:src="C:\Users\ASUS\AndroidStudioProjects\ImOKApp\app\src\main\res\drawable-24\profilepicture.jpg" />
+                    android:src="@drawable/profilepicture" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/patientBrief"
