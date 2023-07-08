@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/addPersonIdET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Person ID" />
+
+    <EditText
+        android:id="@+id/addNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/addPhotoET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Photo" />
+
+    <EditText
+        android:id="@+id/addNicknameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nickname" />
+
+    <EditText
+        android:id="@+id/addTitleET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title" />
+
+    <EditText
+        android:id="@+id/addEmailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/addPhoneNumberET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number" />
+
+    <EditText
+        android:id="@+id/addAddressStreetET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address Street" />
+
+    <EditText
+        android:id="@+id/addAddressUnitET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address Unit" />
+
+    <EditText
+        android:id="@+id/addAddressPostalET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address Postal" />
+
+    <EditText
+        android:id="@+id/addWebsiteET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Website" />
+
+    <Button
+        android:id="@+id/addRecordsBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
+</LinearLayout>
