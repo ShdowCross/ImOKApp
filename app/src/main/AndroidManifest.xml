@@ -18,6 +18,12 @@
             android:name=".PersonContacts"
             android:exported="true" />
         <activity
+            android:name=".Graph"
+            android:exported="true" />
+        <activity
+            android:name=".HealthMetrics"
+            android:exported="true" />
+        <activity
             android:name=".ManualInput"
             android:exported="true" />
         <activity
@@ -32,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddContactActivity"></activity>
     </application>
 
 </manifest>
