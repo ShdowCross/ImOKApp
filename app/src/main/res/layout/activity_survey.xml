@@ -14,7 +14,7 @@
         android:id="@+id/c1q1_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do you like Kotlin?" />
+        android:text="Were you physically active before taking this survey?" />
 
     <RadioGroup
         android:id="@+id/c1q1_radio_group"
@@ -22,13 +22,13 @@
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/c1q1_yes_radio_button"
+            android:id="@+id/c1q1_yes"
             android:text="Yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <RadioButton
-            android:id="@+id/c1q1_no_radio_button"
+            android:id="@+id/c1q1_no"
             android:text="No"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -38,7 +38,7 @@
         android:id="@+id/c1q2_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do you like Kotlin?" />
+        android:text="Did you drink a caffeinated beverage or smoke 30 minutes before the test?" />
 
     <RadioGroup
         android:id="@+id/c1q2_radio_group"
@@ -46,13 +46,109 @@
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/c1q2_yes_radio_button"
+            android:id="@+id/c1q2_yes"
             android:text="Yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <RadioButton
-            android:id="@+id/c1q2_no_radio_button"
+            android:id="@+id/c1q2_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c1q3_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you been taking your medication?" />
+
+    <RadioGroup
+        android:id="@+id/c1q3_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c1q3_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c1q3_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c1q4_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have any difficulty in breathing?" />
+
+    <RadioGroup
+        android:id="@+id/c1q4_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c1q4_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c1q4_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c1q5_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have any chest pains?" />
+
+    <RadioGroup
+        android:id="@+id/c1q5_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c1q5_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c1q5_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c1q6_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you experienced blurred vision or any other vision changes?" />
+
+    <RadioGroup
+        android:id="@+id/c1q6_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c1q6_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c1q6_no"
             android:text="No"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -66,22 +162,375 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/c2q1_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you feel dizzy or lightheaded when standing or sitting after lying down?" />
+
     <RadioGroup
         android:id="@+id/c2q1_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/c2q1_yes_radio_button"
+            android:id="@+id/c2q1_yes"
             android:text="Yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <RadioButton
-            android:id="@+id/c2q1_no_radio_button"
+            android:id="@+id/c2q1_no"
             android:text="No"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/c2q2_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you experience any blurred vision?" />
+
+    <RadioGroup
+        android:id="@+id/c2q2_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c2q2_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c2q2_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/c2q3_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you been eating and drinking normally" />
+
+    <RadioGroup
+        android:id="@+id/c2q3_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c2q3_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c2q3_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c2q4_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you had any recent illness, accidents, or injury?" />
+
+    <RadioGroup
+        android:id="@+id/c2q4_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c2q4_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c2q4_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c2q5_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Did you faint or become less alert?" />
+
+    <RadioGroup
+        android:id="@+id/c2q5_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c2q5_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c2q5_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <!-- Category 3 questions -->
+    <TextView
+        android:text="Weight Loss"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+    android:id="@+id/c3q1_text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Have your eating patterns changed?" />
+
+    <RadioGroup
+        android:id="@+id/c3q1_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q1_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q1_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q2_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you excercising more?" />
+
+    <RadioGroup
+        android:id="@+id/c3q2_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q2_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q2_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q3_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you been sick recently?" />
+
+    <RadioGroup
+        android:id="@+id/c3q3_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q3_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q3_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q4_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you feeling tired more often?" />
+
+    <RadioGroup
+        android:id="@+id/c3q4_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q4_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q4_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q5_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have any problems with swallowing?" />
+
+    <RadioGroup
+        android:id="@+id/c3q5_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q5_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q5_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q6_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you been vomiting?" />
+
+    <RadioGroup
+        android:id="@+id/c3q6_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q6_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q6_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q7_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you experiencing stress?" />
+
+    <RadioGroup
+        android:id="@+id/c3q7_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q7_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q7_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q8_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have you had any fainting episodes?" />
+
+    <RadioGroup
+        android:id="@+id/c3q8_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q8_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q8_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q9_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have increased thirst?" />
+
+    <RadioGroup
+        android:id="@+id/c3q9_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q9_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q9_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/c3q10_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you urinating more than usual?" />
+
+    <RadioGroup
+        android:id="@+id/c3q10_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/c3q10_yes"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/c3q10_no"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
 
     <Button
         android:id="@+id/submit_button"
