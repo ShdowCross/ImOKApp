@@ -19,12 +19,15 @@ class Graph : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph)
 
-        setUpLineChart()
-        setDataToLineChart()
+        setUpBpChart()
+        setDataToBpChart()
+
+        setUpWeightChart()
+        setDataToWeightChart()
     }
 
-    private fun setUpLineChart() {
-        with(lineChart) {
+    private fun setUpBpChart() {
+        with(BpChart) {
 
             axisRight.isEnabled = false
             animateX(1200, Easing.EaseInSine)
@@ -50,64 +53,118 @@ class Graph : AppCompatActivity() {
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
 
-        private var items = arrayListOf("Milk", "Butter", "Cheese", "Ice cream", "Milkshake")
+        private var time = arrayListOf("0700", "1200", "1700", "2200")
 
         override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
             val index = value.toInt()
-            return if (index < items.size) {
-                items[index]
+            return if (index < time.size) {
+                time[index]
             } else {
                 null
             }
         }
     }
 
-    private fun setDataToLineChart() {
+    private fun setDataToBpChart() {
 
-        val weekOneSales = LineDataSet(week1(), "Week 1")
-        weekOneSales.lineWidth = 3f
-        weekOneSales.valueTextSize = 15f
-        weekOneSales.mode = LineDataSet.Mode.CUBIC_BEZIER
-        weekOneSales.color = ContextCompat.getColor(this, R.color.red)
-        weekOneSales.valueTextColor = ContextCompat.getColor(this, R.color.red)
-        weekOneSales.enableDashedLine(20F, 10F, 0F)
+        val systolic = LineDataSet(systolic(), "Systolic")
+        systolic.lineWidth = 3f
+        systolic.valueTextSize = 15f
+        systolic.mode = LineDataSet.Mode.CUBIC_BEZIER
+        systolic.color = ContextCompat.getColor(this, R.color.red)
+        systolic.valueTextColor = ContextCompat.getColor(this, R.color.red)
+        systolic.enableDashedLine(20F, 10F, 0F)
+        systolic.disableDashedLine()
 
-        val weekTwoSales = LineDataSet(week2(), "Week 2")
-        weekTwoSales.lineWidth = 3f
-        weekTwoSales.valueTextSize = 15f
-        weekTwoSales.mode = LineDataSet.Mode.CUBIC_BEZIER
-        weekTwoSales.color = ContextCompat.getColor(this, R.color.blue)
-        weekTwoSales.valueTextColor = ContextCompat.getColor(this, R.color.blue)
-        weekTwoSales.enableDashedLine(20F, 10F, 0F)
+        val diastolic = LineDataSet(diastolic(), "Diastolic")
+        diastolic.lineWidth = 3f
+        diastolic.valueTextSize = 15f
+        diastolic.mode = LineDataSet.Mode.CUBIC_BEZIER
+        diastolic.color = ContextCompat.getColor(this, R.color.blue)
+        diastolic.valueTextColor = ContextCompat.getColor(this, R.color.blue)
+        diastolic.enableDashedLine(20F, 10F, 0F)
+        diastolic.disableDashedLine()
 
         val dataSet = ArrayList<ILineDataSet>()
-        dataSet.add(weekOneSales)
-        dataSet.add(weekTwoSales)
+        dataSet.add(systolic)
+        dataSet.add(diastolic)
 
         val lineData = LineData(dataSet)
-        lineChart.data = lineData
+        BpChart.data = lineData
 
-        lineChart.invalidate()
+        BpChart.invalidate()
     }
 
-    private fun week1(): ArrayList<Entry> {
-        val sales = ArrayList<Entry>()
-        sales.add(Entry(0f, 15f))
-        sales.add(Entry(1f, 16f))
-        sales.add(Entry(2f, 13f))
-        sales.add(Entry(3f, 22f))
-        sales.add(Entry(4f, 20f))
-        return sales
+    private fun systolic(): ArrayList<Entry> {
+        val systolic = ArrayList<Entry>()
+        systolic.add(Entry(0f, 126f))
+        systolic.add(Entry(1f, 127f))
+        systolic.add(Entry(2f, 126f))
+        systolic.add(Entry(3f, 125f))
+        return systolic
     }
 
-    private fun week2(): ArrayList<Entry> {
-        val sales = ArrayList<Entry>()
-        sales.add(Entry(0f, 11f))
-        sales.add(Entry(1f, 13f))
-        sales.add(Entry(2f, 18f))
-        sales.add(Entry(3f, 16f))
-        sales.add(Entry(4f, 22f))
-        return sales
+    private fun diastolic(): ArrayList<Entry> {
+        val diastolic = ArrayList<Entry>()
+        diastolic.add(Entry(0f, 82f))
+        diastolic.add(Entry(1f, 80f))
+        diastolic.add(Entry(2f, 81f))
+        diastolic.add(Entry(3f, 82f))
+        return diastolic
+    }
+
+    private fun setUpWeightChart() {
+        with(WeightChart) {
+
+            axisRight.isEnabled = false
+            animateX(1200, Easing.EaseInSine)
+
+            description.isEnabled = false
+
+            xAxis.position = XAxis.XAxisPosition.BOTTOM
+            xAxis.valueFormatter = MyAxisFormatter()
+            xAxis.granularity = 1F
+            xAxis.setDrawGridLines(false)
+            xAxis.setDrawAxisLine(false)
+            axisLeft.setDrawGridLines(false)
+            extraRightOffset = 30f
+
+            legend.isEnabled = true
+            legend.orientation = Legend.LegendOrientation.VERTICAL
+            legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            legend.form = Legend.LegendForm.LINE
+
+        }
+    }
+
+    private fun setDataToWeightChart() {
+
+        val weight = LineDataSet(weight(), "Weight")
+        weight.lineWidth = 3f
+        weight.valueTextSize = 15f
+        weight.mode = LineDataSet.Mode.CUBIC_BEZIER
+        weight.color = ContextCompat.getColor(this, R.color.yellow_orange)
+        weight.valueTextColor = ContextCompat.getColor(this, R.color.yellow_orange)
+        weight.enableDashedLine(20F, 10F, 0F)
+        weight.disableDashedLine()
+
+        val dataSet = ArrayList<ILineDataSet>()
+        dataSet.add(weight)
+
+        val lineData = LineData(dataSet)
+        WeightChart.data = lineData
+
+        WeightChart.invalidate()
+    }
+
+    private fun weight(): ArrayList<Entry> {
+        val weight = ArrayList<Entry>()
+        weight.add(Entry(0f, 74.20f))
+        weight.add(Entry(1f, 75.00f))
+        weight.add(Entry(2f, 75.10f))
+        weight.add(Entry(3f, 74.00f))
+        return weight
     }
 
 }

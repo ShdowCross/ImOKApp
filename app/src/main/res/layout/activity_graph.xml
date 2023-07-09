@@ -13,18 +13,18 @@
         android:layout_height="match_parent">
 
         <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+            android:id="@+id/BpChart"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="30dp"/>
+            android:layout_margin="20dp"/>
 
         <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChartTwo"
+            android:id="@+id/WeightChart"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="30dp"/>
+            android:layout_margin="20dp"/>
 
     </LinearLayout>
 

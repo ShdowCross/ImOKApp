@@ -11,4 +11,5 @@
     <color name="profileModal"></color>
     <color name="red">#FF0000</color>
     <color name="blue">#0000FF</color>
+    <color name="yellow_orange">#FFAE42</color>
 </resources>
