@@ -1,3 +1,49 @@
 <resources>
     <string name="app_name">ImOKApp</string>
+
+    <string name="HBPRecommendations">
+        <li>Limit alcohol</li>\n
+        <li>Reduce salt (sodium) in your diet</li>\n
+        <li>Regular physical activity</li>\n
+        <li>Eating a diet rich in whole grains, fruits, vegetables and low-fat dairy products and low in saturated fat and cholesterol</li>
+    </string>
+
+    <string name="HBPComplications">
+        <li>Heart attack or stroke</li>\n
+        <li>Heart failure</li>\n
+        <li>Kidney problems</li>\n
+        <li>Eye problems</li>\n
+        <li>Metabolic syndrome</li>\n
+        <li>Changes with memory or understanding</li>\n
+        <li>Dementia</li>\n
+    </string>
+
+    <string name="LBPRecommendations">
+        <li>Drinking more fluids</li>\n
+        <li>Getting up slowly after sitting or lying down</li>\n
+        <li>Not drinking alcohol</li>\n
+        <li>Not standing for a long time (if you have NMH)</li>\n
+        <li>Using compression stockings so blood does not collect in the legs</li>\n
+    </string>
+
+    <string name="LBRComplications">
+        <li>Repeated fainting spells</li>\n
+        <li>Coma</li>\n
+        <li>Stroke due to reduced blood supply to the brain</li>\n
+        <li>Cardiovascular diseases</li>\n
+    </string>
+
+    <string name="WLRecommendations">
+        <li>Consult the doctor immediately if you keep losing weight without changing your diet or exercise routine</li>\n
+        <li>Use nutrition shakes to get more calories</li>\n
+        <li>Add flavour enchancers to your food to improve the taste so that you eat more</li>\n
+        <li>Refer to a dietitian for advice and counseling</li>\n
+    </string>
+
+    <string name="WLComplications">
+        <li>Cancer</li>\n
+        <li>Mental health complications, such as depression, anxiety, eating disorders and obsessive compulsive disorder (OCD)</li>\n
+        <li>Problems with digestion, such as coeliac disease or irritable bowel syndrome (IBS)</li>\n
+        <li>Other health conditions, such as an overactive thyroid, type 2 diabetes, or heart failure</li>\n
+    </string>
 </resources>
