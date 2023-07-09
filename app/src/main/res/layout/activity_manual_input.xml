@@ -61,15 +61,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/fullNameET"
+                <TextView
+                    android:id="@+id/fullNameText"
                     android:gravity="center"
                     android:padding="30dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Thomas Tan Wei Jie"/>
+                    android:text="John Tan Jia En"/>
 
                 <EditText
                     android:id="@+id/weightET"
