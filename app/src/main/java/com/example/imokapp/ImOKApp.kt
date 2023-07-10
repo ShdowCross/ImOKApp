@@ -1,8 +1,19 @@
 package com.example.imokapp
 
 import android.app.Application
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.util.Log
+import com.example.imokapp.ImOKApp.Companion.COLUMN_ALLERGIES
+import com.example.imokapp.ImOKApp.Companion.COLUMN_BLOOD_TYPE
+import com.example.imokapp.ImOKApp.Companion.COLUMN_BMI
+import com.example.imokapp.ImOKApp.Companion.COLUMN_DOB
+import com.example.imokapp.ImOKApp.Companion.COLUMN_GENDER
+import com.example.imokapp.ImOKApp.Companion.COLUMN_NRIC
+import com.example.imokapp.ImOKApp.Companion.COLUMN_PERSON_ID
+import com.example.imokapp.ImOKApp.Companion.COLUMN_USER_NAME
 import java.util.ArrayList
 
 
@@ -11,60 +22,158 @@ import java.util.ArrayList
 // - Declare the two list objects that will hold the id and contact information
 // - Create a static instance of MyContacts using the constructor
 class ImOKApp() : Application(){
-
     //Calling of classes - Person Contacts
     private var contactList: ArrayList<String> = ArrayList<String>()
     private var contactIdList: ArrayList<Int> = ArrayList<Int>()
 
     companion object {
-        val ourInstance = ImOKApp()
+        const val COLUMN_PERSON_ID = "person_id"
+        const val COLUMN_USER_NAME = "user_name"
+        const val COLUMN_NRIC = "nric"
+        const val COLUMN_GENDER = "gender"
+        const val COLUMN_DOB = "dob"
+        const val COLUMN_BLOOD_TYPE = "blood_type"
+        const val COLUMN_BMI = "bmi"
+        const val COLUMN_ALLERGIES = "allergies"
+        private const val MYDBADAPTER_LOG_CAT = "MyDBAdapter"
+        data class PersonInfo(
+            val personId: Long,
+            val userName: String,
+            val nric: String,
+            val gender: String,
+            val dob: String,
+            val bloodType: String,
+            val bmi: String,
+            val allergies: String,
+            val medicalHistory: String,
+            val vaccinationHistory: String
+        )
+
+        private lateinit var instance: ImOKApp
+
+        fun getInstance(): ImOKApp {
+            return instance
+        }
     }
 
-    //Adding to DB - Person Contacts
-    fun personContactsAddToDatabase(personId: Long, photo: String?, nickname: String?, name: String?, title: String?,
-                                    email: String?, phoneNumber: String?, address_street: String?, address_unit: String?, address_postal: String?, website: String?, c: Context): Long? {
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        val dbAdapter = MyDBAdapter(this)
+        dbAdapter.open()
+        personInfoHardcodedValues()
+        dbAdapter.close()
+    }
 
-        val db = MyDBAdapter(c)
+    fun personContactsAddToDatabase(
+        personId: Long, photo: String?, nickname: String?, name: String?, title: String?,
+        email: String?, phoneNumber: String?, addressStreet: String?, addressUnit: String?,
+        addressPostal: String?, website: String?
+    ): Long? {
+        val db = MyDBAdapter(applicationContext)
         db.open()
-
-        val rowIDofInsertedEntry = db.insertPersonContact(personId, photo, nickname, name, title, email, phoneNumber, address_street, address_unit, address_postal, website)
+        val rowIDofInsertedEntry =
+            db.insertPersonContact(personId, photo, nickname, name, title, email, phoneNumber, addressStreet, addressUnit, addressPostal, website)
         db.close()
-
         return rowIDofInsertedEntry
     }
+    fun personInfoHardcodedValues() {
+        val dbAdapter = MyDBAdapter(applicationContext)
+        dbAdapter.open()
+        val personInfoList: List<ContentValues> = listOf(
+            ContentValues().apply {
+                put(COLUMN_PERSON_ID, 1)
+                put(COLUMN_USER_NAME, "John Doe")
+                put(COLUMN_NRIC, "1234567890")
+                put(COLUMN_GENDER, "Male")
+                put(COLUMN_DOB, "1990-01-01")
+                put(COLUMN_BLOOD_TYPE, "O+")
+                put(COLUMN_BMI, "22.5")
+                put(COLUMN_ALLERGIES, "None")
+            },
+            ContentValues().apply {
+                put(COLUMN_PERSON_ID, 2)
+                put(COLUMN_USER_NAME, "Jane Smith")
+                put(COLUMN_NRIC, "9876543210")
+                put(COLUMN_GENDER, "Female")
+                put(COLUMN_DOB, "1995-05-10")
+                put(COLUMN_BLOOD_TYPE, "A+")
+                put(COLUMN_BMI, "20.2")
+                put(COLUMN_ALLERGIES, "Pollen")
+            },
+            ContentValues().apply {
+                put(COLUMN_PERSON_ID, 3)
+                put(COLUMN_USER_NAME, "Mike Johnson")
+                put(COLUMN_NRIC, "5432167890")
+                put(COLUMN_GENDER, "Male")
+                put(COLUMN_DOB, "1988-09-22")
+                put(COLUMN_BLOOD_TYPE, "B+")
+                put(COLUMN_BMI, "25.1")
+                put(COLUMN_ALLERGIES, "Dairy")
+            },
+            ContentValues().apply {
+                put(COLUMN_PERSON_ID, 4)
+                put(COLUMN_USER_NAME, "Emily Davis")
+                put(COLUMN_NRIC, "6789123450")
+                put(COLUMN_GENDER, "Female")
+                put(COLUMN_DOB, "1992-03-15")
+                put(COLUMN_BLOOD_TYPE, "AB+")
+                put(COLUMN_BMI, "23.7")
+                put(COLUMN_ALLERGIES, "Peanuts")
+            },
+            ContentValues().apply {
+                put(COLUMN_PERSON_ID, 5)
+                put(COLUMN_USER_NAME, "David Wilson")
+                put(COLUMN_NRIC, "9876543219")
+                put(COLUMN_GENDER, "Male")
+                put(COLUMN_DOB, "1993-11-18")
+                put(COLUMN_BLOOD_TYPE, "O-")
+                put(COLUMN_BMI, "24.5")
+                put(COLUMN_ALLERGIES, "Shellfish")
+            })
+            for (item in personInfoList) {
+            val newPersonInfoRowId = dbAdapter.insertPersonInfo(item)
+            Log.d(MYDBADAPTER_LOG_CAT, "Inserted row with ID: $newPersonInfoRowId")
+            val valueSet = item.valueSet()
+            if (valueSet.isNotEmpty()) {
+                for ((key, value) in valueSet) {
+                    Log.d(MYDBADAPTER_LOG_CAT, "Column: $key, Value: $value")
+                }
+            } else {
+                Log.d(MYDBADAPTER_LOG_CAT, "Empty valueSet for item: $item")
+            }
+            Log.d(MYDBADAPTER_LOG_CAT, "Data inserted: ${item.toString()}")
+        }
+        dbAdapter.close()
+    }
 
-    //Deleting from DB - Person Contacts
-    fun personContactsDeleteFrmDatabase(contactID: Int, c: Context): Boolean {
 
-        val db = MyDBAdapter(c)
+    fun personContactsDeleteFromDatabase(contactID: Int): Boolean {
+        val db = MyDBAdapter(applicationContext)
         db.open()
-
         val id = contactIdList[contactID]
-
         val updateStatus = db.removePersonContact(id)
         db.close()
-
         return updateStatus
     }
 
-    //Retrieve All from DB - Person Contacts
-    fun personContactsRetrieveAll(c: Context): List<String> {
-
-        val myCursor: Cursor?
-        var contactName = ""
-        val db = MyDBAdapter(c)
+    fun personContactsRetrieveAll(): List<String> {
+        val db = MyDBAdapter(applicationContext)
         db.open()
         contactIdList.clear()
         contactList.clear()
-        myCursor = db.personContactsTableRetrieveAllEntriesCursor()
-        if (myCursor != null && myCursor!!.count > 0){
-            myCursor!!.moveToFirst()
-            do{
-                contactIdList.add(myCursor.getInt(db.COLUMN_CONTACT_ID)) // need to take based on personID
-                contactName = myCursor.getString(db.COLUMN_NAME) // retrieve name fields need to put the classes into the contactList to extract all the features
-                contactList.add(contactName)
-            } while(myCursor.moveToNext())
+        val myCursor = db.personContactsTableRetrieveAllEntriesCursor()
+        myCursor?.let {
+            if (myCursor.count > 0) {
+                myCursor.moveToFirst()
+                do {
+                    contactIdList.add(myCursor.getInt(db.COLUMN_CONTACT_ID))
+                    val contactName = myCursor.getString(db.COLUMN_NAME)
+                    contactList.add(contactName)
+                } while (myCursor.moveToNext())
+            }
         }
+        myCursor?.close()
         db.close()
         return contactList
     }

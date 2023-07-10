@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ImOKApp</string>
+    <string-array name="contacts">
+        <item>Doctor</item>
+        <item>Relative</item>
+    </string-array>
 </resources>
