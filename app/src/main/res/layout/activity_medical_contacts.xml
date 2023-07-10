@@ -7,13 +7,14 @@
     tools:context=".PersonContacts"
     android:orientation="horizontal"
     android:padding="120px"
+    android:background="@color/MainBackground"
     android:weightSum="1">
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
         android:orientation="vertical">
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/row1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -22,102 +23,132 @@
             android:gravity="center"
             android:orientation="horizontal">
             <LinearLayout
-                android:id="@+id/selected1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:id="@+id/medicalProfileFace"
-                    android:layout_width="0dp"
+                android:id="@+id/unselectedDoctorLL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/unselectedDoctorTV"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/medicalProfileImg"
-                        android:layout_width="100dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:layout_gravity="center"
-                        android:padding="10px"
-                        android:src="@mipmap/profile"/>
-                    <TextView
-                        android:id="@+id/medicalProfileWebsite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.3"
-                        android:padding="5px"
-                        android:gravity="center"
-                        android:text="www.JushaMedical.com.sg"/>
-                </LinearLayout>
+                    android:gravity="center"
+                    android:text="Unselected Doctor, choose one from the right."/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/selectedMedical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/medicalProfileDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
+                    android:layout_gravity="center"
                     android:gravity="center_horizontal"
+                    android:padding="10dp"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/doctorClass"
+                        android:id="@+id/selectedDoctorNickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="Gastroenterologist"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="---------------------------------"/>
                     <TextView
-                        android:id="@+id/selected1Name"
+                        android:id="@+id/selectedDoctorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="Dr Seng"/>
                     <TextView
-                        android:id="@+id/selected1Title"
+                        android:id="@+id/selectedDoctorTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
+                        android:textSize="15dp"
                         android:text="Stomach &amp; Intestine Specialist"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="--------------------------------------"/>
                     <TextView
-                        android:id="@+id/selected1Email"
+                        android:id="@+id/medicalProfileWebsite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5px"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="www.JushaMedical.com.sg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/medicalProfileFace"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/chosenMedicalProfileImg"
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:padding="10px"
+                        android:src="@mipmap/profile"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/selectedDoctorEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
+                        android:textSize="15dp"
                         android:text="DrSeng@JushaMedical.com.sg"/>
                     <TextView
-                        android:id="@+id/selected1PhoneNumber"
+                        android:id="@+id/selectedDoctorPhoneNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="+65 6614 3218"/>
                     <TextView
-                        android:id="@+id/selected1Address1"
+                        android:id="@+id/selectedDoctorStreet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:text="Parkway Street 13"/>
                     <LinearLayout
-                        android:id="@+id/selected1Address2"
+                        android:id="@+id/selectedDoctorAddress2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/selected1Address2Unit"
+                            android:id="@+id/selectedDoctorUnit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="15dp"
                             android:layout_marginRight="10dp"
                             android:text="#01-35"/>
                         <TextView
-                            android:id="@+id/selected1Address2Postal"
+                            android:id="@+id/selectedDoctorPostal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:textSize="15dp"
                             android:text="S420183"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
+        </FrameLayout>
+        <FrameLayout
             android:id="@+id/row2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -125,106 +156,131 @@
             android:background="@drawable/black_border"
             android:gravity="center"
             android:orientation="horizontal">
-
             <LinearLayout
-                android:id="@+id/selected2"
+                android:id="@+id/unselectedRelativeLL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/unselectedRelativeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Unselected Relative, choose one from the right."/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/selectedRelative"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/relativeProfileDetails"
+                    android:id="@+id/selectedRelativeProfileDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.3"
                     android:gravity="center_horizontal"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
                     android:orientation="vertical">
-
                     <TextView
-                        android:id="@+id/relativeNickname"
+                        android:id="@+id/selectedRelativeNickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mother" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="---------------------------------" />
-
-                    <TextView
-                        android:id="@+id/selected2Name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gwek Ji Ngoh" />
-
+                        android:textSize="15dp"
+                        android:text="Mum"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--------------------------------------" />
-
+                        android:textSize="15dp"
+                        android:text="---------------------------------"/>
                     <TextView
-                        android:id="@+id/selected2Email"
+                        android:id="@+id/selectedRelativeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:text="Gwek Ji Ngoh"/>
+                    <TextView
+                        android:id="@+id/selectedRelativeNRIC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:text="S4420196A"/>
+                    <TextView
+                        android:id="@+id/selectedRelativeTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Gwek@gmail.com" />
-
+                        android:textSize="15dp"
+                        android:text="Mother"/>
                     <TextView
-                        android:id="@+id/selected2PhoneNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+65 9248 1234" />
-
-                    <TextView
-                        android:id="@+id/selected2Address1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="16 Tampines Street" />
-
-                    <LinearLayout
-                        android:id="@+id/selected2Address2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/selected2Address2Unit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:text="#14-304" />
-
-                        <TextView
-                            android:id="@+id/selected2Address2Postal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="S810238" />
-                    </LinearLayout>
+                        android:textSize="15dp"
+                        android:text="--------------------------------------"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/relativeProfileFace"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.35"
                     android:orientation="vertical">
-
                     <ImageView
-                        android:id="@+id/relativeProfileImg"
-                        android:layout_width="100dp"
+                        android:id="@+id/chosenRelativeProfileImg"
+                        android:layout_width="160dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:padding="10px"
-                        android:src="@mipmap/profile" />
+                        android:src="@mipmap/profile"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/selectedRelativeEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textSize="15dp"
+                        android:text="Gwekk@gmail.com"/>
+                    <TextView
+                        android:id="@+id/selectedRelativePhoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/selectedRelativeStreet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp" />
+                    <LinearLayout
+                        android:id="@+id/selectedRelativeAddress2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/selectedRelativeUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:layout_marginRight="10dp" />
+                        <TextView
+                            android:id="@+id/selectedRelativePostal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="15dp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/medicalSelection"
@@ -236,21 +292,35 @@
             <LinearLayout
                 android:id="@+id/medicalSelectionLeft"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/mainDoctorNick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Main"/>
+                    android:layout_weight="0.05"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:text="Gastroenterologist"/>
+                <ImageView
+                    android:id="@+id/mainMedicalProfileImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.95"
+                    android:layout_gravity="center"
+                    android:padding="10px"
+                    android:src="@mipmap/profile"/>
             </LinearLayout>
-            <ScrollView
+            <ListView
                 android:id="@+id/medicalSelectionRight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:background="@drawable/black_border">
-            </ScrollView>
+            </ListView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/relativeSelection"
@@ -262,21 +332,35 @@
             <LinearLayout
                 android:id="@+id/relativeSelectionLeft"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
                 android:orientation="vertical">
+
                 <TextView
+                    android:id="@+id/mainRelative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Main"/>
+                    android:layout_gravity="center"
+                    android:layout_weight="0.05"
+                    android:text="Mother"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+                <ImageView
+                    android:id="@+id/relativeProfileImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.95"
+                    android:layout_gravity="center"
+                    android:padding="10px"
+                    android:src="@mipmap/profile" />
             </LinearLayout>
-            <ScrollView
+            <ListView
                 android:id="@+id/relativeSelectionRight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:background="@drawable/black_border">
-            </ScrollView>
+            </ListView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

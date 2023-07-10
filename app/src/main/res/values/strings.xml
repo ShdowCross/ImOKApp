@@ -46,4 +46,8 @@
         <li>Problems with digestion, such as coeliac disease or irritable bowel syndrome (IBS)</li>\n
         <li>Other health conditions, such as an overactive thyroid, type 2 diabetes, or heart failure</li>\n
     </string>
+    <string-array name="contacts">
+        <item>Doctor</item>
+        <item>Relative</item>
+    </string-array>
 </resources>

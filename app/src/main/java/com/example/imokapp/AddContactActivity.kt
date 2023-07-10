@@ -1,6 +1,5 @@
 package com.example.imokapp
 
-import android.app.Person
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_add_contact.*
@@ -15,7 +14,7 @@ class AddContactActivity : AppCompatActivity() {
         //TODO 13 : Add listener to add contact into database
 
         addRecordsBtn.setOnClickListener {
-            val inst = ImOKApp.ourInstance
+            val inst = ImOKApp.getInstance()
 
             val personId = addPersonIdET.text.toString()
             val name = addNameET.text.toString()
@@ -29,26 +28,21 @@ class AddContactActivity : AppCompatActivity() {
             val addressPostal = addAddressPostalET.text.toString()
             val website = addWebsiteET.text.toString()
 
-            addRecordsBtn.setOnClickListener {
-                val inst = ImOKApp.ourInstance
+            inst.personContactsAddToDatabase(
+                personId.toLong(),
+                photo,
+                nickname,
+                name,
+                title,
+                email,
+                phoneNumber,
+                addressStreet,
+                addressUnit,
+                addressPostal,
+                website
+            )
 
-                inst.personContactsAddToDatabase(
-                    personId.toLong(),
-                    photo,
-                    nickname,
-                    name,
-                    title,
-                    email,
-                    phoneNumber,
-                    addressStreet,
-                    addressUnit,
-                    addressPostal,
-                    website,
-                    applicationContext
-                )
-
-                finish()
-            }
+            finish()
         }
     }
 }
