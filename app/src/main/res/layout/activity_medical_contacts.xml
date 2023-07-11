@@ -14,6 +14,13 @@
         android:layout_height="match_parent"
         android:layout_weight="0.6"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back to profile" />
+
         <FrameLayout
             android:id="@+id/row1"
             android:layout_width="match_parent"
@@ -280,6 +287,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
         android:layout_weight="0.4"
         android:orientation="vertical">
         <LinearLayout

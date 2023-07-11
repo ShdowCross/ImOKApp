@@ -3,6 +3,7 @@ package com.example.imokapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.view.View
 import android.widget.*
@@ -20,6 +21,13 @@ class PersonContacts : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medical_contacts)
+
+        val profileButton = findViewById<Button>(R.id.profile_button)
+        profileButton.setOnClickListener {
+            val intent = Intent(this, PatientProfile::class.java)
+            startActivity(intent)
+        }
+
         val paths = getPaths()
         val main1Doctor = "General Doctor"
         val main1Info = getDoctorInfo(main1Doctor)
