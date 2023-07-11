@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780748082980",
+    "project_id": "imokapp-87105",
+    "storage_bucket": "imokapp-87105.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780748082980:android:5ece7e7e5cb822a9ee2db1",
+        "android_client_info": {
+          "package_name": "com.example.imokapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780748082980-mugoh2liti8uee446l18a1716hei504u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjwA36QxO1ceTx0oMTl9zQjlQr3E_kjGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780748082980-mugoh2liti8uee446l18a1716hei504u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
