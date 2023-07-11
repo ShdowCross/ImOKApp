@@ -16,14 +16,24 @@ class HealthMetrics : AppCompatActivity() {
             startActivity(myIntent)
         }
 
-        bpGraphBtn.setOnClickListener() {
+        bloodPressureIV.setOnClickListener() {
             var myIntent = Intent(this, BpGraph::class.java)
             startActivity(myIntent)
         }
 
-        weightGraphBtn.setOnClickListener() {
+        weightIV.setOnClickListener() {
             var myIntent = Intent(this, WeightGraph::class.java)
             startActivity(myIntent)
         }
+
+//        bpGraphBtn.setOnClickListener() {
+//            var myIntent = Intent(this, BpGraph::class.java)
+//            startActivity(myIntent)
+//        }
+//
+//        weightGraphBtn.setOnClickListener() {
+//            var myIntent = Intent(this, WeightGraph::class.java)
+//            startActivity(myIntent)
+//        }
     }
 }
