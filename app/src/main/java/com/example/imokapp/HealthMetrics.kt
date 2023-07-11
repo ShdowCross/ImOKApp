@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
@@ -17,7 +18,6 @@ import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.uWeight
-
 import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
@@ -27,7 +27,7 @@ class HealthMetrics : AppCompatActivity() {
         setContentView(R.layout.activity_health_metrics)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
         val weightTV = findViewById<TextView>(R.id.weightKgTV)
-        val heightTV = findViewById<TextView>(R.id.heightMTV)
+        val heightTV = findViewById<TextView>(R.id.heightCmTV)
         val bmiTV = findViewById<TextView>(R.id.bmiMeasurementTV)
         val bpTV = findViewById<TextView>(R.id.bpmmHgTV)
         val hrTV = findViewById<TextView>(R.id.hrBPMTV)
@@ -35,7 +35,7 @@ class HealthMetrics : AppCompatActivity() {
         weightTV.text = weight.toString()
         heightTV.text = heightCM.toString()
         var bmiVal = weight / (heightMeter * heightMeter)
-        var formattedBMI = String.format("%.3f", bmiVal)
+        var formattedBMI = String.format("%.2f", bmiVal)
         bmiTV.text = formattedBMI
         bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
         hrTV.text = "$heartRate bpm"
@@ -80,19 +80,3 @@ class HealthMetrics : AppCompatActivity() {
         }
     }
 }
-
-//var weightFromManualInput = intent.getStringExtra("enter_weight")
-//var heartRateFromManualInput = intent.getStringExtra("enter_heart_rate")
-//var bloodPressureFromManualInput = intent.getStringExtra("enter_blood_pressure")
-//
-//weightKgTV.text = "$weightFromManualInput"
-//hrBPMTV.text = "$heartRateFromManualInput bpm"
-//bpmmHgTV.text = "$bloodPressureFromManualInput mmHg"
-//
-//
-//var weightForBMI = weightFromManualInput?.toFloat()
-//var heightForBMI = (heightMTV.text as String).toFloat()
-//
-//var calculatedBMI = weightForBMI?.div((heightForBMI * heightForBMI))
-//
-//bmiMeasurementTV.text = String.format("%.2f",calculatedBMI) + " kg/m\u00B2"

@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/muscleMassTV"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/weightHeightTV"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         <TextView
             android:id="@+id/muscleRangeTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         <TextView
             android:id="@+id/weightTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -119,13 +119,13 @@
         <TextView
             android:id="@+id/heightTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textColor="#3B71CA"
-            android:text="Height (m)"/>
+            android:text="Height (cm)"/>
     </LinearLayout>
 
     <LinearLayout
@@ -136,7 +136,7 @@
         <TextView
             android:id="@+id/musclePercentageTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -147,7 +147,7 @@
         <TextView
             android:id="@+id/weightKgTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -156,15 +156,15 @@
             android:text="74.20"/>
 
         <TextView
-            android:id="@+id/heightMTV"
+            android:id="@+id/heightCmTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:textColor="#3B71CA"
             android:textSize="20dp"
-            android:text="1.695"/>
+            android:text="169.50"/>
 
     </LinearLayout>
 
@@ -177,7 +177,7 @@
         <TextView
             android:id="@+id/BmiTV"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
         <TextView
             android:id="@+id/bloodPressureTV"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
         <TextView
             android:id="@+id/heartRateTV"
             android:gravity="center"
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
         <TextView
             android:id="@+id/bmiRangeTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
         <TextView
             android:id="@+id/bpRangeTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -302,7 +302,7 @@
         <TextView
             android:id="@+id/hrRangeTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
         <TextView
             android:id="@+id/bmiMeasurementTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -332,7 +332,7 @@
         <TextView
             android:id="@+id/bpmmHgTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -343,7 +343,7 @@
         <TextView
             android:id="@+id/hrBPMTV"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -360,7 +360,7 @@
 
         <Button
             android:id="@+id/manualInputBtn"
-            android:padding="20dp"
+            android:padding="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
@@ -373,7 +373,7 @@
             android:backgroundTint="#14A44D"/>
         <Button
             android:id="@+id/backBtn"
-            android:padding="20dp"
+            android:padding="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
