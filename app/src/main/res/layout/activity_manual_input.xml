@@ -174,7 +174,6 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:onClick="saveManualInput"
                     android:id="@+id/saveBtn"
                     android:padding="35dp"
                     android:layout_margin="20dp"
