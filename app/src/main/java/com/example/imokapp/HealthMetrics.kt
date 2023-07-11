@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
@@ -24,14 +25,20 @@ class HealthMetrics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_metrics)
-        musclePercentageTV.text = "$muscleMass%"
-        weightKgTV.text = weight.toString()
-        heightCmTV.text = heightCM.toString()
-        var bmiVal = (weight.toFloat() / (heightMeter * heightMeter)).toFloat()
+        val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
+        val weightTV = findViewById<TextView>(R.id.weightKgTV)
+        val heightTV = findViewById<TextView>(R.id.heightCmTV)
+        val bmiTV = findViewById<TextView>(R.id.bmiMeasurementTV)
+        val bpTV = findViewById<TextView>(R.id.bpmmHgTV)
+        val hrTV = findViewById<TextView>(R.id.hrBPMTV)
+        muscleTV.text = "$muscleMass%"
+        weightTV.text = weight.toString()
+        heightTV.text = heightCM.toString()
+        var bmiVal = weight / (heightMeter * heightMeter)
         var formattedBMI = String.format("%.3f", bmiVal)
-        bmiMessurementTV.text = formattedBMI
-        bpmmHgTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
-        hrBPMTV.text = heartRate.toString()
+        bmiTV.text = formattedBMI
+        bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
+        hrTV.text = "$heartRate bpm"
         mMAlertIV.visibility = View.INVISIBLE
         weightAlertIV.visibility = View.INVISIBLE
         bmiAlertIV.visibility = View.INVISIBLE
@@ -67,7 +74,7 @@ class HealthMetrics : AppCompatActivity() {
         }
 
         //to be changed to linear layout of whole item
-        BmiIV.setOnClickListener() {
+        weightIV.setOnClickListener() {
             var toBmiGraph = Intent(this, WeightGraph::class.java)
             startActivity(toBmiGraph)
         }

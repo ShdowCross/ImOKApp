@@ -91,7 +91,6 @@ class BpGraph : AppCompatActivity() {
 
         BpChart.invalidate()
     }
-
     private fun systolic(): ArrayList<Entry> {
         val systolic = ArrayList<Entry>()
         systolic.add(Entry(0f, 126f))
@@ -109,4 +108,14 @@ class BpGraph : AppCompatActivity() {
         diastolic.add(Entry(3f, 82f))
         return diastolic
     }
+    fun addData(systolicValue: Float, diastolicValue: Float) {
+        val systolic = ArrayList<Entry>()
+        val systolicIndex = systolic.size.toFloat()
+        systolic.add(Entry(systolicIndex, systolicValue))
+
+        val diastolic = ArrayList<Entry>()
+        val diastolicIndex = diastolic.size.toFloat()
+        diastolic.add(Entry(diastolicIndex, diastolicValue))
+    }
+
 }
