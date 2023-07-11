@@ -3,6 +3,9 @@ package com.example.imokapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.example.imokapp.ImOKApp.Companion.diastolic
+import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
+import com.example.imokapp.ImOKApp.Companion.systolic
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -20,6 +23,7 @@ class BpGraph : AppCompatActivity() {
         setContentView(R.layout.activity_bp_graph)
 
         setUpBpChart()
+
         setDataToBpChart()
     }
 
@@ -50,72 +54,44 @@ class BpGraph : AppCompatActivity() {
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
 
-        private var time = arrayListOf("0700", "1200", "1700", "2200")
+        private var time = generateTimeLabels()
 
         override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
             val index = value.toInt()
-            return if (index < time.size) {
+            return if (index in time.indices) {
                 time[index]
             } else {
-                null
+                ""
             }
         }
     }
 
     private fun setDataToBpChart() {
+        val systolicDataset = LineDataSet(systolic, "Systolic")
+        systolicDataset.lineWidth = 3f
+        systolicDataset.valueTextSize = 15f
+        systolicDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
+        systolicDataset.color = ContextCompat.getColor(this, R.color.red)
+        systolicDataset.valueTextColor = ContextCompat.getColor(this, R.color.red)
+        systolicDataset.enableDashedLine(20F, 10F, 0F)
+        systolicDataset.disableDashedLine()
 
-        val systolic = LineDataSet(systolic(), "Systolic")
-        systolic.lineWidth = 3f
-        systolic.valueTextSize = 15f
-        systolic.mode = LineDataSet.Mode.CUBIC_BEZIER
-        systolic.color = ContextCompat.getColor(this, R.color.red)
-        systolic.valueTextColor = ContextCompat.getColor(this, R.color.red)
-        systolic.enableDashedLine(20F, 10F, 0F)
-        systolic.disableDashedLine()
-
-        val diastolic = LineDataSet(diastolic(), "Diastolic")
-        diastolic.lineWidth = 3f
-        diastolic.valueTextSize = 15f
-        diastolic.mode = LineDataSet.Mode.CUBIC_BEZIER
-        diastolic.color = ContextCompat.getColor(this, R.color.blue)
-        diastolic.valueTextColor = ContextCompat.getColor(this, R.color.blue)
-        diastolic.enableDashedLine(20F, 10F, 0F)
-        diastolic.disableDashedLine()
+        val diastolicDataset = LineDataSet(diastolic, "Diastolic")
+        diastolicDataset.lineWidth = 3f
+        diastolicDataset.valueTextSize = 15f
+        diastolicDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
+        diastolicDataset.color = ContextCompat.getColor(this, R.color.blue)
+        diastolicDataset.valueTextColor = ContextCompat.getColor(this, R.color.blue)
+        diastolicDataset.enableDashedLine(20F, 10F, 0F)
+        diastolicDataset.disableDashedLine()
 
         val dataSet = ArrayList<ILineDataSet>()
-        dataSet.add(systolic)
-        dataSet.add(diastolic)
+        dataSet.add(systolicDataset)
+        dataSet.add(diastolicDataset)
 
         val lineData = LineData(dataSet)
         BpChart.data = lineData
 
         BpChart.invalidate()
     }
-    private fun systolic(): ArrayList<Entry> {
-        val systolic = ArrayList<Entry>()
-        systolic.add(Entry(0f, 126f))
-        systolic.add(Entry(1f, 127f))
-        systolic.add(Entry(2f, 126f))
-        systolic.add(Entry(3f, 125f))
-        return systolic
-    }
-
-    private fun diastolic(): ArrayList<Entry> {
-        val diastolic = ArrayList<Entry>()
-        diastolic.add(Entry(0f, 82f))
-        diastolic.add(Entry(1f, 80f))
-        diastolic.add(Entry(2f, 81f))
-        diastolic.add(Entry(3f, 82f))
-        return diastolic
-    }
-    fun addData(systolicValue: Float, diastolicValue: Float) {
-        val systolic = ArrayList<Entry>()
-        val systolicIndex = systolic.size.toFloat()
-        systolic.add(Entry(systolicIndex, systolicValue))
-
-        val diastolic = ArrayList<Entry>()
-        val diastolicIndex = diastolic.size.toFloat()
-        diastolic.add(Entry(diastolicIndex, diastolicValue))
-    }
-
 }
