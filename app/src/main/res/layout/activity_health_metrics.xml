@@ -6,351 +6,356 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HealthMetrics">
-
     <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/muscleMassTV"
-            android:gravity="center"
-            android:padding="25dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Muscle Mass"/>
-
-        <TextView
-            android:id="@+id/weightHeightTV"
-            android:gravity="center"
-            android:padding="25dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Weight &amp; Height"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5">
-            <ImageView
-                android:id="@+id/muscleMassIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/muscle"/>
-            <ImageView
-                android:id="@+id/mMAlertIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="110dp"
-                android:src="@drawable/alert"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5">
-            <ImageView
-                android:id="@+id/weightIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/scale"/>
-            <ImageView
-                android:id="@+id/weightAlertIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="110dp"
-                android:src="@drawable/alert"/>
-        </FrameLayout>
-        <ImageView
-            android:id="@+id/heightIV"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/height"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/muscleRangeTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#14A44D"
-            android:text="Normal"/>
-
-        <TextView
-            android:id="@+id/weightTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#3B71CA"
-            android:text="Weight (kg)"/>
-
-        <TextView
-            android:id="@+id/heightTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#3B71CA"
-            android:text="Height (cm)"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/musclePercentageTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:text="35.80%"/>
-
-        <TextView
-            android:id="@+id/weightKgTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#3B71CA"
-            android:text="74.20"/>
-
-        <TextView
-            android:id="@+id/heightCmTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:textColor="#3B71CA"
-            android:textSize="20dp"
-            android:text="169.50"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/BmiTV"
-            android:gravity="center"
-            android:padding="25dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="BMI"/>
-
-        <TextView
-            android:id="@+id/bloodPressureTV"
-            android:gravity="center"
-            android:padding="25dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Blood Pressure"/>
-
-        <TextView
-            android:id="@+id/heartRateTV"
-            android:gravity="center"
-            android:padding="25dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Heart Rate"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5">
-            <ImageView
-                android:id="@+id/BmiIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/bmi"/>
-            <ImageView
-                android:id="@+id/bmiAlertIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="110dp"
-                android:src="@drawable/alert"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5">
-            <ImageView
-                android:id="@+id/bloodPressureIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/blood_pressure"/>
-            <ImageView
-                android:id="@+id/bpAlertIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="110dp"
-                android:src="@drawable/alert"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5">
-            <ImageView
-                android:id="@+id/heartRateIV"
+            <TextView
+                android:id="@+id/muscleMassTV"
+                android:gravity="center"
+                android:padding="25dp"
                 android:layout_weight="0.5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Muscle Mass"/>
+
+            <TextView
+                android:id="@+id/weightHeightTV"
+                android:gravity="center"
+                android:padding="25dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Weight &amp; Height"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/heart_rate"/>
+                android:layout_weight="0.5">
+                <ImageView
+                    android:id="@+id/muscleMassIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/muscle"/>
+                <ImageView
+                    android:id="@+id/mMAlertIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="110dp"
+                    android:src="@drawable/alert"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
+                <ImageView
+                    android:id="@+id/weightIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/scale"/>
+                <ImageView
+                    android:id="@+id/weightAlertIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="110dp"
+                    android:src="@drawable/alert"/>
+            </FrameLayout>
             <ImageView
-                android:id="@+id/hrAlertIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="110dp"
-                android:src="@drawable/alert"/>
-        </FrameLayout>
-    </LinearLayout>
+                android:id="@+id/heightIV"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/height"/>
 
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/bmiRangeTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#E4A11B"
-            android:text="OverWeight"/>
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/bpRangeTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#E4A11B"
-            android:text="Pre-High"/>
+            <TextView
+                android:id="@+id/muscleRangeTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#14A44D"
+                android:text="Normal"/>
 
-        <TextView
-            android:id="@+id/hrRangeTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#14A44D"
-            android:text="Normal"/>
+            <TextView
+                android:id="@+id/weightTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#3B71CA"
+                android:text="Weight (kg)"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/heightTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#3B71CA"
+                android:text="Height (cm)"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:weightSum="1.5"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/musclePercentageTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="35.80%"/>
 
-        <TextView
-            android:id="@+id/bmiMeasurementTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:text="25.83 kg/m\u00B2"/>
+            <TextView
+                android:id="@+id/weightKgTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#3B71CA"
+                android:text="74.20"/>
 
-        <TextView
-            android:id="@+id/bpmmHgTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:text="126/82 mmHg"/>
+            <TextView
+                android:id="@+id/heightCmTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="#3B71CA"
+                android:textSize="20dp"
+                android:text="169.50"/>
 
-        <TextView
-            android:id="@+id/hrBPMTV"
-            android:gravity="center"
-            android:padding="20dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:text="72.00 bpm"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/BmiTV"
+                android:gravity="center"
+                android:padding="25dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="BMI"/>
+
+            <TextView
+                android:id="@+id/bloodPressureTV"
+                android:gravity="center"
+                android:padding="25dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Blood Pressure"/>
+
+            <TextView
+                android:id="@+id/heartRateTV"
+                android:gravity="center"
+                android:padding="25dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Heart Rate"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
+                <ImageView
+                    android:id="@+id/BmiIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bmi"/>
+                <ImageView
+                    android:id="@+id/bmiAlertIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="110dp"
+                    android:src="@drawable/alert"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
+                <ImageView
+                    android:id="@+id/bloodPressureIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/blood_pressure"/>
+                <ImageView
+                    android:id="@+id/bpAlertIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="110dp"
+                    android:src="@drawable/alert"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5">
+                <ImageView
+                    android:id="@+id/heartRateIV"
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/heart_rate"/>
+                <ImageView
+                    android:id="@+id/hrAlertIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="110dp"
+                    android:src="@drawable/alert"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/bmiRangeTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#E4A11B"
+                android:text="OverWeight"/>
+
+            <TextView
+                android:id="@+id/bpRangeTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#E4A11B"
+                android:text="Pre-High"/>
+
+            <TextView
+                android:id="@+id/hrRangeTV"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#14A44D"
+                android:text="Normal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="1.5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/bmiMeasurementTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="25.83 kg/m\u00B2"/>
+
+            <TextView
+                android:id="@+id/bpmmHgTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="126/82 mmHg"/>
+
+            <TextView
+                android:id="@+id/hrBPMTV"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="72.00 bpm"/>
+
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:weightSum="1"
