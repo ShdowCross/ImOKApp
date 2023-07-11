@@ -79,7 +79,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="54.5"/>
+                    android:textSize="40dp"/>
 
             </LinearLayout>
 
@@ -127,17 +127,43 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textSize="40dp"
                     android:hint="75"/>
-
-                <EditText
-                    android:id="@+id/bloodPressureET"
-                    android:gravity="center"
-                    android:padding="35dp"
-                    android:layout_margin="20dp"
-                    android:layout_weight="0.5"
+                <LinearLayout
+                    android:id="@+id/bloodPressureLL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="126/82"/>
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bloodPressureSystolicET"
+                        android:gravity="center"
+                        android:padding="35dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="0.45"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="40dp"/>
+                    <TextView
+                        android:id="@+id/bloodPressureSeparator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="24dp"
+                        android:textSize="48dp"
+                        android:text="/"/>
+                    <EditText
+                        android:id="@+id/bloodPressureDiastolicET"
+                        android:gravity="center"
+                        android:padding="35dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="0.45"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="40dp"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -177,3 +203,4 @@
     </ScrollView>
 
 </LinearLayout>
+
