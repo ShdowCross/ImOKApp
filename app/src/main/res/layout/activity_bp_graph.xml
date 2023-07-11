@@ -7,15 +7,17 @@
     tools:context=".BpGraph">
 
     <LinearLayout
+        android:weightSum="1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/BpChart"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"/>
+            android:layout_margin="40dp"/>
 
     </LinearLayout>
 

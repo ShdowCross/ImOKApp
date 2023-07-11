@@ -17,7 +17,12 @@ class HealthMetrics : AppCompatActivity() {
         }
 
         bpGraphBtn.setOnClickListener() {
-            var myIntent = Intent(this, Graph::class.java)
+            var myIntent = Intent(this, BpGraph::class.java)
+            startActivity(myIntent)
+        }
+
+        weightGraphBtn.setOnClickListener() {
+            var myIntent = Intent(this, WeightGraph::class.java)
             startActivity(myIntent)
         }
     }

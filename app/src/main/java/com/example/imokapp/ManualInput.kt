@@ -10,6 +10,11 @@ class ManualInput : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_input)
 
+        saveBtn.setOnClickListener() {
+            var myIntent = Intent(this, HealthMetrics::class.java)
+            startActivity(myIntent)
+        }
+
         cancelBtn.setOnClickListener() {
             var myIntent = Intent(this, HealthMetrics::class.java)
             startActivity(myIntent)
