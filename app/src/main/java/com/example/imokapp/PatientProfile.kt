@@ -1,8 +1,10 @@
 package com.example.imokapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import java.text.SimpleDateFormat
@@ -12,6 +14,19 @@ class PatientProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patientprofile)
+
+        val homeButton = findViewById<Button>(R.id.home_button)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, HealthMetrics::class.java)
+            startActivity(intent)
+        }
+
+        val medicalButton = findViewById<Button>(R.id.medical_button)
+        medicalButton.setOnClickListener {
+            val intent = Intent(this, PersonContacts::class.java)
+            startActivity(intent)
+        }
+
         var personInfoList = retrievePersonInfo()
         if(personInfoList.isNotEmpty()){
             val personInfo = personInfoList[0]
