@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
+import com.example.imokapp.ImOKApp.Companion.firstRun
 import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
 import com.example.imokapp.ImOKApp.Companion.heightMeter
@@ -25,6 +26,7 @@ class HealthMetrics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_metrics)
+        val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
         val weightTV = findViewById<TextView>(R.id.weightKgTV)
         val heightTV = findViewById<TextView>(R.id.heightCmTV)
@@ -44,23 +46,29 @@ class HealthMetrics : AppCompatActivity() {
         bmiAlertIV.visibility = View.INVISIBLE
         bpAlertIV.visibility = View.INVISIBLE
         hrAlertIV.visibility = View.INVISIBLE
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Alert")
-        var message = ""
+        if (!firstRun){
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            alertDialogBuilder.setTitle("Alert")
+            var message = ""
 
-        if (highBP){
-            bpAlertIV.visibility = View.VISIBLE
-            message += "There's a slight increase in blood pressure, take it easy.\n"
+            if (highBP){
+                bpAlertIV.visibility = View.VISIBLE
+                message += "There's a slight increase in blood pressure, take it easy.\n"
+            }
+            if (lowBP){
+                bpAlertIV.visibility = View.VISIBLE
+                message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+            }
+            if (uWeight){
+                weightAlertIV.visibility = View.VISIBLE
+                message += "Your weight has dropped, how are you?"
+            }
+            alertDialogBuilder.setMessage(message)
+            if (message != "") {
+                alertDialogBuilder.show()
+            }
         }
-        if (lowBP){
-            bpAlertIV.visibility = View.VISIBLE
-            message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
-        }
-        if (uWeight){
-            weightAlertIV.visibility = View.VISIBLE
-            message += "Your weight has dropped, how are you?"
-        }
-
+        firstRun = false
         var btn = findViewById<Button>(R.id.manualInputBtn)
         btn.setOnClickListener() {
             var myIntent = Intent(this, ManualInput::class.java)
@@ -75,8 +83,9 @@ class HealthMetrics : AppCompatActivity() {
 
         //to be changed to linear layout of whole item
         weightIV.setOnClickListener() {
-            var toBmiGraph = Intent(this, WeightGraph::class.java)
-            startActivity(toBmiGraph)
+            var toWeightGraph = Intent(this, WeightGraph::class.java)
+            toWeightGraph.putExtra("weight", weightValue)
+            startActivity(toWeightGraph)
         }
     }
 }

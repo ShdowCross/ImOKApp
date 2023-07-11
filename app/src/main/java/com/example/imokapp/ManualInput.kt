@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.example.imokapp.ImOKApp.Companion.BMI
+import com.example.imokapp.ImOKApp.Companion.addBpData
+import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
 import com.example.imokapp.ImOKApp.Companion.heartRate
@@ -46,18 +48,26 @@ class ManualInput : AppCompatActivity() {
             else if(bloodPressureSystolicValue.toInt() < 90){
                 lowBP = true
             }
+            else{
+                highBP = false
+                lowBP = false
+            }
             if(bloodPressureDiastolicValue.toInt() > 85){
                 highBP = true
             }
             else if (bloodPressureDiastolicValue.toInt() < 60){
                 lowBP = true
             }
-            if(bmiValue < 18.5){
-                uWeight = true
+            else{
+                highBP = false
+                lowBP = false
             }
+            uWeight = bmiValue < 18.5
             BMI = bmiValue
             bloodPressureSystolic = bloodPressureSystolicValue.toInt()
             bloodPressureDiastolic = bloodPressureDiastolicValue.toInt()
+            addBpData(bloodPressureSystolic, bloodPressureDiastolic)
+            addWeightData(weight)
             var newValuesSubmit = Intent(this,HealthMetrics::class.java)
             startActivity(newValuesSubmit)
         }

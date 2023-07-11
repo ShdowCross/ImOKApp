@@ -69,6 +69,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textSize="40dp"
                     android:text="John Tan Jia En"/>
 
                 <EditText

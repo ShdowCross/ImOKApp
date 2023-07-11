@@ -14,7 +14,8 @@ import com.example.imokapp.ImOKApp.Companion.COLUMN_GENDER
 import com.example.imokapp.ImOKApp.Companion.COLUMN_NRIC
 import com.example.imokapp.ImOKApp.Companion.COLUMN_PERSON_ID
 import com.example.imokapp.ImOKApp.Companion.COLUMN_USER_NAME
-import java.util.ArrayList
+import com.github.mikephil.charting.data.Entry
+import java.util.*
 
 
 //TODO 7 :
@@ -55,17 +56,49 @@ class ImOKApp() : Application(){
             return instance
         }
         var muscleMass: Float = 35.8F
-        var weight: Float = 74.20F
-        var heightCM: Float = 169.50F
+        var weight: Float = 0F
+        var heightCM: Float = 169F
         var heightMeter: Float = (heightCM / 100)
         var BMI: Float = (weight / (heightMeter * heightMeter))
-        var bloodPressureSystolic: Int = 126
-        var bloodPressureDiastolic: Int = 82
-        var heartRate: Float = 72.00F
+        var bloodPressureSystolic: Int = 0
+        var bloodPressureDiastolic: Int = 0
+        var heartRate: Float = 0F
+
+        var firstRun: Boolean = true
 
         var highBP: Boolean = false
         var lowBP : Boolean = false
         var uWeight: Boolean = false
+
+        var systolic = ArrayList<Entry>()
+        var diastolic = ArrayList<Entry>()
+        var weightArray = ArrayList<Entry>()
+
+        fun addBpData(systolicValue: Int, diastolicValue: Int) {
+            val systolicIndex = systolic.size.toFloat()
+            systolic.add(Entry(systolicIndex, systolicValue.toFloat()))
+
+            val diastolicIndex = diastolic.size.toFloat()
+            diastolic.add(Entry(diastolicIndex, diastolicValue.toFloat()))
+        }
+        fun addWeightData(weight:Float){
+            val weightIndex = weightArray.size.toFloat()
+            weightArray.add(Entry(weightIndex, weight))
+        }
+        fun generateTimeLabels(): List<String> {
+            val currentTime = Calendar.getInstance()
+            val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+            val minute = currentTime.get(Calendar.MINUTE)
+            val seconds = currentTime.get(Calendar.SECOND)
+
+            val labels = ArrayList<String>()
+            for (i in 0..3) {
+                val labelHour = (hour) % 24
+                val label = String.format("%02d:%02d:%02d", labelHour, minute, seconds)
+                labels.add(label)
+            }
+            return labels
+        }
     }
 
     override fun onCreate() {
