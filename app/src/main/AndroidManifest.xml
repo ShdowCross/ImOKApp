@@ -15,29 +15,37 @@
         android:theme="@style/Theme.ImOKApp"
         tools:targetApi="31">
         <activity
+            android:name=".WeightGraph"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".BpGraph"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+        <activity
             android:name=".PersonContacts"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Graph"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HealthMetrics"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ManualInput"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".PatientProfile"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
