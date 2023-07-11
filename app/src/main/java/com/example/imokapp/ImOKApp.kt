@@ -54,15 +54,27 @@ class ImOKApp() : Application(){
         fun getInstance(): ImOKApp {
             return instance
         }
+        var muscleMass: Float = 35.8F
+        var weight: Float = 74.20F
+        var heightCM: Float = 169.50F
+        var heightMeter: Float = (heightCM / 100)
+        var BMI: Float = (weight / (heightMeter * heightMeter))
+        var bloodPressureSystolic: Int = 126
+        var bloodPressureDiastolic: Int = 82
+        var heartRate: Float = 72.00F
+
+        var highBP: Boolean = false
+        var lowBP : Boolean = false
+        var uWeight: Boolean = false
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        val dbAdapter = MyDBAdapter(this)
-        dbAdapter.open()
-        personInfoHardcodedValues()
-        dbAdapter.close()
+//        val dbAdapter = MyDBAdapter(this)
+//        dbAdapter.open()
+//        personInfoHardcodedValues()
+//        dbAdapter.close()
     }
 
     fun personContactsAddToDatabase(

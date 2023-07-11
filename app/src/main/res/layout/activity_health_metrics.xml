@@ -41,24 +41,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/muscleMassIV"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/muscle"/>
-
-        <ImageView
-            android:id="@+id/weightIV"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/muscleMassIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/muscle"/>
+            <ImageView
+                android:id="@+id/mMAlertIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="110dp"
+                android:src="@drawable/alert"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/scale"/>
-
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/weightIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/scale"/>
+            <ImageView
+                android:id="@+id/weightAlertIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="110dp"
+                android:src="@drawable/alert"/>
+        </FrameLayout>
         <ImageView
             android:id="@+id/heightIV"
             android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/height"/>
 
@@ -102,7 +126,6 @@
             android:textSize="20dp"
             android:textColor="#3B71CA"
             android:text="Height"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -110,7 +133,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/musclePercentageTV"
             android:gravity="center"
@@ -189,29 +211,64 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/BmiIV"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/bmi"/>
-
-
-        <ImageView
-            android:id="@+id/bloodPressureIV"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/BmiIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/bmi"/>
+            <ImageView
+                android:id="@+id/bmiAlertIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="110dp"
+                android:src="@drawable/alert"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/blood_pressure"/>
-
-        <ImageView
-            android:id="@+id/heartRateIV"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/bloodPressureIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/blood_pressure"/>
+            <ImageView
+                android:id="@+id/bpAlertIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="110dp"
+                android:src="@drawable/alert"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/heart_rate"/>
-
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/heartRateIV"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/heart_rate"/>
+            <ImageView
+                android:id="@+id/hrAlertIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="110dp"
+                android:src="@drawable/alert"/>
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -295,43 +352,6 @@
             android:text="72.00 bpm"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/bpGraphBtn"
-            android:padding="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BP Graph"
-            android:textColor="@color/white"
-            android:backgroundTint="#DC4C64"/>
-
-        <Button
-            android:id="@+id/weightGraphBtn"
-            android:padding="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weight Graph"
-            android:textColor="@color/white"
-            android:backgroundTint="#E4A11B"/>
-
-    </LinearLayout>
-
     <LinearLayout
         android:weightSum="1"
         android:orientation="horizontal"
@@ -351,7 +371,6 @@
             android:text="Manual Input"
             android:textColor="@color/white"
             android:backgroundTint="#14A44D"/>
-
         <Button
             android:id="@+id/backBtn"
             android:padding="20dp"
@@ -365,8 +384,6 @@
             android:text="Back"
             android:textColor="@color/white"
             android:backgroundTint="#9FA6B2"/>
-
     </LinearLayout>
 
 </LinearLayout>
-
