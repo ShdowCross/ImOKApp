@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/muscleMassTV"
             android:gravity="center"
-            android:padding="25dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/weightHeightTV"
             android:gravity="center"
-            android:padding="25dp"
+            android:padding="20dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
         <TextView
             android:id="@+id/BmiTV"
             android:gravity="center"
-            android:padding="25dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
         <TextView
             android:id="@+id/bloodPressureTV"
             android:gravity="center"
-            android:padding="25dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
         <TextView
             android:id="@+id/heartRateTV"
             android:gravity="center"
-            android:padding="25dp"
+            android:padding="20dp"
             android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -297,43 +297,74 @@
     </LinearLayout>
 
     <LinearLayout
-        android:weightSum="1.5"
+        android:weightSum="1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bpGraphBtn"
+            android:padding="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BP Graph"
+            android:textColor="@color/white"
+            android:backgroundTint="#DC4C64"/>
+
+        <Button
+            android:id="@+id/weightGraphBtn"
+            android:padding="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight Graph"
+            android:textColor="@color/white"
+            android:backgroundTint="#E4A11B"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/manualInputBtn"
             android:padding="20dp"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manual Input"
             android:textColor="@color/white"
-            android:backgroundTint="#00A31A"/>
-
-        <Button
-            android:id="@+id/graphBtn"
-            android:padding="20dp"
-            android:layout_margin="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Graph"
-            android:textColor="@color/white"
-            android:backgroundTint="#54B4D3"/>
+            android:backgroundTint="#14A44D"/>
 
         <Button
             android:id="@+id/backBtn"
             android:padding="20dp"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Back"
-            android:textColor="@color/black"
-            android:backgroundTint="#D9D9D9"/>
+            android:textColor="@color/white"
+            android:backgroundTint="#9FA6B2"/>
 
     </LinearLayout>
 

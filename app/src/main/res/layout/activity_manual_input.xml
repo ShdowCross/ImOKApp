@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/manualInputTV"
         android:gravity="center"
-        android:padding="30dp"
+        android:padding="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
@@ -34,7 +34,7 @@
                 <TextView
                     android:id="@+id/fullNameTV"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -45,7 +45,7 @@
                 <TextView
                     android:id="@+id/weightTV"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -64,7 +64,7 @@
                 <TextView
                     android:id="@+id/fullNameText"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -74,7 +74,7 @@
                 <EditText
                     android:id="@+id/weightET"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -92,7 +92,7 @@
                 <TextView
                     android:id="@+id/heartRateTV"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -103,7 +103,7 @@
                 <TextView
                     android:id="@+id/bloodPressureTV"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -122,7 +122,7 @@
                 <EditText
                     android:id="@+id/heartRateET"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -132,7 +132,7 @@
                 <EditText
                     android:id="@+id/bloodPressureET"
                     android:gravity="center"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
@@ -149,7 +149,7 @@
 
                 <Button
                     android:id="@+id/saveBtn"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="match_parent"
@@ -160,7 +160,7 @@
 
                 <Button
                     android:id="@+id/cancelBtn"
-                    android:padding="30dp"
+                    android:padding="35dp"
                     android:layout_margin="20dp"
                     android:layout_weight="0.5"
                     android:layout_width="match_parent"
