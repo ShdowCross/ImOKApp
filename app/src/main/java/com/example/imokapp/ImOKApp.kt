@@ -57,7 +57,7 @@ class ImOKApp() : Application(){
         }
         var muscleMass: Float = 35.8F
         var weight: Float = 0F
-        var heightCM: Float = 169F
+        var heightCM: Float = 169.50F
         var heightMeter: Float = (heightCM / 100)
         var BMI: Float = (weight / (heightMeter * heightMeter))
         var bloodPressureSystolic: Int = 0
