@@ -15,7 +15,7 @@ class PatientProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patientprofile)
 
-        val homeButton = findViewById<Button>(R.id.home_button)
+        val homeButton = findViewById<Button>(R.id.backBtn)
         homeButton.setOnClickListener {
             val intent = Intent(this, HealthMetrics::class.java)
             startActivity(intent)
