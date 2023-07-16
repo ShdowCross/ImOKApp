@@ -22,8 +22,8 @@ class PersonContacts : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medical_contacts)
 
-        val profileButton = findViewById<Button>(R.id.profile_button)
-        profileButton.setOnClickListener {
+        val back = findViewById<Button>(R.id.backBtn)
+        back.setOnClickListener {
             val intent = Intent(this, PatientProfile::class.java)
             startActivity(intent)
         }

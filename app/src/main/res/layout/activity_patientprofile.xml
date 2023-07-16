@@ -12,23 +12,39 @@
         android:layout_margin="15dp"
         android:background="@color/MainBackground"
         android:orientation="vertical">
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-        <Button
-            android:id="@+id/home_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Home" />
-
-        <Button
-            android:id="@+id/medical_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Medical contacts" />
-</LinearLayout>
+            android:layout_weight="0.1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:text="Back"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.25"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:backgroundTint="#9FA6B2"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:padding="30dp"
+                android:gravity="center"
+                android:textSize="36dp"
+                android:text="Profile"/>
+            <Button
+                android:id="@+id/medical_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="0.25"
+                android:layout_marginHorizontal="25dp"
+                android:layout_gravity="center_vertical|end"
+                android:text="Medical contacts" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -85,7 +101,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24dp"
-                            android:text="" />
+                            android:text="John Doe" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -102,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24dp"
-                            android:text=""/>
+                            android:text="S6392819S"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -119,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24dp"
-                            android:text=""/>
+                            android:text="Male"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -136,7 +152,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24dp"
-                            android:text="21 June 1982 (41)"/>
+                            android:text="21 June 1963 (60)"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -208,7 +224,7 @@
             android:layout_height="0dp"
             android:layout_margin="30dp"
             android:orientation="vertical"
-            android:layout_weight="0.6"
+            android:layout_weight="0.5"
             android:background="@drawable/bubble_border">
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -359,6 +359,16 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom">
         <Button
+            android:id="@+id/surveyBtn"
+            android:layout_margin="20dp"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Tell us how you're feeling!"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:backgroundTint="#E4A11B"/>
+        <Button
             android:id="@+id/manualInputBtn"
             android:layout_margin="20dp"
             android:layout_weight="0.5"
@@ -367,14 +377,5 @@
             android:text="Manual Input"
             android:textColor="@color/white"
             android:backgroundTint="#14A44D"/>
-        <Button
-            android:id="@+id/backBtn"
-            android:layout_margin="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Back"
-            android:textColor="@color/white"
-            android:backgroundTint="#9FA6B2"/>
     </LinearLayout>
 </LinearLayout>
