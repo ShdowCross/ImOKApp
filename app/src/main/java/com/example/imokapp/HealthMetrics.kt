@@ -75,8 +75,13 @@ class HealthMetrics : AppCompatActivity() {
             startActivity(myIntent)
         }
 
+        profilePictureIV.setOnClickListener(){
+            var toProfile = Intent(this, PatientProfile::class.java)
+            startActivity(toProfile)
+        }
+
         //to be changed to linear layout of whole item
-        bloodPressureIV.setOnClickListener() {
+        bloodPressure.setOnClickListener() {
             var toBpGraph = Intent(this, BpGraph::class.java)
             startActivity(toBpGraph)
         }

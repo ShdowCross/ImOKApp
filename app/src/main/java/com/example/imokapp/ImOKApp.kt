@@ -59,7 +59,7 @@ class ImOKApp() : Application(){
         var weight: Float = 0F
         var heightCM: Float = 169F
         var heightMeter: Float = (heightCM / 100)
-        var BMI: Float = (weight / (heightMeter * heightMeter))
+        var BMI: Float = 0F
         var bloodPressureSystolic: Int = 0
         var bloodPressureDiastolic: Int = 0
         var heartRate: Float = 0F
@@ -71,8 +71,11 @@ class ImOKApp() : Application(){
         var uWeight: Boolean = false
 
         var systolic = ArrayList<Entry>()
+        var systolicValues = ArrayList<Int>()
         var diastolic = ArrayList<Entry>()
+        var diastolicValues = ArrayList<Int>()
         var weightArray = ArrayList<Entry>()
+        var weightValues = ArrayList<Float>()
 
         fun addBpData(systolicValue: Int, diastolicValue: Int) {
             val systolicIndex = systolic.size.toFloat()
@@ -98,6 +101,10 @@ class ImOKApp() : Application(){
                 labels.add(label)
             }
             return labels
+        }
+        fun calculateBMI(w: Float, h: Float): Float{
+            BMI = w / (h * h)
+            return BMI
         }
     }
 

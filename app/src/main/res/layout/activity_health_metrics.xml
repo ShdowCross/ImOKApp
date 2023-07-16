@@ -10,13 +10,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_weight="0.15"
         android:orientation="vertical">
         <TextView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="36dp"
             android:text="Im OK App Dashboard"/>
         <ImageView
             android:id="@+id/profilePictureIV"
@@ -31,7 +31,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.37">
+        android:layout_weight="0.335">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -186,7 +186,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.37"
+        android:layout_weight="0.335"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_weight="0.33"
@@ -243,6 +243,7 @@
                 android:text="25.83 kg/m\u00B2"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/bloodPressure"
             android:layout_weight="0.33"
             android:orientation="vertical"
             android:layout_width="0dp"
