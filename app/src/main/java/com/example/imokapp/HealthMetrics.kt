@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
+import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
 import com.example.imokapp.ImOKApp.Companion.firstRun
 import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
@@ -18,7 +20,10 @@ import com.example.imokapp.ImOKApp.Companion.muscleMass
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.lowBP
+import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.uWeight
+import com.example.imokapp.ImOKApp.Companion.weightArray
+import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
@@ -26,6 +31,10 @@ class HealthMetrics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_metrics)
+        val lowColor = ContextCompat.getColor(this, R.color.blue)
+        val normalColor = ContextCompat.getColor(this, R.color.green)
+        val highColor = ContextCompat.getColor(this, R.color.red)
+
         val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
         val weightTV = findViewById<TextView>(R.id.weightKgTV)
@@ -33,6 +42,9 @@ class HealthMetrics : AppCompatActivity() {
         val bmiTV = findViewById<TextView>(R.id.bmiMeasurementTV)
         val bpTV = findViewById<TextView>(R.id.bpmmHgTV)
         val hrTV = findViewById<TextView>(R.id.hrBPMTV)
+        val bpDiagnosis = findViewById<TextView>(R.id.bpRangeTV)
+        val bmiDiagnosis = findViewById<TextView>(R.id.bmiRangeTV)
+
         muscleTV.text = "$muscleMass%"
         weightTV.text = weight.toString()
         heightTV.text = heightCM.toString()
@@ -46,29 +58,53 @@ class HealthMetrics : AppCompatActivity() {
         bmiAlertIV.visibility = View.INVISIBLE
         bpAlertIV.visibility = View.INVISIBLE
         hrAlertIV.visibility = View.INVISIBLE
-        if (!firstRun){
-            val alertDialogBuilder = AlertDialog.Builder(this)
-            alertDialogBuilder.setTitle("Alert")
-            var message = ""
 
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Alert")
+        var message = ""
+        if (systolic.isNotEmpty()){
             if (highBP){
                 bpAlertIV.visibility = View.VISIBLE
-                message += "There's a slight increase in blood pressure, take it easy.\n"
+                bpDiagnosis.text = "High BP"
+                bpDiagnosis.setTextColor(highColor)
+                if (bpNotificationOn) {
+                    message += "There's a slight increase in blood pressure, take it easy.\n"
+                    bpNotificationOn = false
+                }
             }
-            if (lowBP){
+            else if (lowBP){
                 bpAlertIV.visibility = View.VISIBLE
-                message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                bpDiagnosis.text = "Low BP"
+                bpDiagnosis.setTextColor(lowColor)
+                if (bpNotificationOn){
+                    message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                    bpNotificationOn = false
+                }
             }
-            if (uWeight){
-                weightAlertIV.visibility = View.VISIBLE
-                message += "Your weight has dropped, how are you?"
-            }
-            alertDialogBuilder.setMessage(message)
-            if (message != "") {
-                alertDialogBuilder.show()
+            else if(!highBP || !lowBP){
+                bpDiagnosis.text = "Normal BP"
+                bpDiagnosis.setTextColor(normalColor)
             }
         }
-        firstRun = false
+        if(weightArray.isNotEmpty()){
+            if (uWeight){
+                weightAlertIV.visibility = View.VISIBLE
+                bmiDiagnosis.text = "Underweight"
+                bmiDiagnosis.setTextColor(lowColor)
+                if (weightNotificationOn){
+                    message += "Your weight has dropped, how are you?"
+                    weightNotificationOn = false
+                }
+            }
+            else{
+                bmiDiagnosis.text = "Normal"
+                bmiDiagnosis.setTextColor(normalColor)
+            }
+        }
+        alertDialogBuilder.setMessage(message)
+        if (message != "") {
+            alertDialogBuilder.show()
+        }
         var btn = findViewById<Button>(R.id.manualInputBtn)
         btn.setOnClickListener() {
             var myIntent = Intent(this, ManualInput::class.java)

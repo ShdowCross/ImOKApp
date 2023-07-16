@@ -231,7 +231,7 @@
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#E4A11B"
-                android:text="OverWeight"/>
+                android:text="No data available"/>
             <TextView
                 android:id="@+id/bmiMeasurementTV"
                 android:gravity="center"
@@ -286,7 +286,7 @@
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#E4A11B"
-                android:text="Pre-High"/>
+                android:text="No data available"/>
             <TextView
                 android:id="@+id/bpmmHgTV"
                 android:gravity="center"

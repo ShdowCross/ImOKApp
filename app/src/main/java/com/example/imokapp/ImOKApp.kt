@@ -65,6 +65,10 @@ class ImOKApp() : Application(){
         var heartRate: Float = 0F
 
         var firstRun: Boolean = true
+        var bpNotificationOn: Boolean = true
+        var weightNotificationOn: Boolean = true
+        var hrNotificationOn: Boolean = true
+        var muscleMassNotificationOn: Boolean = true
 
         var highBP: Boolean = false
         var lowBP : Boolean = false
@@ -76,6 +80,7 @@ class ImOKApp() : Application(){
         var diastolicValues = ArrayList<Int>()
         var weightArray = ArrayList<Entry>()
         var weightValues = ArrayList<Float>()
+        var timeList = ArrayList<String>()
 
         fun addBpData(systolicValue: Int, diastolicValue: Int) {
             val systolicIndex = systolic.size.toFloat()
@@ -88,19 +93,14 @@ class ImOKApp() : Application(){
             val weightIndex = weightArray.size.toFloat()
             weightArray.add(Entry(weightIndex, weight))
         }
-        fun generateTimeLabels(): List<String> {
+        fun generateTimeLabels(): String {
             val currentTime = Calendar.getInstance()
             val hour = currentTime.get(Calendar.HOUR_OF_DAY)
             val minute = currentTime.get(Calendar.MINUTE)
             val seconds = currentTime.get(Calendar.SECOND)
-
-            val labels = ArrayList<String>()
-            for (i in 0..3) {
-                val labelHour = (hour) % 24
-                val label = String.format("%02d:%02d:%02d", labelHour, minute, seconds)
-                labels.add(label)
-            }
-            return labels
+            val labelHour = (hour) % 24
+            val label = String.format("%02d:%02d:%02d", labelHour, minute, seconds)
+            return label
         }
         fun calculateBMI(w: Float, h: Float): Float{
             BMI = w / (h * h)

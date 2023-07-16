@@ -10,14 +10,19 @@ import com.example.imokapp.ImOKApp.Companion.addBpData
 import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
+import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
+import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
 import com.example.imokapp.ImOKApp.Companion.heightMeter
 import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.muscleMass
+import com.example.imokapp.ImOKApp.Companion.systolicValues
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weight
+import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
+import com.example.imokapp.ImOKApp.Companion.weightValues
 import kotlinx.android.synthetic.main.activity_health_metrics.*
 import kotlinx.android.synthetic.main.activity_manual_input.*
 import kotlinx.android.synthetic.main.activity_survey.*
@@ -66,9 +71,17 @@ class ManualInput : AppCompatActivity() {
             BMI = bmiValue
             bloodPressureSystolic = bloodPressureSystolicValue.toInt()
             bloodPressureDiastolic = bloodPressureDiastolicValue.toInt()
+
+            systolicValues.add(bloodPressureSystolic)
+            diastolicValues.add(bloodPressureDiastolic)
+            weightValues.add(weight)
+
             addBpData(bloodPressureSystolic, bloodPressureDiastolic)
             addWeightData(weight)
+
             var newValuesSubmit = Intent(this,HealthMetrics::class.java)
+            bpNotificationOn = true
+            weightNotificationOn = true
             startActivity(newValuesSubmit)
         }
     }

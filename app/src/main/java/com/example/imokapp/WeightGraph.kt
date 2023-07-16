@@ -6,20 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.calculateBMI
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
 import com.example.imokapp.ImOKApp.Companion.heightMeter
+import com.example.imokapp.ImOKApp.Companion.timeList
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
+import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import com.example.imokapp.ImOKApp.Companion.weightValues
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
@@ -38,32 +39,60 @@ override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_weight_graph)
 
+    var warningLL = findViewById<LinearLayout>(R.id.diagnosisLL)
     var warningView = findViewById<TextView>(R.id.diagnosisTV)
+    var warningSurveyView = findViewById<TextView>(R.id.diagnosisSurveyTV)
+
     val lowColor = ContextCompat.getColor(this, R.color.blue)
     val normalColor = ContextCompat.getColor(this, R.color.green)
     val highColor = ContextCompat.getColor(this, R.color.red)
+
     val alertDialogBuilder = AlertDialog.Builder(this)
     alertDialogBuilder.setTitle("Alert")
     var message = ""
+    var surveyClassName = ""
+
     if(weightValues.isNotEmpty()){
         var weightSize = weightValues.size
         lastReadingWeightTV.text = weightValues[weightSize-1].toString()
         if (uWeight){
             warningView.text = "Underweight"
             warningView.setTextColor(lowColor)
-            message += "Your weight has dropped, how are you?"
+            warningSurveyView.text = "Click here to tell us how you're feeling!"
+            warningLL.isVisible = true
+            if (weightNotificationOn){
+                message += "Your weight has dropped, how are you?"
+                surveyClassName = "com.example.imokapp.WLRecommendationComplication"
+                weightNotificationOn = false
+            }
         }
         else{
             warningView.text = "Normal"
             warningView.setTextColor(normalColor)
+            warningLL.isInvisible = true
         }
         alertDialogBuilder.setMessage(message)
+        alertDialogBuilder.setPositiveButton("Ok for now"){ dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialogBuilder.setNegativeButton("Take Survey"){_, _ ->
+            val surveyClass = Class.forName(surveyClassName)
+            val toSurvey = Intent(this, surveyClass)
+            startActivity(toSurvey)
+        }
         if (message != "") {
             alertDialogBuilder.show()
         }
         setUpWeightChart()
         setDataToWeightChart()
     }
+
+    warningLL.setOnClickListener{
+        val surveyClass = Class.forName(surveyClassName)
+        val toSurvey = Intent(this, surveyClass)
+        startActivity(toSurvey)
+    }
+
     var submitBtn = findViewById<Button>(R.id.weightSubmitBtn)
     submitBtn.setOnClickListener {
         var weightET = findViewById<EditText>(R.id.weightEntryET)
@@ -82,6 +111,8 @@ override fun onCreate(savedInstanceState: Bundle?) {
             uWeight = calculateBMI(weight, heightMeter) < 18.5
             addWeightData(weight)
             weightValues.add(weight)
+            weightNotificationOn = true
+            timeList.add(generateTimeLabels())
             recreate()
         }
     }
@@ -100,7 +131,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 private fun setUpWeightChart() {
     with(WeightChart) {
 
-        axisRight.isEnabled = false
+        axisRight.isEnabled = true
         animateX(1200, Easing.EaseInSine)
 
         description.isEnabled = false
@@ -108,15 +139,16 @@ private fun setUpWeightChart() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = MyAxisFormatter()
         xAxis.granularity = 1F
-        xAxis.setDrawGridLines(false)
-        xAxis.setDrawAxisLine(false)
-        axisLeft.setDrawGridLines(false)
+        xAxis.setDrawGridLines(true)
+        xAxis.setDrawAxisLine(true)
+        axisLeft.setDrawGridLines(true)
         extraRightOffset = 30f
 
         legend.isEnabled = true
+        legend.textSize = 15f
         legend.orientation = Legend.LegendOrientation.VERTICAL
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
         legend.form = Legend.LegendForm.LINE
 
     }
@@ -124,12 +156,10 @@ private fun setUpWeightChart() {
 
 inner class MyAxisFormatter : IndexAxisValueFormatter() {
 
-    private var time = generateTimeLabels()
-
     override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
         val index = value.toInt()
-        return if (index in time.indices) {
-            time[index]
+        return if (index in timeList.indices) {
+            timeList[index]
         } else {
             ""
         }
@@ -139,12 +169,12 @@ inner class MyAxisFormatter : IndexAxisValueFormatter() {
 private fun setDataToWeightChart() {
     val weightDataset = LineDataSet(weightArray, "Weight")
     weightDataset.lineWidth = 3f
-    weightDataset.valueTextSize = 15f
+    weightDataset.valueTextSize = 12f
     weightDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
     weightDataset.color = ContextCompat.getColor(this, R.color.green)
     weightDataset.valueTextColor = ContextCompat.getColor(this, R.color.green)
-    weightDataset.enableDashedLine(20F, 10F, 0F)
-    weightDataset.disableDashedLine()
+//    weightDataset.enableDashedLine(20F, 10F, 0F)
+//    weightDataset.disableDashedLine()
 
     val dataSet = ArrayList<ILineDataSet>()
     dataSet.add(weightDataset)
