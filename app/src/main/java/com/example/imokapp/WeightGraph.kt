@@ -62,7 +62,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
             warningLL.isVisible = true
             if (weightNotificationOn){
                 message += "Your weight has dropped, how are you?"
-                surveyClassName = "com.example.imokapp.WLRecommendationComplication"
+                surveyClassName = "com.example.imokapp.Survey"
                 weightNotificationOn = false
             }
         }
