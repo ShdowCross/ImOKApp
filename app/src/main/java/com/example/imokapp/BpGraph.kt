@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.addBpData
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
+import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
 import com.example.imokapp.ImOKApp.Companion.diastolic
 import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
@@ -20,6 +24,7 @@ import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.systolicValues
+import com.example.imokapp.ImOKApp.Companion.timeList
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -38,13 +43,19 @@ class BpGraph : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bp_graph)
+        var warningLL = findViewById<LinearLayout>(R.id.diagnosisLL)
         var warningView = findViewById<TextView>(R.id.diagnosisTV)
+        var warningSurveyView = findViewById<TextView>(R.id.diagnosisSurveyTV)
+
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
+
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
         var message = ""
+        var surveyClassName = ""
+
         if(systolic.isNotEmpty()){
             var systolicSize = systolicValues.size
             var diastolicSize = diastolicValues.size
@@ -53,24 +64,52 @@ class BpGraph : AppCompatActivity() {
             if (highBP){
                 warningView.text = "High BP"
                 warningView.setTextColor(highColor)
-                message += "There's a slight increase in blood pressure, take it easy.\n"
+                warningSurveyView.text = "Click here to tell us how you're feeling!"
+                warningLL.isVisible = true
+                if (bpNotificationOn) {
+                    message += "There's a slight increase in blood pressure, take it easy.\n"
+                    surveyClassName = "com.example.imokapp.HBPRecommendationComplication"
+                    bpNotificationOn = false
+                }
             }
             else if (lowBP){
                 warningView.text = "Low BP"
                 warningView.setTextColor(lowColor)
-                message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                warningSurveyView.text = "Click here to tell us how you're feeling!"
+                warningLL.isVisible = true
+                if (bpNotificationOn){
+                    message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                    surveyClassName = "com.example.imokapp.LBPRecommendationComplication"
+                    bpNotificationOn = false
+                }
             }
             else{
                 warningView.text = "Normal BP"
                 warningView.setTextColor(normalColor)
+                warningLL.isInvisible = true
             }
             alertDialogBuilder.setMessage(message)
+            alertDialogBuilder.setPositiveButton("Ok for now"){ dialog, _ ->
+                dialog.dismiss()
+            }
+            alertDialogBuilder.setNegativeButton("Take Survey"){_, _ ->
+                val surveyClass = Class.forName(surveyClassName)
+                val toSurvey = Intent(this, surveyClass)
+                startActivity(toSurvey)
+            }
             if (message != "") {
                 alertDialogBuilder.show()
             }
             setUpBpChart()
             setDataToBpChart()
         }
+
+        warningLL.setOnClickListener{
+            val surveyClass = Class.forName(surveyClassName)
+            val toSurvey = Intent(this, surveyClass)
+            startActivity(toSurvey)
+        }
+
         var submitBtn = findViewById<Button>(R.id.submitBtn)
         submitBtn.setOnClickListener {
             var systolicET = findViewById<EditText>(R.id.EntrySystolicET)
@@ -111,6 +150,8 @@ class BpGraph : AppCompatActivity() {
                 addBpData(bloodPressureSystolic, bloodPressureDiastolic)
                 systolicValues.add(bloodPressureSystolic)
                 diastolicValues.add(bloodPressureDiastolic)
+                bpNotificationOn = true
+                timeList.add(generateTimeLabels())
                 recreate()
             }
         }
@@ -152,12 +193,10 @@ class BpGraph : AppCompatActivity() {
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
 
-        private var time = generateTimeLabels()
-
         override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
             val index = value.toInt()
-            return if (index in time.indices) {
-                time[index]
+            return if (index in timeList.indices) {
+                timeList[index]
             } else {
                 ""
             }
