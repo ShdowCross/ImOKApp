@@ -65,6 +65,7 @@ class HealthMetrics : AppCompatActivity() {
         if (systolic.isNotEmpty()){
             if (highBP){
                 bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "High BP"
                 bpDiagnosis.setTextColor(highColor)
                 if (bpNotificationOn) {
@@ -74,6 +75,7 @@ class HealthMetrics : AppCompatActivity() {
             }
             else if (lowBP){
                 bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "Low BP"
                 bpDiagnosis.setTextColor(lowColor)
                 if (bpNotificationOn){
@@ -89,6 +91,7 @@ class HealthMetrics : AppCompatActivity() {
         if(weightArray.isNotEmpty()){
             if (uWeight){
                 weightAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
                 bmiDiagnosis.text = "Underweight"
                 bmiDiagnosis.setTextColor(lowColor)
                 if (weightNotificationOn){
@@ -105,23 +108,25 @@ class HealthMetrics : AppCompatActivity() {
         if (message != "") {
             alertDialogBuilder.show()
         }
-        var btn = findViewById<Button>(R.id.manualInputBtn)
-        btn.setOnClickListener() {
+        var inputBtn = findViewById<Button>(R.id.manualInputBtn)
+        inputBtn.setOnClickListener() {
             var myIntent = Intent(this, ManualInput::class.java)
             startActivity(myIntent)
         }
-
+        var surveyBtn = findViewById<Button>(R.id.surveyBtn)
+        surveyBtn.setOnClickListener(){
+            var toSurvey = Intent(this, Survey::class.java)
+            startActivity(toSurvey)
+        }
         profilePictureIV.setOnClickListener(){
             var toProfile = Intent(this, PatientProfile::class.java)
             startActivity(toProfile)
         }
-
         //to be changed to linear layout of whole item
         bloodPressure.setOnClickListener() {
             var toBpGraph = Intent(this, BpGraph::class.java)
             startActivity(toBpGraph)
         }
-
         //to be changed to linear layout of whole item
         weightIV.setOnClickListener() {
             var toWeightGraph = Intent(this, WeightGraph::class.java)
