@@ -31,7 +31,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import kotlinx.android.synthetic.main.activity_bp_graph.*
 import kotlinx.android.synthetic.main.activity_weight_graph.*
 
 class WeightGraph : AppCompatActivity() {

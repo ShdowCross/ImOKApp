@@ -23,9 +23,8 @@ import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import com.example.imokapp.ImOKApp.Companion.weightValues
-import kotlinx.android.synthetic.main.activity_health_metrics.*
 import kotlinx.android.synthetic.main.activity_manual_input.*
-import kotlinx.android.synthetic.main.activity_survey.*
+
 
 class ManualInput : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

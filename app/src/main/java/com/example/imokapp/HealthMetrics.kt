@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -24,7 +25,6 @@ import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
-import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
 
@@ -45,6 +45,17 @@ class HealthMetrics : AppCompatActivity() {
         val bpDiagnosis = findViewById<TextView>(R.id.bpRangeTV)
         val bmiDiagnosis = findViewById<TextView>(R.id.bmiRangeTV)
 
+        val AlertIV = findViewById<ImageView>(R.id.mMAlertIV)
+        val weightAlertIV = findViewById<ImageView>(R.id.weightAlertIV)
+        val bmiAlertIV = findViewById<ImageView>(R.id.bmiAlertIV)
+        val bpAlertIV = findViewById<ImageView>(R.id.bpAlertIV)
+        val hrAlertIV = findViewById<ImageView>(R.id.hrAlertIV)
+        val bloodPressure = findViewById<LinearLayout>(R.id.bloodPressure)
+        val weightIV = findViewById<LinearLayout>(R.id.weightLayout)
+        val profilePictureIV = findViewById<ImageView>(R.id.profilePictureIV)
+        val surveyBtn = findViewById<Button>(R.id.surveyBtn)
+
+
         muscleTV.text = "$muscleMass%"
         weightTV.text = weight.toString()
         heightTV.text = heightCM.toString()
@@ -53,7 +64,7 @@ class HealthMetrics : AppCompatActivity() {
         bmiTV.text = formattedBMI
         bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
         hrTV.text = "$heartRate bpm"
-        mMAlertIV.visibility = View.INVISIBLE
+        AlertIV.visibility = View.INVISIBLE
         weightAlertIV.visibility = View.INVISIBLE
         bmiAlertIV.visibility = View.INVISIBLE
         bpAlertIV.visibility = View.INVISIBLE
@@ -113,7 +124,7 @@ class HealthMetrics : AppCompatActivity() {
             var myIntent = Intent(this, ManualInput::class.java)
             startActivity(myIntent)
         }
-        var surveyBtn = findViewById<Button>(R.id.surveyBtn)
+
         surveyBtn.setOnClickListener(){
             var toSurvey = Intent(this, Survey::class.java)
             startActivity(toSurvey)
