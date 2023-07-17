@@ -31,7 +31,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import kotlinx.android.synthetic.main.activity_bp_graph.*
 import kotlinx.android.synthetic.main.activity_weight_graph.*
 
 class WeightGraph : AppCompatActivity() {
@@ -62,7 +61,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
             warningLL.isVisible = true
             if (weightNotificationOn){
                 message += "Your weight has dropped, how are you?"
-                surveyClassName = "com.example.imokapp.WLRecommendationComplication"
+                surveyClassName = "com.example.imokapp.Survey"
                 weightNotificationOn = false
             }
         }

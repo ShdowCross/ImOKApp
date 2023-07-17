@@ -35,9 +35,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.activity_bp_graph.*
-import kotlinx.android.synthetic.main.activity_bp_graph.backBtn
-import kotlinx.android.synthetic.main.activity_bp_graph.profilePictureIV
-import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class BpGraph : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +65,7 @@ class BpGraph : AppCompatActivity() {
                 warningLL.isVisible = true
                 if (bpNotificationOn) {
                     message += "There's a slight increase in blood pressure, take it easy.\n"
-                    surveyClassName = "com.example.imokapp.HBPRecommendationComplication"
+                    surveyClassName = "com.example.imokapp.Survey"
                     bpNotificationOn = false
                 }
             }
@@ -79,7 +76,7 @@ class BpGraph : AppCompatActivity() {
                 warningLL.isVisible = true
                 if (bpNotificationOn){
                     message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
-                    surveyClassName = "com.example.imokapp.LBPRecommendationComplication"
+                    surveyClassName = "com.example.imokapp.Survey"
                     bpNotificationOn = false
                 }
             }
