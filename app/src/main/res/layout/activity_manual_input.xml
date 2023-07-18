@@ -39,7 +39,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:text="Full Name"/>
 
                 <TextView
@@ -50,7 +50,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:text="Weight (kg)"/>
 
             </LinearLayout>
@@ -69,7 +69,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
+                    android:textSize="35dp"
                     android:text="John Tan Jia En"/>
 
                 <EditText
@@ -80,7 +80,8 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"/>
+                    android:textSize="35dp"
+                    android:hint="80"/>
 
             </LinearLayout>
 
@@ -98,7 +99,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:text="Heart Rate (bpm)"/>
 
                 <TextView
@@ -109,7 +110,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:text="Blood Pressure (mmHg)"/>
 
             </LinearLayout>
@@ -124,12 +125,16 @@
                     android:id="@+id/heartRateET"
                     android:gravity="center"
                     android:padding="35dp"
-                    android:layout_margin="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="50dp"
                     android:layout_weight="0.5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
+                    android:textSize="35dp"
                     android:hint="75"/>
+
                 <LinearLayout
                     android:id="@+id/bloodPressureLL"
                     android:layout_width="0dp"
@@ -144,7 +149,8 @@
                         android:layout_weight="0.45"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="40dp"/>
+                        android:textSize="35dp"
+                        android:hint="120"/>
                     <TextView
                         android:id="@+id/bloodPressureSeparator"
                         android:layout_width="0dp"
@@ -163,7 +169,8 @@
                         android:layout_weight="0.45"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:hint="80"/>
                 </LinearLayout>
 
             </LinearLayout>
