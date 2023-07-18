@@ -16,6 +16,8 @@ import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
 import com.example.imokapp.ImOKApp.Companion.heightMeter
 import com.example.imokapp.ImOKApp.Companion.highBP
+import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
+import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.muscleMass
 import com.example.imokapp.ImOKApp.Companion.systolicValues
@@ -46,25 +48,35 @@ class ManualInput : AppCompatActivity() {
             var heartRateValue = heartRateET.text.toString()
             heartRate = heartRateValue.toFloat()
             var bmiValue = bmi(weight, heightMeter)
-            if (bloodPressureSystolicValue.toInt() > 130){
-                highBP = true
+            if (bloodPressureSystolicValue.toInt() > 130 && bloodPressureDiastolicValue.toInt() < 60){
+                highBP = false
+                lowBP = false
+                isolatedSystolic = true
+                isolatedDiastolic = false
             }
-            else if(bloodPressureSystolicValue.toInt() < 90){
+            else if(bloodPressureSystolicValue.toInt() < 90 && bloodPressureDiastolicValue.toInt() > 85){
+                highBP = false
+                lowBP = false
+                isolatedSystolic = false
+                isolatedDiastolic = true
+            }
+            else if (bloodPressureSystolicValue.toInt() > 130 || bloodPressureDiastolicValue.toInt() > 85){
+                highBP = true
+                lowBP = false
+                isolatedSystolic = false
+                isolatedDiastolic = false
+            }
+            else if(bloodPressureSystolicValue.toInt() < 90 || bloodPressureDiastolicValue.toInt() < 60){
+                highBP = false
                 lowBP = true
+                isolatedSystolic = false
+                isolatedDiastolic = false
             }
             else{
                 highBP = false
                 lowBP = false
-            }
-            if(bloodPressureDiastolicValue.toInt() > 85){
-                highBP = true
-            }
-            else if (bloodPressureDiastolicValue.toInt() < 60){
-                lowBP = true
-            }
-            else{
-                highBP = false
-                lowBP = false
+                isolatedSystolic = false
+                isolatedDiastolic = false
             }
             uWeight = bmiValue < 18.5
             BMI = bmiValue

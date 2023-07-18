@@ -21,6 +21,8 @@ import com.example.imokapp.ImOKApp.Companion.diastolic
 import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
 import com.example.imokapp.ImOKApp.Companion.highBP
+import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
+import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.systolicValues
@@ -47,6 +49,7 @@ class BpGraph : AppCompatActivity() {
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
+        val halfColor = ContextCompat.getColor(this, R.color.yellow_orange)
 
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
@@ -72,6 +75,28 @@ class BpGraph : AppCompatActivity() {
             else if (lowBP){
                 warningView.text = "Low BP"
                 warningView.setTextColor(lowColor)
+                warningSurveyView.text = "Click here to tell us how you're feeling!"
+                warningLL.isVisible = true
+                if (bpNotificationOn){
+                    message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                    surveyClassName = "com.example.imokapp.Survey"
+                    bpNotificationOn = false
+                }
+            }
+            else if (isolatedSystolic){
+                warningView.text = "Isolated Systolic"
+                warningView.setTextColor(halfColor)
+                warningSurveyView.text = "Click here to tell us how you're feeling!"
+                warningLL.isVisible = true
+                if (bpNotificationOn){
+                    message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                    surveyClassName = "com.example.imokapp.Survey"
+                    bpNotificationOn = false
+                }
+            }
+            else if (isolatedDiastolic){
+                warningView.text = "Isolated Diastolic"
+                warningView.setTextColor(halfColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
                 if (bpNotificationOn){
@@ -130,18 +155,36 @@ class BpGraph : AppCompatActivity() {
                 }
             }
             else {
-                if (systolicText.toInt() > 130 || diastolicText.toInt() > 85){
+                if (systolicText.toInt() > 130 && diastolicText.toInt() < 60){
+                    highBP = false
+                    lowBP = false
+                    isolatedSystolic = true
+                    isolatedDiastolic = false
+                }
+                else if(systolicText.toInt() < 90 && diastolicText.toInt() > 85){
+                    highBP = false
+                    lowBP = false
+                    isolatedSystolic = false
+                    isolatedDiastolic = true
+                }
+                else if (systolicText.toInt() > 130 || diastolicText.toInt() > 85){
                     highBP = true
                     lowBP = false
+                    isolatedSystolic = false
+                    isolatedDiastolic = false
                 }
                 else if(systolicText.toInt() < 90 || diastolicText.toInt() < 60){
                     highBP = false
                     lowBP = true
+                    isolatedSystolic = false
+                    isolatedDiastolic = false
                 }
                 else{
                     highBP = false
                     lowBP = false
-                    }
+                    isolatedSystolic = false
+                    isolatedDiastolic = false
+                }
                 bloodPressureSystolic = systolicText.toInt()
                 bloodPressureDiastolic = diastolicText.toInt()
                 addBpData(bloodPressureSystolic, bloodPressureDiastolic)

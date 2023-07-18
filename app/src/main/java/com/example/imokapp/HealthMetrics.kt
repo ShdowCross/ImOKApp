@@ -20,8 +20,11 @@ import com.example.imokapp.ImOKApp.Companion.heightMeter
 import com.example.imokapp.ImOKApp.Companion.muscleMass
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.highBP
+import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
+import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
+import com.example.imokapp.ImOKApp.Companion.takeCareNotif
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
@@ -34,6 +37,7 @@ class HealthMetrics : AppCompatActivity() {
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
+        val halfColor = ContextCompat.getColor(this, R.color.yellow_orange)
 
         val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
@@ -45,7 +49,7 @@ class HealthMetrics : AppCompatActivity() {
         val bpDiagnosis = findViewById<TextView>(R.id.bpRangeTV)
         val bmiDiagnosis = findViewById<TextView>(R.id.bmiRangeTV)
 
-        val AlertIV = findViewById<ImageView>(R.id.mMAlertIV)
+        val alertIV = findViewById<ImageView>(R.id.mMAlertIV)
         val weightAlertIV = findViewById<ImageView>(R.id.weightAlertIV)
         val bmiAlertIV = findViewById<ImageView>(R.id.bmiAlertIV)
         val bpAlertIV = findViewById<ImageView>(R.id.bpAlertIV)
@@ -64,7 +68,7 @@ class HealthMetrics : AppCompatActivity() {
         bmiTV.text = formattedBMI
         bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
         hrTV.text = "$heartRate bpm"
-        AlertIV.visibility = View.INVISIBLE
+        alertIV.visibility = View.INVISIBLE
         weightAlertIV.visibility = View.INVISIBLE
         bmiAlertIV.visibility = View.INVISIBLE
         bpAlertIV.visibility = View.INVISIBLE
@@ -94,7 +98,27 @@ class HealthMetrics : AppCompatActivity() {
                     bpNotificationOn = false
                 }
             }
-            else if(!highBP || !lowBP){
+            else if (isolatedSystolic){
+                bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
+                bpDiagnosis.text = "Isolated Systolic"
+                bpDiagnosis.setTextColor(highColor)
+                if (bpNotificationOn){
+                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    bpNotificationOn = false
+                }
+            }
+            else if (isolatedDiastolic){
+                bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
+                bpDiagnosis.text = "Isolated Diastolic"
+                bpDiagnosis.setTextColor(lowColor)
+                if (bpNotificationOn){
+                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    bpNotificationOn = false
+                }
+            }
+            else {
                 bpDiagnosis.text = "Normal BP"
                 bpDiagnosis.setTextColor(normalColor)
             }
@@ -114,6 +138,10 @@ class HealthMetrics : AppCompatActivity() {
                 bmiDiagnosis.text = "Normal"
                 bmiDiagnosis.setTextColor(normalColor)
             }
+        }
+        if(takeCareNotif){
+            message += "Monitor your condition, drink water and eat healthily! You should be fine in a few days."
+            surveyBtn.visibility = View.GONE
         }
         alertDialogBuilder.setMessage(message)
         if (message != "") {
