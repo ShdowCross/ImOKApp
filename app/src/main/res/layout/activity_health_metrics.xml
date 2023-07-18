@@ -16,63 +16,63 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36dp"
+            android:textSize="40dp"
             android:text="Im OK App Dashboard"/>
         <ImageView
             android:id="@+id/profilePictureIV"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:background="@mipmap/profile"
             android:layout_marginRight="35dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_vertical|end"/>
     </FrameLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.335">
+        android:weightSum="1.5"
+        android:layout_weight="0.34">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="10dp"
             android:layout_margin="30dp"
             android:background="@drawable/bubble_border">
             <TextView
                 android:id="@+id/muscleMassTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="Muscle Mass"/>
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.4">
                 <ImageView
                     android:id="@+id/muscleMassIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:src="@drawable/muscle" />
                 <ImageView
                     android:id="@+id/mMAlertIV"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="75dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="110dp"
                     android:src="@drawable/alert"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/muscleRangeTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#14A44D"
@@ -80,7 +80,7 @@
             <TextView
                 android:id="@+id/musclePercentageTV"
                 android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.2"
                 android:textColor="@color/black"
@@ -91,7 +91,7 @@
             android:id="@+id/weightLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             android:layout_margin="30dp"
             android:gravity="center"
@@ -100,19 +100,19 @@
                 android:id="@+id/weightHeightTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="Weight"/>
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.4">
                 <ImageView
                     android:id="@+id/weightIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:src="@drawable/scale"/>
                 <ImageView
@@ -120,14 +120,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="75dp"
                     android:src="@drawable/alert" />
             </FrameLayout>
             <TextView
                 android:id="@+id/weightTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#3B71CA"
@@ -136,7 +136,7 @@
                 android:id="@+id/weightKgTV"
                 android:gravity="center"
                 android:layout_weight="0.2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#3B71CA"
@@ -145,7 +145,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             android:layout_margin="30dp"
             android:gravity="center"
@@ -154,21 +154,31 @@
                 android:id="@+id/HeightTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="Height"/>
-            <ImageView
-                android:id="@+id/heightIV"
-                android:layout_weight="0.4"
-                android:layout_width="wrap_content"
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@drawable/height"/>
+                android:layout_gravity="center"
+                android:layout_weight="0.4">
+
+                <ImageView
+                    android:id="@+id/heightIV"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/height"/>
+
+            </FrameLayout>
+
             <TextView
                 android:id="@+id/heightTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#3B71CA"
@@ -176,7 +186,7 @@
             <TextView
                 android:id="@+id/heightCmTV"
                 android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.2"
                 android:textColor="#3B71CA"
@@ -187,7 +197,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.335"
+        android:layout_weight="0.34"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_weight="0.33"
@@ -201,19 +211,19 @@
                 android:id="@+id/BmiTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="BMI"/>
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.4">
                 <ImageView
                     android:id="@+id/BmiIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:src="@drawable/bmi"/>
                 <ImageView
@@ -221,23 +231,23 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="75dp"
                     android:src="@drawable/alert"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/bmiRangeTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
-                android:textColor="#E4A11B"
+                android:textColor="#3B71CA"
                 android:text="No data available"/>
             <TextView
                 android:id="@+id/bmiMeasurementTV"
                 android:gravity="center"
                 android:layout_weight="0.2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="@color/black"
@@ -256,19 +266,19 @@
                 android:id="@+id/bloodPressureTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="Blood Pressure"/>
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.4">
                 <ImageView
                     android:id="@+id/bloodPressureIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:src="@drawable/blood_pressure"/>
                 <ImageView
@@ -276,23 +286,23 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="75dp"
                     android:src="@drawable/alert"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/bpRangeTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
-                android:textColor="#E4A11B"
+                android:textColor="#3B71CA"
                 android:text="No data available"/>
             <TextView
                 android:id="@+id/bpmmHgTV"
                 android:gravity="center"
                 android:layout_weight="0.2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="@color/black"
@@ -310,34 +320,35 @@
                 android:id="@+id/heartRateTV"
                 android:gravity="center"
                 android:layout_weight="0.25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textSize="16dp"
+                android:textSize="25dp"
                 android:text="Heart Rate"/>
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.4">
                 <ImageView
                     android:id="@+id/heartRateIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:src="@drawable/heart_rate"/>
+
                 <ImageView
                     android:id="@+id/hrAlertIV"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="110dp"
-                    android:src="@drawable/alert"/>
+                    android:layout_marginLeft="75dp"
+                    android:src="@drawable/alert" />
             </FrameLayout>
             <TextView
                 android:id="@+id/hrRangeTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
                 android:textColor="#14A44D"
@@ -345,7 +356,7 @@
             <TextView
                 android:id="@+id/hrBPMTV"
                 android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.2"
                 android:textColor="@color/black"

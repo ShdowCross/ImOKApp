@@ -22,6 +22,7 @@
             android:layout_weight="0.14"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:textColor="@color/white"
             android:backgroundTint="#9FA6B2"/>
         <TextView
@@ -30,16 +31,15 @@
             android:layout_gravity="center"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:textSize="36dp"
+            android:textSize="50dp"
             android:text="Blood Pressure"/>
         <ImageView
             android:id="@+id/profilePictureIV"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_weight="0.06"
             android:background="@mipmap/profile"
             android:layout_marginRight="35dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_vertical|end"/>
     </LinearLayout>
     <LinearLayout
