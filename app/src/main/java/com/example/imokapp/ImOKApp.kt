@@ -72,6 +72,8 @@ class ImOKApp() : Application(){
 
         var highBP: Boolean = false
         var lowBP : Boolean = false
+        var isolatedSystolic: Boolean = false
+        var isolatedDiastolic: Boolean = false
         var uWeight: Boolean = false
         var takeCareNotif: Boolean = false
 

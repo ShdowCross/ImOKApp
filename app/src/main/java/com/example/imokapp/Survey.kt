@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.highBP
+import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
+import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.takeCareNotif
 import com.example.imokapp.ImOKApp.Companion.uWeight
@@ -48,8 +50,10 @@ class Survey : AppCompatActivity() {
         category2.isGone = true
         category3.isGone = true
 
+        //for isolatedSystolic and isolatedDiastolic for now we just put both highBP and lowBP fields but most likely is inaccurate "subject to change"
+
         // Category 1 questions
-        if (highBP) {
+        if (highBP || isolatedSystolic || isolatedDiastolic ) {
             category1.isVisible = true
             c1q1RadioGroup = findViewById(R.id.c1q1_radio_group)
             c1q2RadioGroup = findViewById(R.id.c1q2_radio_group)
@@ -60,7 +64,7 @@ class Survey : AppCompatActivity() {
         }
 
         // Category 2 questions
-        if(lowBP) {
+        if(lowBP || isolatedSystolic || isolatedDiastolic ) {
             category2.isVisible = true
             c2q1RadioGroup = findViewById(R.id.c2q1_radio_group)
             c2q2RadioGroup = findViewById(R.id.c2q2_radio_group)

@@ -20,6 +20,8 @@ import com.example.imokapp.ImOKApp.Companion.heightMeter
 import com.example.imokapp.ImOKApp.Companion.muscleMass
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.highBP
+import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
+import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.takeCareNotif
@@ -35,6 +37,7 @@ class HealthMetrics : AppCompatActivity() {
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
+        val halfColor = ContextCompat.getColor(this, R.color.yellow_orange)
 
         val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
@@ -75,10 +78,6 @@ class HealthMetrics : AppCompatActivity() {
         alertDialogBuilder.setTitle("Alert")
         var message = ""
         if (systolic.isNotEmpty()){
-            if(takeCareNotif){
-                message += "Monitor your condition, drink water and eat healthily! You should be fine in a few days."
-                surveyBtn.visibility = View.GONE
-            }
             if (highBP){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
@@ -99,7 +98,27 @@ class HealthMetrics : AppCompatActivity() {
                     bpNotificationOn = false
                 }
             }
-            else if(!highBP || !lowBP){
+            else if (isolatedSystolic){
+                bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
+                bpDiagnosis.text = "Isolated Systolic"
+                bpDiagnosis.setTextColor(highColor)
+                if (bpNotificationOn){
+                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    bpNotificationOn = false
+                }
+            }
+            else if (isolatedDiastolic){
+                bpAlertIV.visibility = View.VISIBLE
+                surveyBtn.visibility = View.VISIBLE
+                bpDiagnosis.text = "Isolated Diastolic"
+                bpDiagnosis.setTextColor(lowColor)
+                if (bpNotificationOn){
+                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    bpNotificationOn = false
+                }
+            }
+            else {
                 bpDiagnosis.text = "Normal BP"
                 bpDiagnosis.setTextColor(normalColor)
             }
@@ -119,6 +138,10 @@ class HealthMetrics : AppCompatActivity() {
                 bmiDiagnosis.text = "Normal"
                 bmiDiagnosis.setTextColor(normalColor)
             }
+        }
+        if(takeCareNotif){
+            message += "Monitor your condition, drink water and eat healthily! You should be fine in a few days."
+            surveyBtn.visibility = View.GONE
         }
         alertDialogBuilder.setMessage(message)
         if (message != "") {
