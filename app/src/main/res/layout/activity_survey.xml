@@ -1,547 +1,1094 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_margin="20dp"
+    android:gravity="center"
     android:orientation="vertical">
-    <!-- Category 1 questions -->
-    <TextView
-        android:text="High Blood Pressure"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"/>
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:background="@color/MainBackground">
+            <!-- NEED TO FIX -->
+            <!-- Last rows of each category radio-buttons seem to squeeze -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <!-- Category 1 questions -->
+                <LinearLayout
+                    android:id="@+id/category1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/c1q1_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Were you physically active before taking this survey?" />
+                    <TextView
+                        android:text="High Blood Pressure"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
 
-    <RadioGroup
-        android:id="@+id/c1q1_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.95"
+                        android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/c1q1_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+                            <TextView
+                                android:id="@+id/c1q1_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Were you physically active before taking this survey?" />
 
-        <RadioButton
-            android:id="@+id/c1q1_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                            <RadioGroup
+                                android:id="@+id/c1q1_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+                                <RadioButton
+                                    android:id="@+id/c1q1_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q1_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <TextView
-        android:id="@+id/c1q2_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Did you drink a caffeinated beverage or smoke 30 minutes before the test?" />
+                            <TextView
+                                android:id="@+id/c1q2_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Did you drink a caffeinated beverage or smoke 30 minutes before the test?" />
 
-    <RadioGroup
-        android:id="@+id/c1q2_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <RadioGroup
+                                android:id="@+id/c1q2_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+                                <RadioButton
+                                    android:id="@+id/c1q2_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q2_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-        <RadioButton
-            android:id="@+id/c1q2_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/c1q3_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you been taking your medication?" />
 
-        <RadioButton
-            android:id="@+id/c1q2_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                            <RadioGroup
+                                android:id="@+id/c1q3_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-    <TextView
-        android:id="@+id/c1q3_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you been taking your medication?" />
+                                <RadioButton
+                                    android:id="@+id/c1q3_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q3_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <RadioGroup
-        android:id="@+id/c1q3_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/c1q4_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you have any difficulty in breathing?" />
 
-        <RadioButton
-            android:id="@+id/c1q3_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <RadioGroup
+                                android:id="@+id/c1q4_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c1q3_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/c1q4_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q4_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
 
-    <TextView
-        android:id="@+id/c1q4_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you have any difficulty in breathing?" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <RadioGroup
-        android:id="@+id/c1q4_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/c1q5_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you have any chest pains?" />
 
-        <RadioButton
-            android:id="@+id/c1q4_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <RadioGroup
+                                android:id="@+id/c1q5_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c1q4_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/c1q5_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q5_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <TextView
-        android:id="@+id/c1q5_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you have any chest pains?" />
+                            <TextView
+                                android:id="@+id/c1q6_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you experienced blurred vision or any other vision changes?" />
 
-    <RadioGroup
-        android:id="@+id/c1q5_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <RadioGroup
+                                android:id="@+id/c1q6_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+                                <RadioButton
+                                    android:id="@+id/c1q6_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c1q6_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/c1q5_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                <!-- Category 2 questions -->
+                <LinearLayout
+                    android:id="@+id/category2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="Low Blood Pressure"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
 
-        <RadioButton
-            android:id="@+id/c1q5_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.95"
+                        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/c1q6_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you experienced blurred vision or any other vision changes?" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <RadioGroup
-        android:id="@+id/c1q6_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/c2q1_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you feel dizzy or lightheaded when standing or sitting after lying down?" />
 
-        <RadioButton
-            android:id="@+id/c1q6_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <RadioGroup
+                                android:id="@+id/c2q1_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c1q6_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/c2q1_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c2q1_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <!-- Category 2 questions -->
-    <TextView
-        android:text="Low Blood Pressure"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/c2q2_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you experience any blurred vision?" />
 
-    <TextView
-        android:id="@+id/c2q1_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you feel dizzy or lightheaded when standing or sitting after lying down?" />
+                            <RadioGroup
+                                android:id="@+id/c2q2_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-    <RadioGroup
-        android:id="@+id/c2q1_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                                <RadioButton
+                                    android:id="@+id/c2q2_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c2q2_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/c2q1_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-        <RadioButton
-            android:id="@+id/c2q1_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                            <TextView
+                                android:id="@+id/c2q3_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you been eating and drinking normally" />
 
+                            <RadioGroup
+                                android:id="@+id/c2q3_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-    <TextView
-        android:id="@+id/c2q2_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you experience any blurred vision?" />
+                                <RadioButton
+                                    android:id="@+id/c2q3_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c2q3_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/c2q2_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-        <RadioButton
-            android:id="@+id/c2q2_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/c2q4_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you had any recent illness, accidents, or injury?" />
 
-        <RadioButton
-            android:id="@+id/c2q2_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                            <RadioGroup
+                                android:id="@+id/c2q4_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
+                                <RadioButton
+                                    android:id="@+id/c2q4_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c2q4_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
 
-    <TextView
-        android:id="@+id/c2q3_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you been eating and drinking normally" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <RadioGroup
-        android:id="@+id/c2q3_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/c2q5_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Did you faint or become less alert?" />
 
-        <RadioButton
-            android:id="@+id/c2q3_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <RadioGroup
+                                android:id="@+id/c2q5_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c2q3_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/c2q5_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c2q5_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/c2q4_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you had any recent illness, accidents, or injury?" />
+                <!-- Category 3 questions -->
+                <LinearLayout
+                    android:id="@+id/category3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="Weight Loss"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <RadioGroup
-        android:id="@+id/c2q4_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/c3q1_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have your eating patterns changed?" />
 
-        <RadioButton
-            android:id="@+id/c2q4_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                            <RadioGroup
+                                android:id="@+id/c3q1_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c2q4_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                                <RadioButton
+                                    android:id="@+id/c3q1_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q1_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <TextView
-        android:id="@+id/c2q5_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Did you faint or become less alert?" />
+                            <TextView
+                                android:id="@+id/c3q2_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Are you excercising more?" />
 
-    <RadioGroup
-        android:id="@+id/c2q5_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                            <RadioGroup
+                                android:id="@+id/c3q2_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
 
-        <RadioButton
-            android:id="@+id/c2q5_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                                <RadioButton
+                                    android:id="@+id/c3q2_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q2_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/c2q5_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
 
-    <!-- Category 3 questions -->
-    <TextView
-        android:text="Weight Loss"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/c3q3_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you been sick recently?" />
 
-    <TextView
-    android:id="@+id/c3q1_text_view"
+                            <RadioGroup
+                                android:id="@+id/c3q3_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q3_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q3_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q4_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Are you feeling tired more often?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q4_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q4_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q4_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q5_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you have any problems with swallowing?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q5_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q5_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q5_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q6_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you been vomiting?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q6_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q6_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q6_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q7_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Are you experiencing stress?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q7_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q7_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q7_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q8_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Have you had any fainting episodes?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q8_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q8_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q8_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q9_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Do you have increased thirst?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q9_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q9_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q9_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginVertical="25dp"
+                            android:background="@drawable/bubble_border">
+
+                            <TextView
+                                android:id="@+id/c3q10_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:gravity="center"
+                                android:text="Are you urinating more than usual?" />
+
+                            <RadioGroup
+                                android:id="@+id/c3q10_radio_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="30dp">
+
+                                <RadioButton
+                                    android:id="@+id/c3q10_yes"
+                                    android:text="Yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.1"/>
+                                <RadioButton
+                                    android:id="@+id/c3q10_no"
+                                    android:text="No"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.45"
+                                    android:background="@drawable/bubble_border"
+                                    android:gravity="center"/>
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"/>
+    </LinearLayout>
+    <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Have your eating patterns changed?" />
-
-    <RadioGroup
-        android:id="@+id/c3q1_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q1_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q1_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q2_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Are you excercising more?" />
-
-    <RadioGroup
-        android:id="@+id/c3q2_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q2_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q2_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q3_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you been sick recently?" />
-
-    <RadioGroup
-        android:id="@+id/c3q3_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q3_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q3_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q4_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Are you feeling tired more often?" />
-
-    <RadioGroup
-        android:id="@+id/c3q4_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q4_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q4_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q5_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you have any problems with swallowing?" />
-
-    <RadioGroup
-        android:id="@+id/c3q5_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q5_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q5_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q6_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you been vomiting?" />
-
-    <RadioGroup
-        android:id="@+id/c3q6_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q6_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q6_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q7_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Are you experiencing stress?" />
-
-    <RadioGroup
-        android:id="@+id/c3q7_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q7_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q7_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q8_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have you had any fainting episodes?" />
-
-    <RadioGroup
-        android:id="@+id/c3q8_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q8_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q8_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q9_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you have increased thirst?" />
-
-    <RadioGroup
-        android:id="@+id/c3q9_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q9_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q9_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/c3q10_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Are you urinating more than usual?" />
-
-    <RadioGroup
-        android:id="@+id/c3q10_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/c3q10_yes"
-            android:text="Yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioButton
-            android:id="@+id/c3q10_no"
-            android:text="No"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
-
+    android:layout_height="0dp"
+    android:layout_weight="0.1">
     <Button
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit" />
-
+    </LinearLayout>
 </LinearLayout>
-</ScrollView>

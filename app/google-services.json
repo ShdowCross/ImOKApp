@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "780748082980",
-    "project_id": "imokapp-87105",
-    "storage_bucket": "imokapp-87105.appspot.com"
+    "project_number": "503185783475",
+    "project_id": "imokapp-e6031",
+    "storage_bucket": "imokapp-e6031.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:780748082980:android:5ece7e7e5cb822a9ee2db1",
+        "mobilesdk_app_id": "1:503185783475:android:c35dc6a67ee98a116ccec6",
         "android_client_info": {
           "package_name": "com.example.imokapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "780748082980-mugoh2liti8uee446l18a1716hei504u.apps.googleusercontent.com",
+          "client_id": "503185783475-naqr1mc722tr7lt5ul4mmdd61jj4vjhk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCjwA36QxO1ceTx0oMTl9zQjlQr3E_kjGU"
+          "current_key": "AIzaSyDRytEfiHznRcYtIBmkKe8vw1VOCFLZ7fE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "780748082980-mugoh2liti8uee446l18a1716hei504u.apps.googleusercontent.com",
+              "client_id": "503185783475-naqr1mc722tr7lt5ul4mmdd61jj4vjhk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

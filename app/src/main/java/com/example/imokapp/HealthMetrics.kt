@@ -22,6 +22,7 @@ import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
+import com.example.imokapp.ImOKApp.Companion.takeCareNotif
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
@@ -45,7 +46,7 @@ class HealthMetrics : AppCompatActivity() {
         val bpDiagnosis = findViewById<TextView>(R.id.bpRangeTV)
         val bmiDiagnosis = findViewById<TextView>(R.id.bmiRangeTV)
 
-        val AlertIV = findViewById<ImageView>(R.id.mMAlertIV)
+        val alertIV = findViewById<ImageView>(R.id.mMAlertIV)
         val weightAlertIV = findViewById<ImageView>(R.id.weightAlertIV)
         val bmiAlertIV = findViewById<ImageView>(R.id.bmiAlertIV)
         val bpAlertIV = findViewById<ImageView>(R.id.bpAlertIV)
@@ -64,7 +65,7 @@ class HealthMetrics : AppCompatActivity() {
         bmiTV.text = formattedBMI
         bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
         hrTV.text = "$heartRate bpm"
-        AlertIV.visibility = View.INVISIBLE
+        alertIV.visibility = View.INVISIBLE
         weightAlertIV.visibility = View.INVISIBLE
         bmiAlertIV.visibility = View.INVISIBLE
         bpAlertIV.visibility = View.INVISIBLE
@@ -74,6 +75,10 @@ class HealthMetrics : AppCompatActivity() {
         alertDialogBuilder.setTitle("Alert")
         var message = ""
         if (systolic.isNotEmpty()){
+            if(takeCareNotif){
+                message += "Monitor your condition, drink water and eat healthily! You should be fine in a few days."
+                surveyBtn.visibility = View.GONE
+            }
             if (highBP){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
