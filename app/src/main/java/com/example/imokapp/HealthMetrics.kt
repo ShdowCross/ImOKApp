@@ -38,6 +38,10 @@ class HealthMetrics : AppCompatActivity() {
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
         val halfColor = ContextCompat.getColor(this, R.color.yellow_orange)
+        val grade1HypertensionColor = ContextCompat.getColor(this, R.color.grade1Hypertension)
+        val grade2HypertensionColor = ContextCompat.getColor(this, R.color.grade2Hypertension)
+        val grade3HypertensionColor = ContextCompat.getColor(this, R.color.grade3Hypertension)
+        val grade4HypertensionColor = ContextCompat.getColor(this, R.color.grade4Hypertension)
 
         val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
@@ -79,13 +83,55 @@ class HealthMetrics : AppCompatActivity() {
         var message = ""
         if (systolic.isNotEmpty()){
             if (highBP){
-                bpAlertIV.visibility = View.VISIBLE
-                surveyBtn.visibility = View.VISIBLE
-                bpDiagnosis.text = "High BP"
-                bpDiagnosis.setTextColor(highColor)
-                if (bpNotificationOn) {
-                    message += "There's a slight increase in blood pressure, take it easy.\n"
-                    bpNotificationOn = false
+                if (ImOKApp.grade1Hypertension){
+                    bpAlertIV.visibility = View.VISIBLE
+                    surveyBtn.visibility = View.VISIBLE
+                    bpDiagnosis.text = "Slightly High BP"
+                    bpDiagnosis.setTextColor(grade1HypertensionColor)
+                    if (bpNotificationOn) {
+                        message += "There's a slight increase in blood pressure, take it easy.\n"
+                        bpNotificationOn = true
+                    }
+                }
+                else if(ImOKApp.grade2Hypertension){
+                    bpAlertIV.visibility = View.VISIBLE
+                    surveyBtn.visibility = View.VISIBLE
+                    bpDiagnosis.text = "High BP"
+                    bpDiagnosis.setTextColor(grade2HypertensionColor)
+                    if (bpNotificationOn) {
+                        message += "Your blood pressure is high, take it easy and monitor your condition..\n"
+                        bpNotificationOn = true
+                    }
+                }
+                else if(ImOKApp.grade3Hypertension){
+                    bpAlertIV.visibility = View.VISIBLE
+                    surveyBtn.visibility = View.VISIBLE
+                    bpDiagnosis.text = "Very High BP"
+                    bpDiagnosis.setTextColor(grade3HypertensionColor)
+                    if (bpNotificationOn) {
+                        message += "Your Blood Pressure is rising pretty high, we recommend you go see a clinic for medical advice.\n"
+                        bpNotificationOn = true
+                    }
+                }
+                else if(ImOKApp.grade4Hypertension){
+                    bpAlertIV.visibility = View.VISIBLE
+                    surveyBtn.visibility = View.VISIBLE
+                    bpDiagnosis.text = "GO TO A HOSPITAL"
+                    bpDiagnosis.setTextColor(grade4HypertensionColor)
+                    if (bpNotificationOn) {
+                        message += "Your Blood Pressure is too high, Please Head To A Hospital Now. \n"
+                        bpNotificationOn = true
+                    }
+                }
+                else{
+                    bpAlertIV.visibility = View.VISIBLE
+                    surveyBtn.visibility = View.VISIBLE
+                    bpDiagnosis.text = "High BP (Unspecified)"
+                    bpDiagnosis.setTextColor(highColor)
+                    if (bpNotificationOn) {
+                        message += "There's a slight increase in blood pressure, take it easy.\n"
+                        bpNotificationOn = false
+                    }
                 }
             }
             else if (lowBP){
@@ -94,17 +140,17 @@ class HealthMetrics : AppCompatActivity() {
                 bpDiagnosis.text = "Low BP"
                 bpDiagnosis.setTextColor(lowColor)
                 if (bpNotificationOn){
-                    message += "There's a slight decrease in blood pressure, are you feeling ok?\n"
+                    message += "There's a decrease in blood pressure, are you feeling ok?\n Take a survey for some recommendations."
                     bpNotificationOn = false
                 }
             }
             else if (isolatedSystolic){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
-                bpDiagnosis.text = "Isolated Systolic"
-                bpDiagnosis.setTextColor(highColor)
+                bpDiagnosis.text = "Go see a doctor"
+                bpDiagnosis.setTextColor(halfColor)
                 if (bpNotificationOn){
-                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
                     bpNotificationOn = false
                 }
             }
@@ -112,13 +158,13 @@ class HealthMetrics : AppCompatActivity() {
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "Isolated Diastolic"
-                bpDiagnosis.setTextColor(lowColor)
+                bpDiagnosis.setTextColor(halfColor)
                 if (bpNotificationOn){
-                    message += "Your Blood Pressure is a little off, are you feeling ok?\n"
+                    message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
                     bpNotificationOn = false
                 }
             }
-            else {
+            else{
                 bpDiagnosis.text = "Normal BP"
                 bpDiagnosis.setTextColor(normalColor)
             }

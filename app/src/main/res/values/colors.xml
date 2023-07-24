@@ -13,4 +13,13 @@
     <color name="blue">#0000FF</color>
     <color name="yellow_orange">#FFAE42</color>
     <color name="green">#00ff00</color>
+    <color name="grade1Hypertension">#ffff05</color>
+    <color name="grade2Hypertension">#efc032</color>
+    <color name="grade3Hypertension">#fe9900</color>
+    <color name="grade4Hypertension">#cc0202</color>
+    <color name="highRiskBmi">#e5052a</color>
+    <color name="moderateRiskBmi">#ef9326</color>
+    <color name="lowRiskBmi">#90c944</color>
+    <color name="uWeight">#e5052a</color>
+    <color name="tooLowBmi">#b6c5c8</color>
 </resources>

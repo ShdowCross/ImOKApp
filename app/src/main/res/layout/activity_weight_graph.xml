@@ -105,7 +105,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/diagnosisTV"
+                    android:id="@+id/warningView"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.35"
@@ -115,7 +115,7 @@
                     android:textSize="32dp"
                     android:text="No data available"/>
                 <LinearLayout
-                    android:id="@+id/diagnosisLL"
+                    android:id="@+id/warningLL"
                     android:layout_width="match_parent"
                     android:padding="10dp"
                     android:layout_height="0dp"
@@ -124,7 +124,7 @@
                     android:visibility="invisible"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/diagnosisSurveyTV"
+                        android:id="@+id/warningSurveyView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

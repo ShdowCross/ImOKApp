@@ -71,9 +71,16 @@ class ImOKApp() : Application(){
         var muscleMassNotificationOn: Boolean = true
 
         var highBP: Boolean = false
+        var grade1Hypertension: Boolean = false
+        var grade2Hypertension: Boolean = false
+        var grade3Hypertension: Boolean = false
+        var grade4Hypertension: Boolean = false
         var lowBP : Boolean = false
         var isolatedSystolic: Boolean = false
         var isolatedDiastolic: Boolean = false
+        var highRiskBmi: Boolean = false
+        var moderateRiskBmi: Boolean = true
+        var lowRiskBmi: Boolean = false
         var uWeight: Boolean = false
         var takeCareNotif: Boolean = false
 
