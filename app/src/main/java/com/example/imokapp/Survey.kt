@@ -49,11 +49,13 @@ class Survey : AppCompatActivity() {
         category1.isGone = true
         category2.isGone = true
         category3.isGone = true
+        category4.isGone = true
+        category5.isGone = true
 
         //for isolatedSystolic and isolatedDiastolic for now we just put both highBP and lowBP fields but most likely is inaccurate "subject to change"
 
         // Category 1 questions
-        if (highBP || isolatedSystolic || isolatedDiastolic ) {
+        if (highBP) {
             category1.isVisible = true
             c1q1RadioGroup = findViewById(R.id.c1q1_radio_group)
             c1q2RadioGroup = findViewById(R.id.c1q2_radio_group)
@@ -64,7 +66,7 @@ class Survey : AppCompatActivity() {
         }
 
         // Category 2 questions
-        if(lowBP || isolatedSystolic || isolatedDiastolic ) {
+        if(lowBP) {
             category2.isVisible = true
             c2q1RadioGroup = findViewById(R.id.c2q1_radio_group)
             c2q2RadioGroup = findViewById(R.id.c2q2_radio_group)
@@ -85,6 +87,13 @@ class Survey : AppCompatActivity() {
             c3q8RadioGroup = findViewById(R.id.c3q8_radio_group)
             c3q9RadioGroup = findViewById(R.id.c3q9_radio_group)
             c3q10RadioGroup = findViewById(R.id.c3q10_radio_group)
+        }
+
+        if(isolatedSystolic){
+            category4.isVisible = true
+        }
+        if(isolatedDiastolic){
+            category5.isVisible = true
         }
 
         val submitButton = findViewById<Button>(R.id.submit_button)

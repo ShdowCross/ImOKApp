@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.calculateBMI
+import com.example.imokapp.ImOKApp.Companion.calculateWeightThreshold
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
 import com.example.imokapp.ImOKApp.Companion.heightMeter
@@ -23,6 +24,7 @@ import com.example.imokapp.ImOKApp.Companion.moderateRiskBmi
 import com.example.imokapp.ImOKApp.Companion.timeList
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
+import com.example.imokapp.ImOKApp.Companion.weightAverage
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import com.example.imokapp.ImOKApp.Companion.weightValues
 import com.github.mikephil.charting.animation.Easing
@@ -37,83 +39,121 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.activity_weight_graph.*
 
 class WeightGraph : AppCompatActivity() {
+    private var surveyClassName = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weight_graph)
-
-        var warningLL = findViewById<LinearLayout>(R.id.warningLL)
-        var warningView = findViewById<TextView>(R.id.warningView)
-        var warningSurveyView = findViewById<TextView>(R.id.warningSurveyView)
 
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
         val highRiskBmiColor = ContextCompat.getColor(this, R.color.highRiskBmi)
         val moderateRiskBmiColor = ContextCompat.getColor(this, R.color.moderateRiskBmi)
-        val lowRiskBmiColor = ContextCompat.getColor(this, R.color.lowRiskBmi)
-        val uWeightColor = ContextCompat.getColor(this, R.color.uWeight)
+
+        val warningLL = findViewById<LinearLayout>(R.id.warningLL)
+        val warningView1 = findViewById<TextView>(R.id.warningView1)
+        val warningView2 = findViewById<TextView>(R.id.warningView2)
+        val warningSurveyView = findViewById<TextView>(R.id.warningSurveyView)
 
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
         var message = ""
-        var surveyClassName = ""
 
         // TODO make the normal threshold for the person
-        // TODO try to correlate this to the height value as the actual app takes from that
+        weightAverage = weightValues.average().toFloat()
+
         if(weightValues.isNotEmpty()) {
             var weightSize = weightValues.size
             lastReadingWeightTV.text = weightValues[weightSize - 1].toString()
             if (highRiskBmi) {
-                warningView.text = "High Risk BMI"
-                warningView.setTextColor(highRiskBmiColor)
-                warningSurveyView.text = "Click here to tell us how you're feeling!"
+                warningView1.text = "High Risk BMI"
+                warningView1.setTextColor(highRiskBmiColor)
+                warningSurveyView.text = "Tell us how you're feeling!"
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
-                    message += "You're weight is extremely high from your norm, if this is not normal, go see a doctor. \n Take our survey as well to get some recommendations!"
+                    message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n" +
+                            " "
                     surveyClassName = "com.example.imokapp.Survey"
                     weightNotificationOn = true
                 }
             } else if (moderateRiskBmi) {
-                warningView.text = "Moderate Risk BMI"
-                warningView.setTextColor(moderateRiskBmiColor)
+                warningView1.text = "Moderate Risk BMI"
+                warningView1.setTextColor(moderateRiskBmiColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
-                    message += "You're weight is getting a little high, which resulted in an increase in BMI. What changed? \n Take our survey to get some recommendations"
+                    message += "You're BMI is getting a little high, which resulted in an increase in BMI. \n What changed? \n"
                     surveyClassName = "com.example.imokapp.Survey"
                     weightNotificationOn = false
                 }
             }
             else if (lowRiskBmi) {
-                warningView.text = "Normal BMI"
-                warningView.setTextColor(lowRiskBmiColor)
+                warningView1.text = "Normal BMI"
+                warningView1.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
             else if (uWeight) {
-                warningView.text = "Underweight"
-                warningView.setTextColor(lowColor)
+                warningView1.text = "Underweight"
+                warningView1.setTextColor(lowColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
-                    message += "Your BMI is a little low, is this normal? "
+                    message += "Your BMI is going a little low \n"
                     surveyClassName = "com.example.imokapp.Survey"
                     weightNotificationOn = false
                 }
             }
             else {
-                warningView.text = "Unspecified"
-                warningView.setTextColor(normalColor)
+                warningView1.text = "Unspecified"
+                warningView1.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
-            alertDialogBuilder.setMessage(message)
+            if (weightValues.size >= 5){
+                var wThreshold = calculateWeightThreshold(weightAverage, 5f)
+                if (weight >= weightAverage + wThreshold) {
+                    // The weight is far above the person's norm
+                    warningView2.text = "Warning: Weight Above Norm"
+                    warningView2.setTextColor(highColor)
+                    if (weightNotificationOn) {
+                        message += "Your weight is significantly higher than your norm. \n If this is not normal, go see a doctor. \n"
+                        if (weightValues.size < 30){
+                            message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
+                        }
+                        surveyClassName = "com.example.imokapp.Survey"
+                        weightNotificationOn = true
+                    }
+                }
+                else if (weight <= weightAverage - wThreshold) {
+                    // The weight is far below the person's norm
+                    warningView2.text = "Warning: Weight Below Norm"
+                    warningView2.setTextColor(lowColor)
+                    if (weightNotificationOn) {
+                        message += "Your weight is significantly lower than your norm. \n If this is not normal, go see a doctor. \n!"
+                        if (weightValues.size < 30){
+                            message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
+                        }
+                        surveyClassName = "com.example.imokapp.Survey"
+                        weightNotificationOn = true
+                    }
+                }
+                else{
+                    warningView2.text = "Normal Range"
+                    warningView2.setTextColor(normalColor)
+                    weightNotificationOn = false
+                }
+            }
             alertDialogBuilder.setPositiveButton("Ok for now") { dialog, _ ->
                 dialog.dismiss()
             }
-            alertDialogBuilder.setNegativeButton("Take Survey") { _, _ ->
-                val surveyClass = Class.forName(surveyClassName)
-                val toSurvey = Intent(this, surveyClass)
-                startActivity(toSurvey)
+            if (uWeight){
+                alertDialogBuilder.setNegativeButton("Take Survey") { _, _ ->
+                    val surveyClass = Class.forName(surveyClassName)
+                    val toSurvey = Intent(this, surveyClass)
+                    startActivity(toSurvey)
+                }
+                message += "Take our survey to get some recommendations \n"
             }
+            alertDialogBuilder.setMessage(message)
             if (message != "") {
                 alertDialogBuilder.show()
             }
@@ -186,7 +226,7 @@ class WeightGraph : AppCompatActivity() {
         }
     }
 
-    private fun setUpWeightChart() {
+    fun setUpWeightChart() {
         with(WeightChart) {
 
             axisRight.isEnabled = true
@@ -224,7 +264,7 @@ class WeightGraph : AppCompatActivity() {
         }
     }
 
-    private fun setDataToWeightChart() {
+    fun setDataToWeightChart() {
         val weightDataset = LineDataSet(weightArray, "Weight")
         weightDataset.lineWidth = 3f
         weightDataset.valueTextSize = 12f
