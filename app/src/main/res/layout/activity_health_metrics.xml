@@ -124,7 +124,7 @@
                     android:src="@drawable/alert" />
             </FrameLayout>
             <TextView
-                android:id="@+id/weightTV"
+                android:id="@+id/weightWarningTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
                 android:layout_width="match_parent"
@@ -235,7 +235,7 @@
                     android:src="@drawable/alert"/>
             </FrameLayout>
             <TextView
-                android:id="@+id/bmiRangeTV"
+                android:id="@+id/bmiWarningTV"
                 android:gravity="center"
                 android:layout_weight="0.15"
                 android:layout_width="match_parent"

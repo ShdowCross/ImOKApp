@@ -88,7 +88,7 @@ class BpGraph : AppCompatActivity() {
                     warningSurveyView.setTextColor(halfColor)
                     warningLL.isVisible = true
                     if (bpNotificationOn) {
-                        message += "Your blood pressure is high, take it easy and monitor your condition..\n"
+                        message += "Your blood pressure is high. \n Take it easy and monitor your condition.\n"
                         surveyClassName = "com.example.imokapp.Survey"
                         bpNotificationOn = false
                     }
@@ -100,7 +100,7 @@ class BpGraph : AppCompatActivity() {
                     warningSurveyView.setTextColor(highColor)
                     warningLL.isVisible = true
                     if (bpNotificationOn) {
-                        message += "Your Blood Pressure is rising pretty high, we recommend you go see a clinic for medical advice.\n"
+                        message += "Your Blood Pressure is rising pretty high. \n We recommend you go see a clinic for medical advice.\n"
                         surveyClassName = "com.example.imokapp.Survey"
                         bpNotificationOn = true
                     }
@@ -112,7 +112,7 @@ class BpGraph : AppCompatActivity() {
                     warningSurveyView.setTextColor(highColor)
                     warningLL.isVisible = true
                     if (bpNotificationOn) {
-                        message += "Your Blood Pressure is too high, Please Head To A Hospital Now. \n"
+                        message += "Your Blood Pressure is too high. \n Please Seek Immediate Medical Attention. \n Call 995 or Head Straight To A Hospital. \n"
                         surveyClassName = "com.example.imokapp.Survey"
                         bpNotificationOn = true
                     }
@@ -136,7 +136,7 @@ class BpGraph : AppCompatActivity() {
                 warningSurveyView.setTextColor(highColor)
                 warningLL.isVisible = true
                 if (bpNotificationOn){
-                    message += "There's a decrease in blood pressure, are you feeling ok?\n Take a survey for some recommendations."
+                    message += "There's a decrease in blood pressure, are you feeling ok? \n"
                     surveyClassName = "com.example.imokapp.Survey"
                     bpNotificationOn = false
                 }
@@ -148,7 +148,7 @@ class BpGraph : AppCompatActivity() {
                 warningSurveyView.setTextColor(halfColor)
                 warningLL.isVisible = true
                 if (bpNotificationOn){
-                    message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
+                    message += "Your Blood Pressure is a little strange. \n Please seek medical advice at your local clinic. \n"
                     surveyClassName = "com.example.imokapp.Survey"
                     bpNotificationOn = false
                 }
@@ -169,6 +169,7 @@ class BpGraph : AppCompatActivity() {
                 warningView.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
+            message += "Take a survey for some recommendations. \n"
             alertDialogBuilder.setMessage(message)
             alertDialogBuilder.setPositiveButton("Ok for now"){ dialog, _ ->
                 dialog.dismiss()

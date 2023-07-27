@@ -57,6 +57,8 @@ class ImOKApp() : Application(){
         }
         var muscleMass: Float = 35.8F
         var weight: Float = 0F
+        var weightAverage: Float = 0F
+        var weightThreshold: Float = 0f
         var heightCM: Float = 169.50F
         var heightMeter: Float = (heightCM / 100)
         var BMI: Float = 0F
@@ -115,6 +117,10 @@ class ImOKApp() : Application(){
         fun calculateBMI(w: Float, h: Float): Float{
             BMI = w / (h * h)
             return BMI
+        }
+        fun calculateWeightThreshold(wA: Float, wT: Float): Float {
+            weightThreshold = wA * (wT / 100.0f)
+            return weightThreshold
         }
     }
 

@@ -10,6 +10,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
 import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
@@ -28,6 +30,8 @@ import com.example.imokapp.ImOKApp.Companion.takeCareNotif
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
+import com.example.imokapp.ImOKApp.Companion.weightThreshold
+import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
 
@@ -42,6 +46,8 @@ class HealthMetrics : AppCompatActivity() {
         val grade2HypertensionColor = ContextCompat.getColor(this, R.color.grade2Hypertension)
         val grade3HypertensionColor = ContextCompat.getColor(this, R.color.grade3Hypertension)
         val grade4HypertensionColor = ContextCompat.getColor(this, R.color.grade4Hypertension)
+        val highRiskBmiColor = ContextCompat.getColor(this, R.color.highRiskBmi)
+        val moderateRiskBmiColor = ContextCompat.getColor(this, R.color.moderateRiskBmi)
 
         val weightValue = intent.getFloatExtra("weight",0f)
         val muscleTV = findViewById<TextView>(R.id.musclePercentageTV)
@@ -51,7 +57,7 @@ class HealthMetrics : AppCompatActivity() {
         val bpTV = findViewById<TextView>(R.id.bpmmHgTV)
         val hrTV = findViewById<TextView>(R.id.hrBPMTV)
         val bpDiagnosis = findViewById<TextView>(R.id.bpRangeTV)
-        val bmiDiagnosis = findViewById<TextView>(R.id.bmiRangeTV)
+        val bmiWarningTV = findViewById<TextView>(R.id.bmiWarningTV)
 
         val alertIV = findViewById<ImageView>(R.id.mMAlertIV)
         val weightAlertIV = findViewById<ImageView>(R.id.weightAlertIV)
@@ -170,19 +176,56 @@ class HealthMetrics : AppCompatActivity() {
             }
         }
         if(weightArray.isNotEmpty()){
-            if (uWeight){
-                weightAlertIV.visibility = View.VISIBLE
-                surveyBtn.visibility = View.VISIBLE
-                bmiDiagnosis.text = "Underweight"
-                bmiDiagnosis.setTextColor(lowColor)
-                if (weightNotificationOn){
-                    message += "Your weight has dropped, how are you?"
+            if (ImOKApp.highRiskBmi) {
+                bmiWarningTV.text = "High Risk BMI"
+                bmiWarningTV.setTextColor(highRiskBmiColor)
+                if (weightNotificationOn) {
+                    message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n Take our survey as well to get some recommendations!"
+                    weightNotificationOn = true
+                }
+            } else if (ImOKApp.moderateRiskBmi) {
+                bmiWarningTV.text = "Moderate Risk BMI"
+                bmiWarningTV.setTextColor(moderateRiskBmiColor)
+                if (weightNotificationOn) {
+                    message += "You're BMI is getting a little high, which resulted in an increase in BMI. What changed? \n Take our survey to get some recommendations"
                     weightNotificationOn = false
                 }
             }
-            else{
-                bmiDiagnosis.text = "Normal"
-                bmiDiagnosis.setTextColor(normalColor)
+            else if (ImOKApp.lowRiskBmi) {
+                bmiWarningTV.text = "Normal BMI"
+                bmiWarningTV.setTextColor(normalColor)
+            }
+            else if (uWeight) {
+                bmiWarningTV.text = "Underweight"
+                bmiWarningTV.setTextColor(lowColor)
+                if (weightNotificationOn) {
+                    message += "Your BMI is going a little low"
+                    weightNotificationOn = false
+                }
+            }
+            else {
+                bmiWarningTV.text = "Unspecified"
+                bmiWarningTV.setTextColor(normalColor)
+            }
+            if (weight >= ImOKApp.weightAverage + weightThreshold) {
+                // The weight is far above the person's norm
+                weightWarningTV.text = "Weight Above Norm"
+                weightWarningTV.setTextColor(highColor)
+                if (weightNotificationOn) {
+                    message += "Your weight is significantly higher than your norm. If this is not normal, go see a doctor. \nTake our survey as well to get some recommendations!"
+                    weightNotificationOn = true
+                }
+            } else if (weight <= ImOKApp.weightAverage - weightThreshold) {
+                // The weight is far below the person's norm
+                weightWarningTV.text = "Weight Below Norm"
+                weightWarningTV.setTextColor(lowColor)
+                if (weightNotificationOn) {
+                    message += "Your weight is significantly lower than your norm. If this is not normal, go see a doctor. \nTake our survey to get some recommendations!"
+                    weightNotificationOn = true
+                }
+            } else {
+                // The weight is within the person's norm
+                weightWarningTV.text = "Weight is Normal"
             }
         }
         if(takeCareNotif){
