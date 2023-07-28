@@ -153,7 +153,7 @@ class HealthMetrics : AppCompatActivity() {
             else if (isolatedSystolic){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
-                bpDiagnosis.text = "Go see a doctor"
+                bpDiagnosis.text = "Isolated Systolic"
                 bpDiagnosis.setTextColor(halfColor)
                 if (bpNotificationOn){
                     message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
@@ -177,6 +177,7 @@ class HealthMetrics : AppCompatActivity() {
         }
         if(weightArray.isNotEmpty()){
             if (ImOKApp.highRiskBmi) {
+                bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "High Risk BMI"
                 bmiWarningTV.setTextColor(highRiskBmiColor)
                 if (weightNotificationOn) {
@@ -184,6 +185,7 @@ class HealthMetrics : AppCompatActivity() {
                     weightNotificationOn = true
                 }
             } else if (ImOKApp.moderateRiskBmi) {
+                bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "Moderate Risk BMI"
                 bmiWarningTV.setTextColor(moderateRiskBmiColor)
                 if (weightNotificationOn) {
@@ -196,6 +198,7 @@ class HealthMetrics : AppCompatActivity() {
                 bmiWarningTV.setTextColor(normalColor)
             }
             else if (uWeight) {
+                bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "Underweight"
                 bmiWarningTV.setTextColor(lowColor)
                 if (weightNotificationOn) {
@@ -209,6 +212,7 @@ class HealthMetrics : AppCompatActivity() {
             }
             if (weight >= ImOKApp.weightAverage + weightThreshold) {
                 // The weight is far above the person's norm
+                weightAlertIV.visibility = View.VISIBLE
                 weightWarningTV.text = "Weight Above Norm"
                 weightWarningTV.setTextColor(highColor)
                 if (weightNotificationOn) {
@@ -217,6 +221,7 @@ class HealthMetrics : AppCompatActivity() {
                 }
             } else if (weight <= ImOKApp.weightAverage - weightThreshold) {
                 // The weight is far below the person's norm
+                weightAlertIV.visibility = View.VISIBLE
                 weightWarningTV.text = "Weight Below Norm"
                 weightWarningTV.setTextColor(lowColor)
                 if (weightNotificationOn) {

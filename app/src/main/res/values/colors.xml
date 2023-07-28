@@ -12,8 +12,8 @@
     <color name="red">#FF0000</color>
     <color name="blue">#0000FF</color>
     <color name="yellow_orange">#FFAE42</color>
-    <color name="green">#00ff00</color>
-    <color name="grade1Hypertension">#ffff05</color>
+    <color name="green">#00FF00</color>
+    <color name="grade1Hypertension">#FFFF00</color>
     <color name="grade2Hypertension">#efc032</color>
     <color name="grade3Hypertension">#fe9900</color>
     <color name="grade4Hypertension">#cc0202</color>

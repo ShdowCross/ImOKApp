@@ -53,13 +53,15 @@ class ManualInput : AppCompatActivity() {
             ImOKApp.grade2Hypertension = false
             ImOKApp.grade3Hypertension = false
             ImOKApp.grade4Hypertension = false
-            if (bloodPressureSystolicValue.toInt() > 130 && bloodPressureDiastolicValue.toInt() < 60){
+            // Isolated systolic hypertension
+            if (bloodPressureSystolicValue.toInt() >= 130 && bloodPressureDiastolicValue.toInt() < 80){
                 highBP = false
                 lowBP = false
                 isolatedSystolic = true
                 isolatedDiastolic = false
             }
-            else if(bloodPressureSystolicValue.toInt() < 90 && bloodPressureDiastolicValue.toInt() > 85){
+            // Isolated diastolic hypertension
+            else if(bloodPressureSystolicValue.toInt() < 130 && bloodPressureDiastolicValue.toInt() >= 80){
                 highBP = false
                 lowBP = false
                 isolatedSystolic = false
@@ -67,26 +69,30 @@ class ManualInput : AppCompatActivity() {
             }
             else if (bloodPressureSystolicValue.toInt() >= 120 || bloodPressureDiastolicValue.toInt() >= 80){
                 highBP = true
-                if (bloodPressureSystolicValue.toInt() >= 180 || bloodPressureDiastolicValue.toInt() >= 120){
+                // HYPERTENSIVE CRISIS
+                if ((bloodPressureSystolicValue.toInt() >= 180 || bloodPressureDiastolicValue.toInt() >= 120) || (bloodPressureSystolicValue.toInt() >= 180 && bloodPressureDiastolicValue.toInt() >= 120)){
                     ImOKApp.grade1Hypertension = false
                     ImOKApp.grade2Hypertension = false
                     ImOKApp.grade3Hypertension = false
                     ImOKApp.grade4Hypertension = true
 
                 }
+                // HIGH BLOOD PRESSURE (HYPERTENSION) STAGE 2
                 else if (bloodPressureSystolicValue.toInt() in 140..179 || bloodPressureDiastolicValue.toInt() in 90..119){
                     ImOKApp.grade1Hypertension = false
                     ImOKApp.grade2Hypertension = false
                     ImOKApp.grade3Hypertension = true
                     ImOKApp.grade4Hypertension = false
                 }
-                else if (bloodPressureSystolicValue.toInt() in 130..139 || bloodPressureDiastolicValue.toInt() in 85..89){
+                // HIGH BLOOD PRESSURE (HYPERTENSION) STAGE 1
+                else if (bloodPressureSystolicValue.toInt() in 130..139 || bloodPressureDiastolicValue.toInt() in 80..89){
                     ImOKApp.grade1Hypertension = false
                     ImOKApp.grade2Hypertension = true
                     ImOKApp.grade3Hypertension = false
                     ImOKApp.grade4Hypertension = false
                 }
-                else if (bloodPressureSystolicValue.toInt() in 120..129 || bloodPressureDiastolicValue.toInt() < 80){
+                // ELEVATED
+                else if (bloodPressureSystolicValue.toInt() in 120..129 && bloodPressureDiastolicValue.toInt() < 80){
                     ImOKApp.grade1Hypertension = true
                     ImOKApp.grade2Hypertension = false
                     ImOKApp.grade3Hypertension = false
@@ -97,12 +103,14 @@ class ManualInput : AppCompatActivity() {
                 isolatedDiastolic = false
             }
             else{
+                // LOW BP
                 if(bloodPressureSystolicValue.toInt() < 90 || bloodPressureDiastolicValue.toInt() < 60){
                     highBP = false
                     lowBP = true
                     isolatedSystolic = false
                     isolatedDiastolic = false
                 }
+                // NORMAL BP
                 else{
                     highBP = false
                     lowBP = false
@@ -110,24 +118,28 @@ class ManualInput : AppCompatActivity() {
                     isolatedDiastolic = false
                 }
             }
+            // High Risk BMI
             if (bmiValue >= "27.5".toFloat()) {
                 ImOKApp.highRiskBmi = true
                 ImOKApp.moderateRiskBmi = false
                 ImOKApp.lowRiskBmi = false
                 uWeight = false
             }
+            // Moderate Risk BMI
             else if (bmiValue.toInt() >= 23 && bmiValue.toInt() < 27.5) {
                 ImOKApp.highRiskBmi = false
                 ImOKApp.moderateRiskBmi = true
                 ImOKApp.lowRiskBmi = false
                 uWeight = false
             }
+            // Low Risk BMI
             else if (bmiValue.toInt() >= 18.5 && bmiValue.toInt() < 23) {
                 ImOKApp.highRiskBmi = false
                 ImOKApp.moderateRiskBmi = false
                 ImOKApp.lowRiskBmi = true
                 uWeight = false
             }
+            // Underweight
             else{
                 ImOKApp.highRiskBmi = false
                 ImOKApp.moderateRiskBmi = false
@@ -150,8 +162,5 @@ class ManualInput : AppCompatActivity() {
             weightNotificationOn = true
             startActivity(newValuesSubmit)
         }
-    }
-    fun bmi(weight: Float, height: Float): Float{
-        return weight / (height*height)
     }
 }
