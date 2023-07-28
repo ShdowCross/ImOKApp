@@ -219,13 +219,13 @@ class BpGraph : AppCompatActivity() {
                 grade2Hypertension = false
                 grade3Hypertension = false
                 grade4Hypertension = false
-                if (systolicText.toInt() > 130 && diastolicText.toInt() < 60){
+                if (systolicText.toInt() >= 130 && diastolicText.toInt() < 80){
                     highBP = false
                     lowBP = false
                     isolatedSystolic = true
                     isolatedDiastolic = false
                 }
-                else if(systolicText.toInt() < 90 && diastolicText.toInt() > 85){
+                else if(systolicText.toInt() < 130 && diastolicText.toInt() >= 80){
                     highBP = false
                     lowBP = false
                     isolatedSystolic = false
@@ -233,7 +233,7 @@ class BpGraph : AppCompatActivity() {
                 }
                 else if (systolicText.toInt() >= 120 || diastolicText.toInt() >= 80){
                     highBP = true
-                    if (systolicText.toInt() >= 180 || diastolicText.toInt() >= 120){
+                    if ((systolicText.toInt() >= 180 || diastolicText.toInt() >= 120) || (systolicText.toInt() >= 180 && diastolicText.toInt() >= 120)){
                         grade1Hypertension = false
                         grade2Hypertension = false
                         grade3Hypertension = false
@@ -246,13 +246,13 @@ class BpGraph : AppCompatActivity() {
                         grade3Hypertension = true
                         grade4Hypertension = false
                     }
-                    else if (systolicText.toInt() in 130..139 || diastolicText.toInt() in 85..89){
+                    else if (systolicText.toInt() in 130..139 || diastolicText.toInt() in 80..89){
                         grade1Hypertension = false
                         grade2Hypertension = true
                         grade3Hypertension = false
                         grade4Hypertension = false
                     }
-                    else if (systolicText.toInt() in 120..129 || diastolicText.toInt() < 80){
+                    else if (systolicText.toInt() in 120..129 &&  diastolicText.toInt() < 80){
                         grade1Hypertension = true
                         grade2Hypertension = false
                         grade3Hypertension = false

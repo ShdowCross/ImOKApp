@@ -352,8 +352,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textSize="20dp"
-                android:textColor="#14A44D"
-                android:text="Normal"/>
+                android:textColor="#3B71CA"
+                android:text="No data available"/>
             <TextView
                 android:id="@+id/hrBPMTV"
                 android:gravity="center"
