@@ -31,7 +31,6 @@ class PatientProfile : AppCompatActivity() {
         if(personInfoList.isNotEmpty()){
             val personInfo = personInfoList[0]
             val userName = personInfo.userName
-            val nric = personInfo.nric
             val gender = personInfo.gender
             val dob = personInfo.dob
             val personAge = age(dob)
@@ -42,7 +41,6 @@ class PatientProfile : AppCompatActivity() {
             val vaccinationHistory = personInfo.vaccinationHistory
             println(userName)
             val userNamePath = findViewById<TextView>(R.id.userNameData)
-            val nricPath = findViewById<TextView>(R.id.userNRICData)
             val genderPath = findViewById<TextView>(R.id.userGenderData)
             val dobPath = findViewById<TextView>(R.id.userAgeData)
             val bloodTypePath = findViewById<TextView>(R.id.userBloodTypeData)
@@ -52,7 +50,7 @@ class PatientProfile : AppCompatActivity() {
             val vaccinationHistoryPath = findViewById<TextView>(R.id.userVaccinationHistoryData)
 
             userNamePath.text = userName
-            nricPath.text = nric
+            //NRIC not required to show
             genderPath.text = gender
             dobPath.text = personAge.toString()
             bloodTypePath.text = bloodType
@@ -101,7 +99,6 @@ class PatientProfile : AppCompatActivity() {
                 val personInfo = ImOKApp.Companion.PersonInfo(
                     personId,
                     userName,
-                    nric,
                     gender,
                     dob,
                     bloodType,

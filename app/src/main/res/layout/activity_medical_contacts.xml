@@ -270,12 +270,6 @@
                             android:textSize="15dp"
                             android:text="Gwek Ji Ngoh"/>
                         <TextView
-                            android:id="@+id/selectedRelativeNRIC"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15dp"
-                            android:text="S4420196A"/>
-                        <TextView
                             android:id="@+id/selectedRelativeTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -378,13 +372,24 @@
                         android:padding="10px"
                         android:src="@mipmap/janedoh" />
                 </LinearLayout>
-                <ListView
-                    android:id="@+id/relativeSelectionRight"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
-                    android:background="@drawable/black_border">
-                </ListView>
+                    android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/relativeSelectionRight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/black_border">
+                    </ListView>
+                    <Button
+                        android:id="@+id/addPeopleBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Add Person"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

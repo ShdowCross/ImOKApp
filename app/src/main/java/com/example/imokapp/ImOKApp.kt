@@ -11,7 +11,6 @@ import com.example.imokapp.ImOKApp.Companion.COLUMN_BLOOD_TYPE
 import com.example.imokapp.ImOKApp.Companion.COLUMN_BMI
 import com.example.imokapp.ImOKApp.Companion.COLUMN_DOB
 import com.example.imokapp.ImOKApp.Companion.COLUMN_GENDER
-import com.example.imokapp.ImOKApp.Companion.COLUMN_NRIC
 import com.example.imokapp.ImOKApp.Companion.COLUMN_PERSON_ID
 import com.example.imokapp.ImOKApp.Companion.COLUMN_USER_NAME
 import com.github.mikephil.charting.data.Entry
@@ -30,7 +29,6 @@ class ImOKApp() : Application(){
     companion object {
         const val COLUMN_PERSON_ID = "person_id"
         const val COLUMN_USER_NAME = "user_name"
-        const val COLUMN_NRIC = "nric"
         const val COLUMN_GENDER = "gender"
         const val COLUMN_DOB = "dob"
         const val COLUMN_BLOOD_TYPE = "blood_type"
@@ -40,7 +38,6 @@ class ImOKApp() : Application(){
         data class PersonInfo(
             val personId: Long,
             val userName: String,
-            val nric: String,
             val gender: String,
             val dob: String,
             val bloodType: String,
@@ -152,7 +149,6 @@ class ImOKApp() : Application(){
             ContentValues().apply {
                 put(COLUMN_PERSON_ID, 1)
                 put(COLUMN_USER_NAME, "John Doe")
-                put(COLUMN_NRIC, "1234567890")
                 put(COLUMN_GENDER, "Male")
                 put(COLUMN_DOB, "1990-01-01")
                 put(COLUMN_BLOOD_TYPE, "O+")
@@ -162,7 +158,6 @@ class ImOKApp() : Application(){
             ContentValues().apply {
                 put(COLUMN_PERSON_ID, 2)
                 put(COLUMN_USER_NAME, "Jane Smith")
-                put(COLUMN_NRIC, "9876543210")
                 put(COLUMN_GENDER, "Female")
                 put(COLUMN_DOB, "1995-05-10")
                 put(COLUMN_BLOOD_TYPE, "A+")
@@ -172,7 +167,6 @@ class ImOKApp() : Application(){
             ContentValues().apply {
                 put(COLUMN_PERSON_ID, 3)
                 put(COLUMN_USER_NAME, "Mike Johnson")
-                put(COLUMN_NRIC, "5432167890")
                 put(COLUMN_GENDER, "Male")
                 put(COLUMN_DOB, "1988-09-22")
                 put(COLUMN_BLOOD_TYPE, "B+")
@@ -182,7 +176,6 @@ class ImOKApp() : Application(){
             ContentValues().apply {
                 put(COLUMN_PERSON_ID, 4)
                 put(COLUMN_USER_NAME, "Emily Davis")
-                put(COLUMN_NRIC, "6789123450")
                 put(COLUMN_GENDER, "Female")
                 put(COLUMN_DOB, "1992-03-15")
                 put(COLUMN_BLOOD_TYPE, "AB+")
@@ -192,7 +185,6 @@ class ImOKApp() : Application(){
             ContentValues().apply {
                 put(COLUMN_PERSON_ID, 5)
                 put(COLUMN_USER_NAME, "David Wilson")
-                put(COLUMN_NRIC, "9876543219")
                 put(COLUMN_GENDER, "Male")
                 put(COLUMN_DOB, "1993-11-18")
                 put(COLUMN_BLOOD_TYPE, "O-")

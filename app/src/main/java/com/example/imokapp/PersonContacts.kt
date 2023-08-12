@@ -1,10 +1,13 @@
 package com.example.imokapp
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.database.Cursor
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import com.squareup.picasso.Picasso
@@ -33,29 +36,32 @@ class PersonContacts : AppCompatActivity() {
         val main1Info = getDoctorInfo(main1Doctor)
         val main2Doctor = "Mother"
         val main2Info = getRelativeInfo(main2Doctor)
-        Picasso.get().load(resources.getIdentifier(main1Info.imageUrl,"drawable",packageName))
-        Picasso.get().load(resources.getIdentifier(main2Info.imageUrl,"drawable",packageName))
+        Picasso.get().load(resources.getIdentifier(main1Info.imageUrl, "drawable", packageName))
+        Picasso.get().load(resources.getIdentifier(main2Info.imageUrl, "drawable", packageName))
         hideFields(paths.selectedDoctor)
         hideFields(paths.selectedRelative)
         showFields(paths.unselectedDoctor)
         showFields(paths.unselectedRelative)
         retrieveHardcodedContacts()
     }
+
     private fun retrieveContacts() {
 //        val contactList: List<String>
 //        val inst = ImOKApp.getInstance()
 //        contactList = inst.personContactsRetrieveAll()
 //        contactsAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1, contactList)
     }
-    private fun retrieveHardcodedContacts(){
+
+    private fun retrieveHardcodedContacts() {
         var paths = getPaths()
-        medicalSelectionLeft.setOnClickListener{
+        medicalSelectionLeft.setOnClickListener {
             hideFields(paths.unselectedDoctor)
             showFields(paths.selectedDoctor)
             val selectedDoctor = "General Doctor"
             displayToast("You have selected your main doctor")
             var doctorInfo = getDoctorInfo(selectedDoctor)
-            val imageResourceId = resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
+            val imageResourceId =
+                resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
             selectedDoctorNickname.text = selectedDoctor
             selectedDoctorName.text = doctorInfo.name
             selectedDoctorTitle.text = doctorInfo.title
@@ -67,35 +73,37 @@ class PersonContacts : AppCompatActivity() {
             selectedDoctorUnit.text = doctorInfo.unit
             selectedDoctorPostal.text = doctorInfo.postal
         }
-        doctorAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1, doctor)
+        doctorAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, doctor)
         medicalSelectionRight.adapter = doctorAdapter
-        medicalSelectionRight.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            hideFields(paths.unselectedDoctor)
-            showFields(paths.selectedDoctor)
-            val selectedDoctor = parent?.adapter?.getItem(position).toString()
-            val doctorInfo = getDoctorInfo(selectedDoctor)
-            val imageResourceId = resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
-            displayToast("You have selected " + parent?.adapter?.getItem(position) + " of doctor")
-            selectedDoctorNickname.text = selectedDoctor
-            selectedDoctorName.text = doctorInfo.name
-            selectedDoctorTitle.text = doctorInfo.title
-            medicalProfileWebsite.text = doctorInfo.website
-            Picasso.get().load(imageResourceId).into(paths.selectedDoctorProfileImg)
-            selectedDoctorEmail.text = doctorInfo.email
-            selectedDoctorPhoneNumber.text = doctorInfo.phoneNumber
-            selectedDoctorStreet.text = doctorInfo.street
-            selectedDoctorUnit.text = doctorInfo.unit
-            selectedDoctorPostal.text = doctorInfo.postal
-        }
-        relativeSelectionLeft.setOnClickListener{
+        medicalSelectionRight.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                hideFields(paths.unselectedDoctor)
+                showFields(paths.selectedDoctor)
+                val selectedDoctor = parent?.adapter?.getItem(position).toString()
+                val doctorInfo = getDoctorInfo(selectedDoctor)
+                val imageResourceId =
+                    resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
+                displayToast("You have selected " + parent?.adapter?.getItem(position) + " of doctor")
+                selectedDoctorNickname.text = selectedDoctor
+                selectedDoctorName.text = doctorInfo.name
+                selectedDoctorTitle.text = doctorInfo.title
+                medicalProfileWebsite.text = doctorInfo.website
+                Picasso.get().load(imageResourceId).into(paths.selectedDoctorProfileImg)
+                selectedDoctorEmail.text = doctorInfo.email
+                selectedDoctorPhoneNumber.text = doctorInfo.phoneNumber
+                selectedDoctorStreet.text = doctorInfo.street
+                selectedDoctorUnit.text = doctorInfo.unit
+                selectedDoctorPostal.text = doctorInfo.postal
+            }
+        relativeSelectionLeft.setOnClickListener {
             hideFields(paths.unselectedRelative)
             showFields(paths.selectedRelative)
             val selectedRelative = "Mother"
             val relativeInfo = getRelativeInfo(selectedRelative)
-            val imageResourceId = resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
+            val imageResourceId =
+                resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
             selectedRelativeNickname.text = selectedRelative
             selectedRelativeName.text = relativeInfo.name
-            selectedRelativeNRIC.text = relativeInfo.nric
             selectedRelativeTitle.text = relativeInfo.title
             Picasso.get().load(imageResourceId).into(paths.selectedRelativeProfileImg)
             selectedRelativeEmail.text = relativeInfo.email
@@ -107,24 +115,50 @@ class PersonContacts : AppCompatActivity() {
         }
         relativeAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, relative)
         relativeSelectionRight.adapter = relativeAdapter
-        relativeSelectionRight.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            hideFields(paths.unselectedRelative)
-            showFields(paths.selectedRelative)
-            val selectedRelative = parent?.adapter?.getItem(position).toString()
-            val relativeInfo = getRelativeInfo(selectedRelative)
-            val imageResourceId = resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
-            selectedRelativeNickname.text = selectedRelative
-            selectedRelativeName.text = relativeInfo.name
-            selectedRelativeNRIC.text = relativeInfo.nric
-            selectedRelativeTitle.text = relativeInfo.title
-            Picasso.get().load(imageResourceId).into(paths.selectedRelativeProfileImg)
-            selectedRelativeEmail.text = relativeInfo.email
-            selectedRelativePhoneNumber.text = relativeInfo.phoneNumber
-            selectedRelativeStreet.text = relativeInfo.street
-            selectedRelativeUnit.text = relativeInfo.unit
-            selectedRelativePostal.text = relativeInfo.postal
-            displayToast("You have selected your " + parent?.adapter?.getItem(position))
+        relativeSelectionRight.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                hideFields(paths.unselectedRelative)
+                showFields(paths.selectedRelative)
+                val selectedRelative = parent?.adapter?.getItem(position).toString()
+                val relativeInfo = getRelativeInfo(selectedRelative)
+                val imageResourceId =
+                    resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
+                selectedRelativeNickname.text = selectedRelative
+                selectedRelativeName.text = relativeInfo.name
+                selectedRelativeTitle.text = relativeInfo.title
+                Picasso.get().load(imageResourceId).into(paths.selectedRelativeProfileImg)
+                selectedRelativeEmail.text = relativeInfo.email
+                selectedRelativePhoneNumber.text = relativeInfo.phoneNumber
+                selectedRelativeStreet.text = relativeInfo.street
+                selectedRelativeUnit.text = relativeInfo.unit
+                selectedRelativePostal.text = relativeInfo.postal
+                displayToast("You have selected your " + parent?.adapter?.getItem(position))
+            }
+        addPeopleBtn.setOnClickListener {
+            showFormDialog()
         }
+    }
+
+    private fun showFormDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.add_family_friends, null)
+
+        // Create the dialog builder
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("Modal Form") // Set the title of the dialog
+
+        dialogBuilder.setPositiveButton("Submit", DialogInterface.OnClickListener { dialog, which ->
+            recreate()
+        })
+
+        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+            // Handle cancel button click if needed
+            dialog.dismiss()
+        })
+
+        // Create and show the dialog
+        val dialog = dialogBuilder.create()
+        dialog.show()
     }
     private fun getDoctorInfo(doctorName: String): DoctorInfo {
         return when (doctorName) {
@@ -211,7 +245,6 @@ class PersonContacts : AppCompatActivity() {
         return when (relativeName) {
             "Mother" -> RelativeInfo(
                 name = "Elderly Mother",
-                nric = "S9876543B",
                 title = "Mother",
                 imageUrl = "janedoh",
                 email = "elderlymother@example.com",
@@ -222,7 +255,6 @@ class PersonContacts : AppCompatActivity() {
             )
             "Brother" -> RelativeInfo(
                 name = "Supportive Brother",
-                nric = "1234567890",
                 title = "Brother",
                 imageUrl = "brother",
                 email = "supportivebrother@example.com",
@@ -233,7 +265,6 @@ class PersonContacts : AppCompatActivity() {
             )
             "Cousin" -> RelativeInfo(
                 name = "Caring Cousin",
-                nric = "0987654321",
                 title = "Cousin",
                 imageUrl = "cousin",
                 email = "caringcousin@example.com",
@@ -244,7 +275,6 @@ class PersonContacts : AppCompatActivity() {
             )
             "Aunt" -> RelativeInfo(
                 name = "Supportive Aunt",
-                nric = "6789012345",
                 title = "Aunt",
                 imageUrl = "aunt",
                 email = "supportiveaunt@example.com",
@@ -255,7 +285,6 @@ class PersonContacts : AppCompatActivity() {
             )
             "Uncle" -> RelativeInfo(
                 name = "Helpful Uncle",
-                nric = "5432109876",
                 title = "Uncle",
                 imageUrl = "uncle",
                 email = "helpfuluncle@example.com",
@@ -266,7 +295,6 @@ class PersonContacts : AppCompatActivity() {
             )
             else -> RelativeInfo(
                 name = "Unknown Relative",
-                nric = "",
                 title = "",
                 imageUrl = "",
                 email = "",
@@ -324,7 +352,6 @@ data class DoctorInfo(
 )
 data class RelativeInfo(
     val name: String,
-    val nric: String,
     val title: String,
     val imageUrl : String,
     val email: String,

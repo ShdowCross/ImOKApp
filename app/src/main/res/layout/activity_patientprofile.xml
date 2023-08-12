@@ -108,23 +108,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/userNRICTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="24dp"
-                            android:text="NRIC: "/>
-                        <TextView
-                            android:id="@+id/userNRICData"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="24dp"
-                            android:text="S6392819S"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
                             android:id="@+id/userGenderTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
