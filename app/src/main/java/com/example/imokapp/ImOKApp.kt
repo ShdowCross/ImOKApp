@@ -13,7 +13,13 @@ import com.example.imokapp.ImOKApp.Companion.COLUMN_DOB
 import com.example.imokapp.ImOKApp.Companion.COLUMN_GENDER
 import com.example.imokapp.ImOKApp.Companion.COLUMN_PERSON_ID
 import com.example.imokapp.ImOKApp.Companion.COLUMN_USER_NAME
+import com.example.imokapp.ImOKApp.Companion.timeList
 import com.github.mikephil.charting.data.Entry
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
 import java.util.*
 
 
@@ -52,6 +58,175 @@ class ImOKApp() : Application(){
         fun getInstance(): ImOKApp {
             return instance
         }
+        // person data
+        var hardCodedDoctors: MutableMap<String , DoctorInfo> = mutableMapOf(
+            "General Doctor" to getDoctorInfo("General Doctor"),
+//            "Cardiologist" to getDoctorInfo("Cardiologist"),
+//            "Dermatologist" to getDoctorInfo("Dermatologist"),
+//            "Neurologist" to getDoctorInfo("Neurologist"),
+//            "Pediatrician" to getDoctorInfo("Pediatrician"),
+//            "Gastroenterologist" to getDoctorInfo("Gastroenterologist")
+        )
+        var hardCodedRelatives: MutableMap<String , RelativeInfo> = mutableMapOf(
+            "Mother" to getRelativeInfo("Mother"),
+            "Brother" to getRelativeInfo("Brother"),
+            "Cousin" to getRelativeInfo("Cousin"),
+            "Aunt" to getRelativeInfo("Aunt"),
+            "Uncle" to getRelativeInfo("Uncle")
+        )
+        private fun getDoctorInfo(doctorName: String): DoctorInfo {
+            return when (doctorName) {
+                "General Doctor" -> DoctorInfo(
+                    name = "Dr. Smith",
+                    title = "General Doctor",
+                    website = "https://example.com/doctors/johnsmith",
+                    imageUrl = "doctor1",
+                    email = "johnsmith@example.com",
+                    phoneNumber = "+65 12345678",
+                    street = "123 Main Street",
+                    unit = "Unit 1",
+                    postal = "123456"
+                )
+                "Cardiologist" -> DoctorInfo(
+                    name = "Dr. Don",
+                    title = "Cardiologist",
+                    website = "www.cardiologyclinic.com",
+                    imageUrl = "doctor5",
+                    email = "drjohn@example.com",
+                    phoneNumber = "+1234567890",
+                    street = "456 Heart Avenue",
+                    unit = "Unit 2",
+                    postal = "67890"
+                )
+                "Dermatologist" -> DoctorInfo(
+                    name = "Dr. Perkins",
+                    title = "Dermatologist",
+                    website = "www.dermatologyclinic.com",
+                    imageUrl = "doctor3",
+                    email = "dremily@example.com",
+                    phoneNumber = "+0987654321",
+                    street = "789 Skin Street",
+                    unit = "Unit 3",
+                    postal = "54321"
+                )
+                "Neurologist" -> DoctorInfo(
+                    name = "Dr. Nash",
+                    title = "Neurologist",
+                    website = "www.neurologyclinic.com",
+                    imageUrl = "doctor2",
+                    email = "drmichael@example.com",
+                    phoneNumber = "+1112223333",
+                    street = "321 Brain Avenue",
+                    unit = "Unit 5",
+                    postal = "98765"
+                )
+                "Pediatrician" -> DoctorInfo(
+                    name = "Dr. Phua",
+                    title = "Pediatrician",
+                    website = "www.pediatricsclinic.com",
+                    imageUrl = "doctor4",
+                    email = "drsarah@example.com",
+                    phoneNumber = "+4445556666",
+                    street = "234 Kids Street",
+                    unit = "Unit 1",
+                    postal = "34567"
+                )
+                "Gastroenterologist" -> DoctorInfo(
+                    name = "Dr. Theresa",
+                    title = "Gastroenterologist",
+                    website = "www.gastroclinic.com",
+                    imageUrl = "doctor6",
+                    email = "drsamantha@example.com",
+                    phoneNumber = "+2223334444",
+                    street = "567 Stomach Street",
+                    unit = "Unit 6",
+                    postal = "98765"
+                )
+                else -> DoctorInfo(
+                    name = "Unknown Doctor",
+                    title = "Unknown Title",
+                    website = "",
+                    imageUrl = "",
+                    email = "",
+                    phoneNumber = "",
+                    street = "",
+                    unit = "",
+                    postal = ""
+                )
+            }
+        }
+        private fun getRelativeInfo(relativeName: String): RelativeInfo {
+            return when (relativeName) {
+                "Mother" -> RelativeInfo(
+                    name = "Elderly Mother",
+                    title = "Mother",
+                    imageUrl = "janedoh",
+                    email = "elderlymother@example.com",
+                    phoneNumber = "+65 87654321",
+                    street = "123 Main Street",
+                    unit = "#12-34",
+                    postal = "654321"
+                )
+                "Brother" -> RelativeInfo(
+                    name = "Supportive Brother",
+                    title = "Brother",
+                    imageUrl = "brother",
+                    email = "supportivebrother@example.com",
+                    phoneNumber = "+1234567890",
+                    street = "123 Brother Street",
+                    unit = "Unit 1",
+                    postal = "12345"
+                )
+                "Cousin" -> RelativeInfo(
+                    name = "Caring Cousin",
+                    title = "Cousin",
+                    imageUrl = "cousin",
+                    email = "caringcousin@example.com",
+                    phoneNumber = "+0987654321",
+                    street = "456 Cousin Street",
+                    unit = "Unit 2",
+                    postal = "54321"
+                )
+                "Aunt" -> RelativeInfo(
+                    name = "Supportive Aunt",
+                    title = "Aunt",
+                    imageUrl = "aunt",
+                    email = "supportiveaunt@example.com",
+                    phoneNumber = "+1112223333",
+                    street = "789 Aunt Street",
+                    unit = "Unit 3",
+                    postal = "67890"
+                )
+                "Uncle" -> RelativeInfo(
+                    name = "Helpful Uncle",
+                    title = "Uncle",
+                    imageUrl = "uncle",
+                    email = "helpfuluncle@example.com",
+                    phoneNumber = "+4445556666",
+                    street = "234 Uncle Street",
+                    unit = "Unit 4",
+                    postal = "34567"
+                )
+                else -> RelativeInfo(
+                    name = "Unknown Relative",
+                    title = "",
+                    imageUrl = "",
+                    email = "",
+                    phoneNumber = "",
+                    street = "",
+                    unit = "",
+                    postal = ""
+                )
+            }
+        }
+
+        var addedDoctors: MutableMap<String , DoctorInfo> = mutableMapOf()
+        var addedRelatives: MutableMap<String , RelativeInfo> = mutableMapOf()
+
+        var doctors: MutableMap<String , DoctorInfo> = (hardCodedDoctors + addedDoctors).toMutableMap()
+        var relatives: MutableMap<String , RelativeInfo> = (hardCodedRelatives + addedRelatives).toMutableMap()
+
+        // health metrics
         var muscleMass: Float = 35.8F
         var weight: Float = 0F
         var weightAverage: Float = 0F
@@ -63,12 +238,14 @@ class ImOKApp() : Application(){
         var bloodPressureDiastolic: Int = 0
         var heartRate: Float = 0F
 
+        // notifications
         var firstRun: Boolean = true
         var bpNotificationOn: Boolean = true
         var weightNotificationOn: Boolean = true
         var hrNotificationOn: Boolean = true
         var muscleMassNotificationOn: Boolean = true
 
+        // status
         var highBP: Boolean = false
         var grade1Hypertension: Boolean = false
         var grade2Hypertension: Boolean = false
@@ -83,6 +260,7 @@ class ImOKApp() : Application(){
         var uWeight: Boolean = false
         var takeCareNotif: Boolean = false
 
+        // stored arrays
         var systolic = ArrayList<Entry>()
         var systolicValues = ArrayList<Int>()
         var diastolic = ArrayList<Entry>()
@@ -124,6 +302,44 @@ class ImOKApp() : Application(){
     override fun onCreate() {
         super.onCreate()
         instance = this
+        val addedRelative = File(this.filesDir, "addedRelatives.json")
+        val gson = Gson()
+        try{
+            val json = addedRelative.readText()
+            val typeToken = object : TypeToken<MutableMap<String, RelativeInfo>>() {}.type
+            val deserializedRelatives: MutableMap<String, RelativeInfo> = gson.fromJson(json, typeToken)
+            addedRelatives = deserializedRelatives
+            relatives.putAll(addedRelatives)
+        } catch (e: FileNotFoundException){
+            Log.d("addedRelatives", "not found" )
+        }
+        try {
+            val file = File(filesDir, "data.json")
+            val json = file.readText()
+
+            val typeToken = object : TypeToken<Map<String, List<Any>>>() {}.type
+            val data: Map<String, List<Any>> = gson.fromJson(json, typeToken)
+
+            // Populate the variables from the retrieved data
+            val systolicList = data["systolic"] as List<Map<String, Float>>
+            val diastolicList = data["diastolic"] as List<Map<String, Float>>
+            val weightList = data["weight"] as List<Map<String, Float>>
+            timeList = ArrayList(data["timeList"] as List<String>)
+
+            systolic = ArrayList<Entry>(systolicList.map { Entry(it["x"]!!, it["y"]!!) })
+            diastolic = ArrayList<Entry>(diastolicList.map { Entry(it["x"]!!, it["y"]!!) })
+            weightArray = ArrayList<Entry>(weightList.map { Entry(it["x"]!!, it["y"]!!) })
+
+            // Extract values for ArrayLists if necessary
+            systolicValues = ArrayList(systolic.map { it.y.toInt() })
+            diastolicValues = ArrayList(diastolic.map { it.y.toInt() })
+            weightValues = ArrayList(weightArray.map { it.y })
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
 //        val dbAdapter = MyDBAdapter(this)
 //        dbAdapter.open()
 //        personInfoHardcodedValues()

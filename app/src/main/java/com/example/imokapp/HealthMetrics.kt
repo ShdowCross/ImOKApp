@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
 import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
+import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.firstRun
 import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
@@ -26,11 +27,13 @@ import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
 import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
+import com.example.imokapp.ImOKApp.Companion.systolicValues
 import com.example.imokapp.ImOKApp.Companion.takeCareNotif
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import com.example.imokapp.ImOKApp.Companion.weightThreshold
+import com.example.imokapp.ImOKApp.Companion.weightValues
 import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
@@ -69,6 +72,9 @@ class HealthMetrics : AppCompatActivity() {
         val profilePictureIV = findViewById<ImageView>(R.id.profilePictureIV)
         val surveyBtn = findViewById<Button>(R.id.surveyBtn)
 
+        bloodPressureSystolic = systolicValues.lastOrNull() ?: 0
+        bloodPressureDiastolic = diastolicValues.lastOrNull() ?: 0
+        weight = weightValues.lastOrNull() ?: 0.0f
 
         muscleTV.text = "$muscleMass%"
         weightTV.text = weight.toString()
@@ -87,6 +93,63 @@ class HealthMetrics : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
         var message = ""
+        if (bloodPressureSystolic >= 130 && bloodPressureDiastolic < 80){
+            highBP = false
+            lowBP = false
+            isolatedSystolic = true
+            isolatedDiastolic = false
+        }
+        else if(bloodPressureSystolic < 130 && bloodPressureDiastolic >= 80){
+            highBP = false
+            lowBP = false
+            isolatedSystolic = false
+            isolatedDiastolic = true
+        }
+        else if (bloodPressureSystolic >= 120 || bloodPressureDiastolic >= 80){
+            highBP = true
+            if ((bloodPressureSystolic >= 180 || bloodPressureDiastolic >= 120) || (bloodPressureSystolic >= 180 && bloodPressureDiastolic >= 120)){
+                ImOKApp.grade1Hypertension = false
+                ImOKApp.grade2Hypertension = false
+                ImOKApp.grade3Hypertension = false
+                ImOKApp.grade4Hypertension = true
+
+            }
+            else if (bloodPressureSystolic in 140..179 || bloodPressureDiastolic in 90..119){
+                ImOKApp.grade1Hypertension = false
+                ImOKApp.grade2Hypertension = false
+                ImOKApp.grade3Hypertension = true
+                ImOKApp.grade4Hypertension = false
+            }
+            else if (bloodPressureSystolic in 130..139 || bloodPressureDiastolic in 80..89){
+                ImOKApp.grade1Hypertension = false
+                ImOKApp.grade2Hypertension = true
+                ImOKApp.grade3Hypertension = false
+                ImOKApp.grade4Hypertension = false
+            }
+            else if (bloodPressureSystolic in 120..129 &&  bloodPressureDiastolic < 80){
+                ImOKApp.grade1Hypertension = true
+                ImOKApp.grade2Hypertension = false
+                ImOKApp.grade3Hypertension = false
+                ImOKApp.grade4Hypertension = false
+            }
+            lowBP = false
+            isolatedSystolic = false
+            isolatedDiastolic = false
+        }
+        else{
+            if(bloodPressureSystolic < 90 || bloodPressureDiastolic < 60){
+                highBP = false
+                lowBP = true
+                isolatedSystolic = false
+                isolatedDiastolic = false
+            }
+            else{
+                highBP = false
+                lowBP = false
+                isolatedSystolic = false
+                isolatedDiastolic = false
+            }
+        }
         if (systolic.isNotEmpty()){
             if (highBP){
                 if (ImOKApp.grade1Hypertension){
@@ -174,6 +237,31 @@ class HealthMetrics : AppCompatActivity() {
                 bpDiagnosis.text = "Normal BP"
                 bpDiagnosis.setTextColor(normalColor)
             }
+        }
+        var bmiValue = ImOKApp.calculateBMI(weight, heightMeter)
+        if (bmiValue >= "27.5".toFloat()) {
+            ImOKApp.highRiskBmi = true
+            ImOKApp.moderateRiskBmi = false
+            ImOKApp.lowRiskBmi = false
+            uWeight = false
+        }
+        else if (bmiValue.toInt() >= 23 && bmiValue.toInt() < 27.5) {
+            ImOKApp.highRiskBmi = false
+            ImOKApp.moderateRiskBmi = true
+            ImOKApp.lowRiskBmi = false
+            uWeight = false
+        }
+        else if (bmiValue.toInt() >= 18.5 && bmiValue.toInt() < 23) {
+            ImOKApp.highRiskBmi = false
+            ImOKApp.moderateRiskBmi = false
+            ImOKApp.lowRiskBmi = true
+            uWeight = false
+        }
+        else{
+            ImOKApp.highRiskBmi = false
+            ImOKApp.moderateRiskBmi = false
+            ImOKApp.lowRiskBmi = false
+            uWeight = true
         }
         if(weightArray.isNotEmpty()){
             if (ImOKApp.highRiskBmi) {

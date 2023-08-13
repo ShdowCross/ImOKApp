@@ -31,6 +31,7 @@ import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.systolicValues
 import com.example.imokapp.ImOKApp.Companion.timeList
+import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -40,7 +41,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_bp_graph.*
+import java.io.File
+import java.io.IOException
 
 class BpGraph : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -283,6 +287,29 @@ class BpGraph : AppCompatActivity() {
                 diastolicValues.add(bloodPressureDiastolic)
                 bpNotificationOn = true
                 timeList.add(generateTimeLabels())
+                // Writing data to a file
+                val gson = Gson()
+
+// Convert ArrayList to regular List before writing
+                val systolicList = systolic.toList()
+                val diastolicList = diastolic.toList()
+                val weightList = weightArray.toList()
+
+                val data = mapOf(
+                    "systolic" to systolicList,
+                    "diastolic" to diastolicList,
+                    "weight" to weightList,
+                    "timeList" to timeList
+                )
+
+                val json = gson.toJson(data)
+
+                try {
+                    val file = File(filesDir, "data.json")
+                    file.writeText(json)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
                 recreate()
             }
         }

@@ -12,6 +12,7 @@ import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
 import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
 import com.example.imokapp.ImOKApp.Companion.calculateBMI
+import com.example.imokapp.ImOKApp.Companion.diastolic
 import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.heightCM
@@ -21,12 +22,18 @@ import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
 import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
 import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.muscleMass
+import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.systolicValues
+import com.example.imokapp.ImOKApp.Companion.timeList
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weight
+import com.example.imokapp.ImOKApp.Companion.weightArray
 import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
 import com.example.imokapp.ImOKApp.Companion.weightValues
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_manual_input.*
+import java.io.File
+import java.io.IOException
 
 
 class ManualInput : AppCompatActivity() {
@@ -156,6 +163,31 @@ class ManualInput : AppCompatActivity() {
 
             addBpData(bloodPressureSystolic, bloodPressureDiastolic)
             addWeightData(weight)
+
+            // Writing data to a file
+            val gson = Gson()
+
+// Convert ArrayList to regular List before writing
+            val systolicList = systolic.toList()
+            val diastolicList = diastolic.toList()
+            val weightList = weightArray.toList()
+
+            val data = mapOf(
+                "systolic" to systolicList,
+                "diastolic" to diastolicList,
+                "weight" to weightList,
+                "timeList" to timeList
+            )
+
+            val json = gson.toJson(data)
+
+            try {
+                val file = File(filesDir, "data.json")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
 
             var newValuesSubmit = Intent(this,HealthMetrics::class.java)
             bpNotificationOn = true

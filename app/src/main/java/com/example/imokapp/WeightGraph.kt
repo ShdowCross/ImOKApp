@@ -15,12 +15,14 @@ import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.calculateBMI
 import com.example.imokapp.ImOKApp.Companion.calculateWeightThreshold
+import com.example.imokapp.ImOKApp.Companion.diastolic
 import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
 import com.example.imokapp.ImOKApp.Companion.heightMeter
 import com.example.imokapp.ImOKApp.Companion.highRiskBmi
 import com.example.imokapp.ImOKApp.Companion.lowRiskBmi
 import com.example.imokapp.ImOKApp.Companion.moderateRiskBmi
+import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.timeList
 import com.example.imokapp.ImOKApp.Companion.uWeight
 import com.example.imokapp.ImOKApp.Companion.weightArray
@@ -36,7 +38,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_weight_graph.*
+import java.io.File
+import java.io.IOException
 
 class WeightGraph : AppCompatActivity() {
     private var surveyClassName = ""
@@ -211,6 +216,30 @@ class WeightGraph : AppCompatActivity() {
                 weightValues.add(weight)
                 weightNotificationOn = true
                 timeList.add(generateTimeLabels())
+                // Writing data to a file
+                val gson = Gson()
+
+// Convert ArrayList to regular List before writing
+                val systolicList = systolic.toList()
+                val diastolicList = diastolic.toList()
+                val weightList = weightArray.toList()
+
+                val data = mapOf(
+                    "systolic" to systolicList,
+                    "diastolic" to diastolicList,
+                    "weight" to weightList,
+                    "timeList" to timeList
+                )
+
+                val json = gson.toJson(data)
+
+                try {
+                    val file = File(filesDir, "data.json")
+                    file.writeText(json)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
                 recreate()
             }
         }
