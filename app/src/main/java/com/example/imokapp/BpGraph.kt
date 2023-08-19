@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addBpData
 import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
 import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
@@ -24,6 +25,7 @@ import com.example.imokapp.ImOKApp.Companion.grade1Hypertension
 import com.example.imokapp.ImOKApp.Companion.grade2Hypertension
 import com.example.imokapp.ImOKApp.Companion.grade3Hypertension
 import com.example.imokapp.ImOKApp.Companion.grade4Hypertension
+import com.example.imokapp.ImOKApp.Companion.heartRate
 import com.example.imokapp.ImOKApp.Companion.highBP
 import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
 import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
@@ -31,7 +33,10 @@ import com.example.imokapp.ImOKApp.Companion.lowBP
 import com.example.imokapp.ImOKApp.Companion.systolic
 import com.example.imokapp.ImOKApp.Companion.systolicValues
 import com.example.imokapp.ImOKApp.Companion.timeList
+import com.example.imokapp.ImOKApp.Companion.updateDataJson
+import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.weightArray
+import com.example.imokapp.ImOKApp.Companion.weightAverage
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -172,8 +177,9 @@ class BpGraph : AppCompatActivity() {
                 warningView.text = "Normal BP"
                 warningView.setTextColor(normalColor)
                 warningLL.isInvisible = true
+                bpNotificationOn = false
             }
-            message += "Take a survey for some recommendations. \n"
+            message += ""
             alertDialogBuilder.setMessage(message)
             alertDialogBuilder.setPositiveButton("Ok for now"){ dialog, _ ->
                 dialog.dismiss()
@@ -287,29 +293,11 @@ class BpGraph : AppCompatActivity() {
                 diastolicValues.add(bloodPressureDiastolic)
                 bpNotificationOn = true
                 timeList.add(generateTimeLabels())
-                // Writing data to a file
-                val gson = Gson()
-
-// Convert ArrayList to regular List before writing
-                val systolicList = systolic.toList()
-                val diastolicList = diastolic.toList()
-                val weightList = weightArray.toList()
-
-                val data = mapOf(
-                    "systolic" to systolicList,
-                    "diastolic" to diastolicList,
-                    "weight" to weightList,
-                    "timeList" to timeList
+                updateDataJson(
+                    systolic = systolic,
+                    diastolic = diastolic,
+                    filesDir = filesDir
                 )
-
-                val json = gson.toJson(data)
-
-                try {
-                    val file = File(filesDir, "data.json")
-                    file.writeText(json)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
                 recreate()
             }
         }

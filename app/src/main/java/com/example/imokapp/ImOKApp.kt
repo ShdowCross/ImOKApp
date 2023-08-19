@@ -6,14 +6,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.example.imokapp.ImOKApp.Companion.COLUMN_ALLERGIES
-import com.example.imokapp.ImOKApp.Companion.COLUMN_BLOOD_TYPE
-import com.example.imokapp.ImOKApp.Companion.COLUMN_BMI
-import com.example.imokapp.ImOKApp.Companion.COLUMN_DOB
-import com.example.imokapp.ImOKApp.Companion.COLUMN_GENDER
-import com.example.imokapp.ImOKApp.Companion.COLUMN_PERSON_ID
-import com.example.imokapp.ImOKApp.Companion.COLUMN_USER_NAME
-import com.example.imokapp.ImOKApp.Companion.timeList
 import com.github.mikephil.charting.data.Entry
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -33,26 +25,66 @@ class ImOKApp() : Application(){
     private var contactIdList: ArrayList<Int> = ArrayList<Int>()
 
     companion object {
-        const val COLUMN_PERSON_ID = "person_id"
-        const val COLUMN_USER_NAME = "user_name"
-        const val COLUMN_GENDER = "gender"
-        const val COLUMN_DOB = "dob"
-        const val COLUMN_BLOOD_TYPE = "blood_type"
-        const val COLUMN_BMI = "bmi"
-        const val COLUMN_ALLERGIES = "allergies"
-        private const val MYDBADAPTER_LOG_CAT = "MyDBAdapter"
+//        const val COLUMN_PERSON_ID = "person_id"
+//        const val COLUMN_USER_NAME = "user_name"
+//        const val COLUMN_GENDER = "gender"
+//        const val COLUMN_DOB = "dob"
+//        const val COLUMN_BLOOD_TYPE = "blood_type"
+//        const val COLUMN_BMI = "bmi"
+//        const val COLUMN_ALLERGIES = "allergies"
+//        private const val MYDBADAPTER_LOG_CAT = "MyDBAdapter"
         data class PersonInfo(
-            val personId: Long,
-            val userName: String,
-            val gender: String,
-            val dob: String,
-            val bloodType: String,
-            val bmi: String,
-            val allergies: String,
-            val medicalHistory: String,
-            val vaccinationHistory: String
+            val userName: String = "Jonathan Ho",
+            val gender: String = "Male",
+            val dob: String = "16 July 1953",
+            val bloodType: String = "O+",
+//            val bmi: String,
+            val allergies: String = "None",
+            val medicalHistory: String = "No major medical history",
+            val vaccinationHistory: String = "Up to Date",
+            var addedDoctors: MutableMap<String, DoctorInfo> = mutableMapOf(),
+            var addedRelatives: MutableMap<String, RelativeInfo> = mutableMapOf()
         )
-
+        data class HealthMetrics(
+            var weightThreshold: Float = 0f,
+            var weight: Float = 0F,
+            var weightAverage: Float = 0F,
+            var muscleMass: Float = 35.8F,
+            var heightCM: Float = 169.50F,
+            var heightMeter: Float = (heightCM / 100),
+            var bloodPressureSystolic: Int = 0,
+            var bloodPressureDiastolic: Int = 0,
+            var heartRate: Float = 0F,
+            var BMI: Float = 0F
+        )
+        data class HealthStatus(
+            var highBP: Boolean = false,
+            var grade1Hypertension: Boolean = false,
+            var grade2Hypertension: Boolean = false,
+            var grade3Hypertension: Boolean = false,
+            var grade4Hypertension: Boolean = false,
+            var lowBP : Boolean = false,
+            var isolatedSystolic: Boolean = false,
+            var isolatedDiastolic: Boolean = false,
+            var highRiskBmi: Boolean = false,
+            var moderateRiskBmi: Boolean = true,
+            var lowRiskBmi: Boolean = false,
+            var uWeight: Boolean = false
+        )
+        data class HealthNotifications(
+            var firstRun: Boolean = true,
+            var bpNotificationOn: Boolean = true,
+            var weightNotificationOn: Boolean = true,
+            var hrNotificationOn: Boolean = true,
+            var muscleMassNotificationOn: Boolean = true,
+            var takeCareNotif: Boolean = false
+        )
+        data class GraphData(
+            var systolic: ArrayList<Entry> = ArrayList(),
+            var diastolic: ArrayList<Entry> = ArrayList(),
+            var weightArray: ArrayList<Entry> = ArrayList(),
+            var timeList: ArrayList<String> = ArrayList()
+        )
         private lateinit var instance: ImOKApp
 
         fun getInstance(): ImOKApp {
@@ -220,65 +252,16 @@ class ImOKApp() : Application(){
             }
         }
 
-        var addedDoctors: MutableMap<String , DoctorInfo> = mutableMapOf()
-        var addedRelatives: MutableMap<String , RelativeInfo> = mutableMapOf()
+        fun addBpData(systolicValue: Int, diastolicValue: Int, graphData: GraphData) {
+            val systolicIndex = graphData.systolic.size.toFloat()
+                graphData.systolic.add(Entry(systolicIndex, systolicValue.toFloat()))
 
-        var doctors: MutableMap<String , DoctorInfo> = (hardCodedDoctors + addedDoctors).toMutableMap()
-        var relatives: MutableMap<String , RelativeInfo> = (hardCodedRelatives + addedRelatives).toMutableMap()
-
-        // health metrics
-        var muscleMass: Float = 35.8F
-        var weight: Float = 0F
-        var weightAverage: Float = 0F
-        var weightThreshold: Float = 0f
-        var heightCM: Float = 169.50F
-        var heightMeter: Float = (heightCM / 100)
-        var BMI: Float = 0F
-        var bloodPressureSystolic: Int = 0
-        var bloodPressureDiastolic: Int = 0
-        var heartRate: Float = 0F
-
-        // notifications
-        var firstRun: Boolean = true
-        var bpNotificationOn: Boolean = true
-        var weightNotificationOn: Boolean = true
-        var hrNotificationOn: Boolean = true
-        var muscleMassNotificationOn: Boolean = true
-
-        // status
-        var highBP: Boolean = false
-        var grade1Hypertension: Boolean = false
-        var grade2Hypertension: Boolean = false
-        var grade3Hypertension: Boolean = false
-        var grade4Hypertension: Boolean = false
-        var lowBP : Boolean = false
-        var isolatedSystolic: Boolean = false
-        var isolatedDiastolic: Boolean = false
-        var highRiskBmi: Boolean = false
-        var moderateRiskBmi: Boolean = true
-        var lowRiskBmi: Boolean = false
-        var uWeight: Boolean = false
-        var takeCareNotif: Boolean = false
-
-        // stored arrays
-        var systolic = ArrayList<Entry>()
-        var systolicValues = ArrayList<Int>()
-        var diastolic = ArrayList<Entry>()
-        var diastolicValues = ArrayList<Int>()
-        var weightArray = ArrayList<Entry>()
-        var weightValues = ArrayList<Float>()
-        var timeList = ArrayList<String>()
-
-        fun addBpData(systolicValue: Int, diastolicValue: Int) {
-            val systolicIndex = systolic.size.toFloat()
-            systolic.add(Entry(systolicIndex, systolicValue.toFloat()))
-
-            val diastolicIndex = diastolic.size.toFloat()
-            diastolic.add(Entry(diastolicIndex, diastolicValue.toFloat()))
+            val diastolicIndex = graphData.diastolic.size.toFloat()
+            graphData.diastolic.add(Entry(diastolicIndex, diastolicValue.toFloat()))
         }
-        fun addWeightData(weight:Float){
-            val weightIndex = weightArray.size.toFloat()
-            weightArray.add(Entry(weightIndex, weight))
+        fun addWeightData(weight:Float, graphData: GraphData){
+            val weightIndex = graphData.weightArray.size.toFloat()
+            graphData.weightArray.add(Entry(weightIndex, weight))
         }
         fun generateTimeLabels(): String {
             val currentTime = Calendar.getInstance()
@@ -289,27 +272,64 @@ class ImOKApp() : Application(){
             val label = String.format("%02d:%02d:%02d", labelHour, minute, seconds)
             return label
         }
-        fun calculateBMI(w: Float, h: Float): Float{
-            BMI = w / (h * h)
-            return BMI
+        fun calculateBMI(w: Float, h: Float, healthMetrics: HealthMetrics): Float{
+            healthMetrics.BMI = w / (h * h)
+            return healthMetrics.BMI
         }
-        fun calculateWeightThreshold(wA: Float, wT: Float): Float {
-            weightThreshold = wA * (wT / 100.0f)
-            return weightThreshold
+        fun calculateWeightThreshold(wA: Float, wT: Float, healthMetrics: HealthMetrics): Float {
+            healthMetrics.weightThreshold = wA * (wT / 100.0f)
+            return healthMetrics.weightThreshold
+        }
+        fun graphDataJson(
+            systolic: List<Entry>? = null,
+            diastolic: List<Entry>? = null,
+            weightArray: List<Entry>? = null,
+            timeList: List<String>? = null,
+            filesDir: File
+        ){
+            val gson = Gson()
+
+            // Convert ArrayLists to regular Lists before writing
+            val systolicList = systolic?.toList()
+            val diastolicList = diastolic?.toList()
+            val weightList = weightArray?.toList()
+
+            val data = mapOf(
+                "systolic" to systolicList,
+                "diastolic" to diastolicList,
+                "weight" to weightList,
+                "timeList" to timeList,
+            )
+
+            val json = gson.toJson(data)
+
+            try {
+                val file = File(filesDir, "data.json")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        val addedRelative = File(this.filesDir, "addedRelatives.json")
+        val profileInfo = PersonInfo()
+        val healthMetrics = HealthMetrics()
+        val healthStatus = HealthStatus()
+        val notifications = HealthNotifications()
+        val graphData = GraphData()
         val gson = Gson()
+        var doctors: MutableMap<String , DoctorInfo> = (hardCodedDoctors + PersonInfo().addedDoctors).toMutableMap()
+        var relatives: MutableMap<String , RelativeInfo> = (hardCodedRelatives + PersonInfo().addedRelatives).toMutableMap()
         try{
-            val json = addedRelative.readText()
+            val file = File(this.filesDir, "addedRelatives.json")
+            val json = file.readText()
             val typeToken = object : TypeToken<MutableMap<String, RelativeInfo>>() {}.type
             val deserializedRelatives: MutableMap<String, RelativeInfo> = gson.fromJson(json, typeToken)
-            addedRelatives = deserializedRelatives
-            relatives.putAll(addedRelatives)
+            profileInfo.addedRelatives = deserializedRelatives
+            relatives.putAll(profileInfo.addedRelatives)
         } catch (e: FileNotFoundException){
             Log.d("addedRelatives", "not found" )
         }
@@ -324,16 +344,21 @@ class ImOKApp() : Application(){
             val systolicList = data["systolic"] as List<Map<String, Float>>
             val diastolicList = data["diastolic"] as List<Map<String, Float>>
             val weightList = data["weight"] as List<Map<String, Float>>
-            timeList = ArrayList(data["timeList"] as List<String>)
+            healthMetrics.weight = data["weightStatic"] as Float
+            healthMetrics.weightAverage = data["weightAverageStatic"] as Float
+            healthMetrics.heartRate = data["heartRate"] as Float
+            healthMetrics.BMI = data["BMI"] as Float
 
-            systolic = ArrayList<Entry>(systolicList.map { Entry(it["x"]!!, it["y"]!!) })
-            diastolic = ArrayList<Entry>(diastolicList.map { Entry(it["x"]!!, it["y"]!!) })
-            weightArray = ArrayList<Entry>(weightList.map { Entry(it["x"]!!, it["y"]!!) })
+            graphData.systolic = ArrayList<Entry>(systolicList.map { Entry(it["x"]!!, it["y"]!!) })
+            graphData.diastolic = ArrayList<Entry>(diastolicList.map { Entry(it["x"]!!, it["y"]!!) })
+            graphData.weightArray = ArrayList<Entry>(weightList.map { Entry(it["x"]!!, it["y"]!!) })
+            graphData.timeList = ArrayList(data["timeList"] as List<String>)
+
 
             // Extract values for ArrayLists if necessary
-            systolicValues = ArrayList(systolic.map { it.y.toInt() })
-            diastolicValues = ArrayList(diastolic.map { it.y.toInt() })
-            weightValues = ArrayList(weightArray.map { it.y })
+            var systolicValues = ArrayList(graphData.systolic.map { it.y.toInt() })
+            var diastolicValues = ArrayList(graphData.diastolic.map { it.y.toInt() })
+            var weightValues = ArrayList(graphData.weightArray.map { it.y })
 
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -346,111 +371,111 @@ class ImOKApp() : Application(){
 //        dbAdapter.close()
     }
 
-    fun personContactsAddToDatabase(
-        personId: Long, photo: String?, nickname: String?, name: String?, title: String?,
-        email: String?, phoneNumber: String?, addressStreet: String?, addressUnit: String?,
-        addressPostal: String?, website: String?
-    ): Long? {
-        val db = MyDBAdapter(applicationContext)
-        db.open()
-        val rowIDofInsertedEntry =
-            db.insertPersonContact(personId, photo, nickname, name, title, email, phoneNumber, addressStreet, addressUnit, addressPostal, website)
-        db.close()
-        return rowIDofInsertedEntry
-    }
-    fun personInfoHardcodedValues() {
-        val dbAdapter = MyDBAdapter(applicationContext)
-        dbAdapter.open()
-        val personInfoList: List<ContentValues> = listOf(
-            ContentValues().apply {
-                put(COLUMN_PERSON_ID, 1)
-                put(COLUMN_USER_NAME, "John Doe")
-                put(COLUMN_GENDER, "Male")
-                put(COLUMN_DOB, "1990-01-01")
-                put(COLUMN_BLOOD_TYPE, "O+")
-                put(COLUMN_BMI, "22.5")
-                put(COLUMN_ALLERGIES, "None")
-            },
-            ContentValues().apply {
-                put(COLUMN_PERSON_ID, 2)
-                put(COLUMN_USER_NAME, "Jane Smith")
-                put(COLUMN_GENDER, "Female")
-                put(COLUMN_DOB, "1995-05-10")
-                put(COLUMN_BLOOD_TYPE, "A+")
-                put(COLUMN_BMI, "20.2")
-                put(COLUMN_ALLERGIES, "Pollen")
-            },
-            ContentValues().apply {
-                put(COLUMN_PERSON_ID, 3)
-                put(COLUMN_USER_NAME, "Mike Johnson")
-                put(COLUMN_GENDER, "Male")
-                put(COLUMN_DOB, "1988-09-22")
-                put(COLUMN_BLOOD_TYPE, "B+")
-                put(COLUMN_BMI, "25.1")
-                put(COLUMN_ALLERGIES, "Dairy")
-            },
-            ContentValues().apply {
-                put(COLUMN_PERSON_ID, 4)
-                put(COLUMN_USER_NAME, "Emily Davis")
-                put(COLUMN_GENDER, "Female")
-                put(COLUMN_DOB, "1992-03-15")
-                put(COLUMN_BLOOD_TYPE, "AB+")
-                put(COLUMN_BMI, "23.7")
-                put(COLUMN_ALLERGIES, "Peanuts")
-            },
-            ContentValues().apply {
-                put(COLUMN_PERSON_ID, 5)
-                put(COLUMN_USER_NAME, "David Wilson")
-                put(COLUMN_GENDER, "Male")
-                put(COLUMN_DOB, "1993-11-18")
-                put(COLUMN_BLOOD_TYPE, "O-")
-                put(COLUMN_BMI, "24.5")
-                put(COLUMN_ALLERGIES, "Shellfish")
-            })
-            for (item in personInfoList) {
-            val newPersonInfoRowId = dbAdapter.insertPersonInfo(item)
-            Log.d(MYDBADAPTER_LOG_CAT, "Inserted row with ID: $newPersonInfoRowId")
-            val valueSet = item.valueSet()
-            if (valueSet.isNotEmpty()) {
-                for ((key, value) in valueSet) {
-                    Log.d(MYDBADAPTER_LOG_CAT, "Column: $key, Value: $value")
-                }
-            } else {
-                Log.d(MYDBADAPTER_LOG_CAT, "Empty valueSet for item: $item")
-            }
-            Log.d(MYDBADAPTER_LOG_CAT, "Data inserted: ${item.toString()}")
-        }
-        dbAdapter.close()
-    }
+//    fun personContactsAddToDatabase(
+//        personId: Long, photo: String?, nickname: String?, name: String?, title: String?,
+//        email: String?, phoneNumber: String?, addressStreet: String?, addressUnit: String?,
+//        addressPostal: String?, website: String?
+//    ): Long? {
+//        val db = MyDBAdapter(applicationContext)
+//        db.open()
+//        val rowIDofInsertedEntry =
+//            db.insertPersonContact(personId, photo, nickname, name, title, email, phoneNumber, addressStreet, addressUnit, addressPostal, website)
+//        db.close()
+//        return rowIDofInsertedEntry
+//    }
+//    fun personInfoHardcodedValues() {
+//        val dbAdapter = MyDBAdapter(applicationContext)
+//        dbAdapter.open()
+//        val personInfoList: List<ContentValues> = listOf(
+//            ContentValues().apply {
+//                put(COLUMN_PERSON_ID, 1)
+//                put(COLUMN_USER_NAME, "John Doe")
+//                put(COLUMN_GENDER, "Male")
+//                put(COLUMN_DOB, "1990-01-01")
+//                put(COLUMN_BLOOD_TYPE, "O+")
+//                put(COLUMN_BMI, "22.5")
+//                put(COLUMN_ALLERGIES, "None")
+//            },
+//            ContentValues().apply {
+//                put(COLUMN_PERSON_ID, 2)
+//                put(COLUMN_USER_NAME, "Jane Smith")
+//                put(COLUMN_GENDER, "Female")
+//                put(COLUMN_DOB, "1995-05-10")
+//                put(COLUMN_BLOOD_TYPE, "A+")
+//                put(COLUMN_BMI, "20.2")
+//                put(COLUMN_ALLERGIES, "Pollen")
+//            },
+//            ContentValues().apply {
+//                put(COLUMN_PERSON_ID, 3)
+//                put(COLUMN_USER_NAME, "Mike Johnson")
+//                put(COLUMN_GENDER, "Male")
+//                put(COLUMN_DOB, "1988-09-22")
+//                put(COLUMN_BLOOD_TYPE, "B+")
+//                put(COLUMN_BMI, "25.1")
+//                put(COLUMN_ALLERGIES, "Dairy")
+//            },
+//            ContentValues().apply {
+//                put(COLUMN_PERSON_ID, 4)
+//                put(COLUMN_USER_NAME, "Emily Davis")
+//                put(COLUMN_GENDER, "Female")
+//                put(COLUMN_DOB, "1992-03-15")
+//                put(COLUMN_BLOOD_TYPE, "AB+")
+//                put(COLUMN_BMI, "23.7")
+//                put(COLUMN_ALLERGIES, "Peanuts")
+//            },
+//            ContentValues().apply {
+//                put(COLUMN_PERSON_ID, 5)
+//                put(COLUMN_USER_NAME, "David Wilson")
+//                put(COLUMN_GENDER, "Male")
+//                put(COLUMN_DOB, "1993-11-18")
+//                put(COLUMN_BLOOD_TYPE, "O-")
+//                put(COLUMN_BMI, "24.5")
+//                put(COLUMN_ALLERGIES, "Shellfish")
+//            })
+//            for (item in personInfoList) {
+//            val newPersonInfoRowId = dbAdapter.insertPersonInfo(item)
+//            Log.d(MYDBADAPTER_LOG_CAT, "Inserted row with ID: $newPersonInfoRowId")
+//            val valueSet = item.valueSet()
+//            if (valueSet.isNotEmpty()) {
+//                for ((key, value) in valueSet) {
+//                    Log.d(MYDBADAPTER_LOG_CAT, "Column: $key, Value: $value")
+//                }
+//            } else {
+//                Log.d(MYDBADAPTER_LOG_CAT, "Empty valueSet for item: $item")
+//            }
+//            Log.d(MYDBADAPTER_LOG_CAT, "Data inserted: ${item.toString()}")
+//        }
+//        dbAdapter.close()
+//    }
 
 
-    fun personContactsDeleteFromDatabase(contactID: Int): Boolean {
-        val db = MyDBAdapter(applicationContext)
-        db.open()
-        val id = contactIdList[contactID]
-        val updateStatus = db.removePersonContact(id)
-        db.close()
-        return updateStatus
-    }
-
-    fun personContactsRetrieveAll(): List<String> {
-        val db = MyDBAdapter(applicationContext)
-        db.open()
-        contactIdList.clear()
-        contactList.clear()
-        val myCursor = db.personContactsTableRetrieveAllEntriesCursor()
-        myCursor?.let {
-            if (myCursor.count > 0) {
-                myCursor.moveToFirst()
-                do {
-                    contactIdList.add(myCursor.getInt(db.COLUMN_CONTACT_ID))
-                    val contactName = myCursor.getString(db.COLUMN_NAME)
-                    contactList.add(contactName)
-                } while (myCursor.moveToNext())
-            }
-        }
-        myCursor?.close()
-        db.close()
-        return contactList
-    }
+//    fun personContactsDeleteFromDatabase(contactID: Int): Boolean {
+//        val db = MyDBAdapter(applicationContext)
+//        db.open()
+//        val id = contactIdList[contactID]
+//        val updateStatus = db.removePersonContact(id)
+//        db.close()
+//        return updateStatus
+//    }
+//
+//    fun personContactsRetrieveAll(): List<String> {
+//        val db = MyDBAdapter(applicationContext)
+//        db.open()
+//        contactIdList.clear()
+//        contactList.clear()
+//        val myCursor = db.personContactsTableRetrieveAllEntriesCursor()
+//        myCursor?.let {
+//            if (myCursor.count > 0) {
+//                myCursor.moveToFirst()
+//                do {
+//                    contactIdList.add(myCursor.getInt(db.COLUMN_CONTACT_ID))
+//                    val contactName = myCursor.getString(db.COLUMN_NAME)
+//                    contactList.add(contactName)
+//                } while (myCursor.moveToNext())
+//            }
+//        }
+//        myCursor?.close()
+//        db.close()
+//        return contactList
+//    }
 }

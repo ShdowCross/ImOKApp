@@ -11,9 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import com.example.imokapp.ImOKApp.Companion.addedRelatives
-import com.example.imokapp.ImOKApp.Companion.doctors
-import com.example.imokapp.ImOKApp.Companion.relatives
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
@@ -28,7 +25,7 @@ class PersonContacts : AppCompatActivity() {
     var relative = arrayListOf<String>()
     var doctorAdapter: ArrayAdapter<String>? = null
     var relativeAdapter: ArrayAdapter<String>? = null
-    val defaultImageResourceId = R.drawable.profile // Replace with the actual resource ID of your default image
+    private val defaultImageResourceId = R.drawable.profile // Replace with the actual resource ID of your default image
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

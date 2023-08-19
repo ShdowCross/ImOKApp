@@ -44,7 +44,7 @@ import java.io.File
 import java.io.IOException
 
 class WeightGraph : AppCompatActivity() {
-    private var surveyClassName = ""
+    private var surveyClassName = "com.example.imokapp.Survey"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weight_graph)
@@ -76,9 +76,7 @@ class WeightGraph : AppCompatActivity() {
                 warningSurveyView.text = "Tell us how you're feeling!"
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
-                    message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n" +
-                            " "
-                    surveyClassName = "com.example.imokapp.Survey"
+                    message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n" + " "
                     weightNotificationOn = true
                 }
             } else if (moderateRiskBmi) {
@@ -88,7 +86,6 @@ class WeightGraph : AppCompatActivity() {
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
                     message += "You're BMI is getting a little high, which resulted in an increase in BMI. \n What changed? \n"
-                    surveyClassName = "com.example.imokapp.Survey"
                     weightNotificationOn = false
                 }
             }
@@ -104,7 +101,6 @@ class WeightGraph : AppCompatActivity() {
                 warningLL.isVisible = true
                 if (weightNotificationOn) {
                     message += "Your BMI is going a little low \n"
-                    surveyClassName = "com.example.imokapp.Survey"
                     weightNotificationOn = false
                 }
             }
@@ -124,7 +120,6 @@ class WeightGraph : AppCompatActivity() {
                         if (weightValues.size < 30){
                             message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
                         }
-                        surveyClassName = "com.example.imokapp.Survey"
                         weightNotificationOn = true
                     }
                 }
@@ -137,12 +132,11 @@ class WeightGraph : AppCompatActivity() {
                         if (weightValues.size < 30){
                             message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
                         }
-                        surveyClassName = "com.example.imokapp.Survey"
                         weightNotificationOn = true
                     }
                 }
                 else{
-                    warningView2.text = "Normal Range"
+                    warningView2.text = "Within Norm"
                     warningView2.setTextColor(normalColor)
                     weightNotificationOn = false
                 }
@@ -167,9 +161,13 @@ class WeightGraph : AppCompatActivity() {
         }
 
         warningLL.setOnClickListener{
-            val surveyClass = Class.forName(surveyClassName)
-            val toSurvey = Intent(this, surveyClass)
-            startActivity(toSurvey)
+            if (surveyClassName.isNotEmpty()) {
+                val surveyClass = Class.forName(surveyClassName)
+                val toSurvey = Intent(this, surveyClass)
+                startActivity(toSurvey)
+            } else {
+              Log.d("surveyClassName", "empty")
+            }
         }
 
         var submitBtn = findViewById<Button>(R.id.weightSubmitBtn)
