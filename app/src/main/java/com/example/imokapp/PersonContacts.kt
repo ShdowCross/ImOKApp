@@ -25,6 +25,7 @@ class PersonContacts : AppCompatActivity() {
     var relative = arrayListOf<String>()
     var doctorAdapter: ArrayAdapter<String>? = null
     var relativeAdapter: ArrayAdapter<String>? = null
+    val personInfo = ImOKApp.Companion.PersonInfo()
     private val defaultImageResourceId = R.drawable.profile // Replace with the actual resource ID of your default image
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +38,12 @@ class PersonContacts : AppCompatActivity() {
             startActivity(intent)
         }
 
-        for (entry in doctors){
+        for (entry in personInfo.doctors){
             if (entry.key != "General Doctor"){
                 doctor.add(entry.key)
             }
         }
-        for (entry in relatives){
+        for (entry in personInfo.relatives){
             if (entry.key != "Mother"){
                 relative.add(entry.key)
             }
@@ -50,9 +51,9 @@ class PersonContacts : AppCompatActivity() {
 
         val paths = getPaths()
         val mainDoctor = "General Doctor"
-        val mainDoctorInfo = doctors[mainDoctor]
+        val mainDoctorInfo = personInfo.doctors[mainDoctor]
         val mainRelative = "Mother"
-        val mainRelativeInfo = relatives[mainRelative]
+        val mainRelativeInfo = personInfo.relatives[mainRelative]
         Picasso.get().load(resources.getIdentifier(mainDoctorInfo?.imageUrl, "drawable", packageName))
         Picasso.get().load(resources.getIdentifier(mainRelativeInfo?.imageUrl, "drawable", packageName))
         hideFields(paths.selectedDoctor)
@@ -76,7 +77,7 @@ class PersonContacts : AppCompatActivity() {
             showFields(paths.selectedDoctor)
             val selectedDoctor = "General Doctor"
             displayToast("You have selected your main doctor")
-            var doctorInfo = doctors[selectedDoctor]
+            var doctorInfo = personInfo.doctors[selectedDoctor]
             val imageResourceId =
                 resources.getIdentifier(doctorInfo?.imageUrl, "drawable", packageName)
             selectedDoctorNickname.text = selectedDoctor
@@ -102,9 +103,8 @@ class PersonContacts : AppCompatActivity() {
                 hideFields(paths.unselectedDoctor)
                 showFields(paths.selectedDoctor)
                 val selectedDoctor = parent?.adapter?.getItem(position).toString()
-                val doctorInfo = doctors[selectedDoctor]
-                val imageResourceId =
-                    resources.getIdentifier(doctorInfo?.imageUrl, "drawable", packageName)
+                val doctorInfo = personInfo.doctors[selectedDoctor]
+                val imageResourceId = resources.getIdentifier(doctorInfo?.imageUrl, "drawable", packageName)
                 displayToast("You have selected " + parent?.adapter?.getItem(position) + " of doctor")
                 selectedDoctorNickname.text = selectedDoctor
                 selectedDoctorName.text = doctorInfo?.name
@@ -126,7 +126,7 @@ class PersonContacts : AppCompatActivity() {
             hideFields(paths.unselectedRelative)
             showFields(paths.selectedRelative)
             val selectedRelative = "Mother"
-            val relativeInfo = relatives[selectedRelative]
+            val relativeInfo = personInfo.relatives[selectedRelative]
             val imageResourceId =
                 resources.getIdentifier(relativeInfo?.imageUrl, "drawable", packageName)
             selectedRelativeNickname.text = selectedRelative
@@ -152,7 +152,7 @@ class PersonContacts : AppCompatActivity() {
                 hideFields(paths.unselectedRelative)
                 showFields(paths.selectedRelative)
                 val selectedRelative = parent?.adapter?.getItem(position).toString()
-                val relativeInfo = relatives[selectedRelative]
+                val relativeInfo = personInfo.relatives[selectedRelative]
                 val imageResourceId =
                     resources.getIdentifier(relativeInfo?.imageUrl, "drawable", packageName)
                 selectedRelativeNickname.text = selectedRelative
@@ -201,10 +201,9 @@ class PersonContacts : AppCompatActivity() {
                 unit = formUnit.text.toString(),
                 postal = formPostal.text.toString()
             )
-            relatives[formTitle.text.toString()] = newRelativeData
-            addedRelatives[formTitle.text.toString()] = newRelativeData
+            personInfo.relatives[formTitle.text.toString()] = newRelativeData
             val gson = Gson()
-            val json = gson.toJson(addedRelatives)
+            val json = gson.toJson(personInfo.relatives)
             val file = File(this.filesDir, "addedRelatives.json")
             val typeToken = object : TypeToken<MutableMap<String, RelativeInfo>>() {}.type
             val deserializedRelatives: MutableMap<String, RelativeInfo> = gson.fromJson(json, typeToken)

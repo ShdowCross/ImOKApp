@@ -11,24 +11,19 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addWeightData
 import com.example.imokapp.ImOKApp.Companion.calculateBMI
 import com.example.imokapp.ImOKApp.Companion.calculateWeightThreshold
-import com.example.imokapp.ImOKApp.Companion.diastolic
-import com.example.imokapp.ImOKApp.Companion.weight
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
-import com.example.imokapp.ImOKApp.Companion.heightMeter
-import com.example.imokapp.ImOKApp.Companion.highRiskBmi
-import com.example.imokapp.ImOKApp.Companion.lowRiskBmi
-import com.example.imokapp.ImOKApp.Companion.moderateRiskBmi
-import com.example.imokapp.ImOKApp.Companion.systolic
-import com.example.imokapp.ImOKApp.Companion.timeList
-import com.example.imokapp.ImOKApp.Companion.uWeight
-import com.example.imokapp.ImOKApp.Companion.weightArray
-import com.example.imokapp.ImOKApp.Companion.weightAverage
-import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
-import com.example.imokapp.ImOKApp.Companion.weightValues
+import com.example.imokapp.ImOKApp.Companion.graphData
+import com.example.imokapp.ImOKApp.Companion.healthMetrics
+import com.example.imokapp.ImOKApp.Companion.healthNotification
+import com.example.imokapp.ImOKApp.Companion.healthStatus
+import com.example.imokapp.ImOKApp.Companion.personInfo
+import com.example.imokapp.ImOKApp.Companion.writeGraphDataJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthMetricsJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthNotificationsJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthStatusJson
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -49,6 +44,13 @@ class WeightGraph : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weight_graph)
 
+        val infoData = ImOKApp.pullInfo(filesDir)
+        personInfo = infoData?.personInfo ?: ImOKApp.Companion.PersonInfo()
+        healthMetrics = infoData?.healthMetrics ?: ImOKApp.Companion.HealthMetrics()
+        healthStatus = infoData?.healthStatus ?: ImOKApp.Companion.HealthStatus()
+        healthNotification = infoData?.healthNotifications ?: ImOKApp.Companion.HealthNotifications()
+        graphData = infoData?.graphData ?: ImOKApp.Companion.GraphData()
+
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
@@ -64,44 +66,49 @@ class WeightGraph : AppCompatActivity() {
         alertDialogBuilder.setTitle("Alert")
         var message = ""
 
-        // TODO make the normal threshold for the person
-        weightAverage = weightValues.average().toFloat()
+        val healthMetrics = ImOKApp.healthMetrics
+        val healthStatus = ImOKApp.healthStatus
+        val healthNotification = ImOKApp.healthNotification
+        val graphData = ImOKApp.graphData
 
-        if(weightValues.isNotEmpty()) {
-            var weightSize = weightValues.size
-            lastReadingWeightTV.text = weightValues[weightSize - 1].toString()
-            if (highRiskBmi) {
+        // TODO make the normal threshold for the person
+        healthMetrics.weightAverage = graphData.weightArray.map { it.y }.average().toFloat()
+        
+        if((graphData.weightArray).isNotEmpty()) {
+            var weightSize = graphData.weightArray.size
+            lastReadingWeightTV.text = (graphData.weightArray).last().y.toString()
+            if (healthStatus.highRiskBmi) {
                 warningView1.text = "High Risk BMI"
                 warningView1.setTextColor(highRiskBmiColor)
                 warningSurveyView.text = "Tell us how you're feeling!"
                 warningLL.isVisible = true
-                if (weightNotificationOn) {
+                if (healthNotification.weightNotificationOn) {
                     message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n" + " "
-                    weightNotificationOn = true
+                    healthNotification.weightNotificationOn = true
                 }
-            } else if (moderateRiskBmi) {
+            } else if (healthStatus.moderateRiskBmi) {
                 warningView1.text = "Moderate Risk BMI"
                 warningView1.setTextColor(moderateRiskBmiColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
-                if (weightNotificationOn) {
+                if (healthNotification.weightNotificationOn) {
                     message += "You're BMI is getting a little high, which resulted in an increase in BMI. \n What changed? \n"
-                    weightNotificationOn = false
+                    healthNotification.weightNotificationOn = false
                 }
             }
-            else if (lowRiskBmi) {
+            else if (healthStatus.lowRiskBmi) {
                 warningView1.text = "Normal BMI"
                 warningView1.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
-            else if (uWeight) {
+            else if (healthStatus.uWeight) {
                 warningView1.text = "Underweight"
                 warningView1.setTextColor(lowColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
-                if (weightNotificationOn) {
+                if (healthNotification.weightNotificationOn) {
                     message += "Your BMI is going a little low \n"
-                    weightNotificationOn = false
+                    healthNotification.weightNotificationOn = false
                 }
             }
             else {
@@ -109,42 +116,42 @@ class WeightGraph : AppCompatActivity() {
                 warningView1.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
-            if (weightValues.size >= 5){
-                var wThreshold = calculateWeightThreshold(weightAverage, 5f)
-                if (weight >= weightAverage + wThreshold) {
+            if ((graphData.weightArray).size >= 5){
+                var wThreshold = calculateWeightThreshold(healthMetrics.weightAverage, 5f, healthMetrics)
+                if (healthMetrics.weight >= healthMetrics.weightAverage + wThreshold) {
                     // The weight is far above the person's norm
                     warningView2.text = "Warning: Weight Above Norm"
                     warningView2.setTextColor(highColor)
-                    if (weightNotificationOn) {
+                    if (healthNotification.weightNotificationOn) {
                         message += "Your weight is significantly higher than your norm. \n If this is not normal, go see a doctor. \n"
-                        if (weightValues.size < 30){
+                        if ((graphData.weightArray).size < 30){
                             message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
                         }
-                        weightNotificationOn = true
+                        healthNotification.weightNotificationOn = true
                     }
                 }
-                else if (weight <= weightAverage - wThreshold) {
+                else if (healthMetrics.weight <= healthMetrics.weightAverage - wThreshold) {
                     // The weight is far below the person's norm
                     warningView2.text = "Warning: Weight Below Norm"
                     warningView2.setTextColor(lowColor)
-                    if (weightNotificationOn) {
+                    if (healthNotification.weightNotificationOn) {
                         message += "Your weight is significantly lower than your norm. \n If this is not normal, go see a doctor. \n!"
-                        if (weightValues.size < 30){
+                        if ((graphData.weightArray).size < 30){
                             message += "\n If this is normal, don't be alarmed. \n Sudden spikes or drops could have a larger impact on your norm and will go away over time. \n"
                         }
-                        weightNotificationOn = true
+                        healthNotification.weightNotificationOn = true
                     }
                 }
                 else{
                     warningView2.text = "Within Norm"
                     warningView2.setTextColor(normalColor)
-                    weightNotificationOn = false
+                    healthNotification.weightNotificationOn = false
                 }
             }
             alertDialogBuilder.setPositiveButton("Ok for now") { dialog, _ ->
                 dialog.dismiss()
             }
-            if (uWeight){
+            if (healthStatus.uWeight){
                 alertDialogBuilder.setNegativeButton("Take Survey") { _, _ ->
                     val surveyClass = Class.forName(surveyClassName)
                     val toSurvey = Intent(this, surveyClass)
@@ -184,59 +191,54 @@ class WeightGraph : AppCompatActivity() {
                 weightET.error = "Weight Value is Empty"
             }
             else {
-                weight = weightText.toFloat()
-                var bmiValue = calculateBMI(weight, heightMeter)
+                healthMetrics.weight = weightText.toFloat()
+                var bmiValue = calculateBMI(healthMetrics.weight, healthMetrics.heightMeter, healthMetrics)
                 if (bmiValue >= "27.5".toFloat()) {
-                    highRiskBmi = true
-                    moderateRiskBmi = false
-                    lowRiskBmi = false
-                    uWeight = false
+                    healthStatus.highRiskBmi = true
+                    healthStatus.moderateRiskBmi = false
+                    healthStatus.lowRiskBmi = false
+                    healthStatus.uWeight = false
                 }
                 else if (bmiValue.toInt() >= 23 && bmiValue.toInt() < 27.5) {
-                    highRiskBmi = false
-                    moderateRiskBmi = true
-                    lowRiskBmi = false
-                    uWeight = false
+                    healthStatus.highRiskBmi = false
+                    healthStatus.moderateRiskBmi = true
+                    healthStatus.lowRiskBmi = false
+                    healthStatus.uWeight = false
                 }
                 else if (bmiValue.toInt() >= 18.5 && bmiValue.toInt() < 23) {
-                    highRiskBmi = false
-                    moderateRiskBmi = false
-                    lowRiskBmi = true
-                    uWeight = false
+                    healthStatus.highRiskBmi = false
+                    healthStatus.moderateRiskBmi = false
+                    healthStatus.lowRiskBmi = true
+                    healthStatus.uWeight = false
                 }
                 else{
-                    highRiskBmi = false
-                    moderateRiskBmi = false
-                    lowRiskBmi = false
-                    uWeight = true
+                    healthStatus.highRiskBmi = false
+                    healthStatus.moderateRiskBmi = false
+                    healthStatus.lowRiskBmi = false
+                    healthStatus.uWeight = true
                 }
-                addWeightData(weight)
-                weightValues.add(weight)
-                weightNotificationOn = true
-                timeList.add(generateTimeLabels())
-                // Writing data to a file
-                val gson = Gson()
-
-// Convert ArrayList to regular List before writing
-                val systolicList = systolic.toList()
-                val diastolicList = diastolic.toList()
-                val weightList = weightArray.toList()
-
-                val data = mapOf(
-                    "systolic" to systolicList,
-                    "diastolic" to diastolicList,
-                    "weight" to weightList,
-                    "timeList" to timeList
+                addWeightData(healthMetrics.weight, graphData)
+                healthNotification.weightNotificationOn = true
+                graphData.timeList.add(generateTimeLabels())
+                writeHealthMetricsJson(
+                    weightThreshold = healthMetrics.weightThreshold,
+                    weight = healthMetrics.weight,
+                    weightAverage = healthMetrics.weightAverage,
+                    filesDir = filesDir
                 )
-
-                val json = gson.toJson(data)
-
-                try {
-                    val file = File(filesDir, "data.json")
-                    file.writeText(json)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+                writeHealthStatusJson(
+                    uWeight = healthStatus.uWeight,
+                    filesDir = filesDir
+                )
+                writeHealthNotificationsJson(
+                    weightNotificationOn = healthNotification.weightNotificationOn,
+                    filesDir = filesDir
+                )
+                writeGraphDataJson(
+                    systolic = graphData.weightArray,
+                    timeList = graphData.timeList,
+                    filesDir = filesDir
+                )
 
                 recreate()
             }
@@ -280,11 +282,11 @@ class WeightGraph : AppCompatActivity() {
     }
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
-
+        val graphData = ImOKApp.Companion.GraphData()
         override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
             val index = value.toInt()
-            return if (index in timeList.indices) {
-                timeList[index]
+            return if (index in graphData.timeList.indices) {
+                graphData.timeList[index]
             } else {
                 ""
             }
@@ -292,7 +294,8 @@ class WeightGraph : AppCompatActivity() {
     }
 
     fun setDataToWeightChart() {
-        val weightDataset = LineDataSet(weightArray, "Weight")
+        val graphData = ImOKApp.Companion.GraphData()
+        val weightDataset = LineDataSet(graphData.weightArray, "Weight")
         weightDataset.lineWidth = 3f
         weightDataset.valueTextSize = 12f
         weightDataset.mode = LineDataSet.Mode.CUBIC_BEZIER

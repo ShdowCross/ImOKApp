@@ -1,10 +1,6 @@
 package com.example.imokapp
 
 import android.app.Application
-import android.content.ContentValues
-import android.content.Context
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.github.mikephil.charting.data.Entry
 import com.google.gson.Gson
@@ -25,7 +21,7 @@ class ImOKApp() : Application(){
     private var contactIdList: ArrayList<Int> = ArrayList<Int>()
 
     companion object {
-//        const val COLUMN_PERSON_ID = "person_id"
+        //        const val COLUMN_PERSON_ID = "person_id"
 //        const val COLUMN_USER_NAME = "user_name"
 //        const val COLUMN_GENDER = "gender"
 //        const val COLUMN_DOB = "dob"
@@ -33,18 +29,25 @@ class ImOKApp() : Application(){
 //        const val COLUMN_BMI = "bmi"
 //        const val COLUMN_ALLERGIES = "allergies"
 //        private const val MYDBADAPTER_LOG_CAT = "MyDBAdapter"
+
+        lateinit var personInfo: PersonInfo
+        lateinit var healthMetrics: HealthMetrics
+        lateinit var healthStatus: HealthStatus
+        lateinit var healthNotification: HealthNotifications
+        lateinit var graphData: GraphData
+
         data class PersonInfo(
             val userName: String = "Jonathan Ho",
             val gender: String = "Male",
             val dob: String = "16 July 1953",
             val bloodType: String = "O+",
-//            val bmi: String,
             val allergies: String = "None",
             val medicalHistory: String = "No major medical history",
             val vaccinationHistory: String = "Up to Date",
-            var addedDoctors: MutableMap<String, DoctorInfo> = mutableMapOf(),
-            var addedRelatives: MutableMap<String, RelativeInfo> = mutableMapOf()
+            var doctors: MutableMap<String, DoctorInfo> = mutableMapOf(),
+            var relatives: MutableMap<String, RelativeInfo> = mutableMapOf()
         )
+
         data class HealthMetrics(
             var weightThreshold: Float = 0f,
             var weight: Float = 0F,
@@ -57,13 +60,14 @@ class ImOKApp() : Application(){
             var heartRate: Float = 0F,
             var BMI: Float = 0F
         )
+
         data class HealthStatus(
             var highBP: Boolean = false,
             var grade1Hypertension: Boolean = false,
             var grade2Hypertension: Boolean = false,
             var grade3Hypertension: Boolean = false,
             var grade4Hypertension: Boolean = false,
-            var lowBP : Boolean = false,
+            var lowBP: Boolean = false,
             var isolatedSystolic: Boolean = false,
             var isolatedDiastolic: Boolean = false,
             var highRiskBmi: Boolean = false,
@@ -71,6 +75,7 @@ class ImOKApp() : Application(){
             var lowRiskBmi: Boolean = false,
             var uWeight: Boolean = false
         )
+
         data class HealthNotifications(
             var firstRun: Boolean = true,
             var bpNotificationOn: Boolean = true,
@@ -79,19 +84,22 @@ class ImOKApp() : Application(){
             var muscleMassNotificationOn: Boolean = true,
             var takeCareNotif: Boolean = false
         )
+
         data class GraphData(
             var systolic: ArrayList<Entry> = ArrayList(),
             var diastolic: ArrayList<Entry> = ArrayList(),
             var weightArray: ArrayList<Entry> = ArrayList(),
             var timeList: ArrayList<String> = ArrayList()
         )
+
         private lateinit var instance: ImOKApp
 
         fun getInstance(): ImOKApp {
             return instance
         }
+
         // person data
-        var hardCodedDoctors: MutableMap<String , DoctorInfo> = mutableMapOf(
+        var hardCodedDoctors: MutableMap<String, DoctorInfo> = mutableMapOf(
             "General Doctor" to getDoctorInfo("General Doctor"),
 //            "Cardiologist" to getDoctorInfo("Cardiologist"),
 //            "Dermatologist" to getDoctorInfo("Dermatologist"),
@@ -99,13 +107,14 @@ class ImOKApp() : Application(){
 //            "Pediatrician" to getDoctorInfo("Pediatrician"),
 //            "Gastroenterologist" to getDoctorInfo("Gastroenterologist")
         )
-        var hardCodedRelatives: MutableMap<String , RelativeInfo> = mutableMapOf(
+        var hardCodedRelatives: MutableMap<String, RelativeInfo> = mutableMapOf(
             "Mother" to getRelativeInfo("Mother"),
             "Brother" to getRelativeInfo("Brother"),
             "Cousin" to getRelativeInfo("Cousin"),
             "Aunt" to getRelativeInfo("Aunt"),
             "Uncle" to getRelativeInfo("Uncle")
         )
+
         private fun getDoctorInfo(doctorName: String): DoctorInfo {
             return when (doctorName) {
                 "General Doctor" -> DoctorInfo(
@@ -187,6 +196,7 @@ class ImOKApp() : Application(){
                 )
             }
         }
+
         private fun getRelativeInfo(relativeName: String): RelativeInfo {
             return when (relativeName) {
                 "Mother" -> RelativeInfo(
@@ -254,15 +264,17 @@ class ImOKApp() : Application(){
 
         fun addBpData(systolicValue: Int, diastolicValue: Int, graphData: GraphData) {
             val systolicIndex = graphData.systolic.size.toFloat()
-                graphData.systolic.add(Entry(systolicIndex, systolicValue.toFloat()))
+            graphData.systolic.add(Entry(systolicIndex, systolicValue.toFloat()))
 
             val diastolicIndex = graphData.diastolic.size.toFloat()
             graphData.diastolic.add(Entry(diastolicIndex, diastolicValue.toFloat()))
         }
-        fun addWeightData(weight:Float, graphData: GraphData){
+
+        fun addWeightData(weight: Float, graphData: GraphData) {
             val weightIndex = graphData.weightArray.size.toFloat()
             graphData.weightArray.add(Entry(weightIndex, weight))
         }
+
         fun generateTimeLabels(): String {
             val currentTime = Calendar.getInstance()
             val hour = currentTime.get(Calendar.HOUR_OF_DAY)
@@ -272,24 +284,173 @@ class ImOKApp() : Application(){
             val label = String.format("%02d:%02d:%02d", labelHour, minute, seconds)
             return label
         }
-        fun calculateBMI(w: Float, h: Float, healthMetrics: HealthMetrics): Float{
+
+        fun calculateBMI(w: Float, h: Float, healthMetrics: HealthMetrics): Float {
             healthMetrics.BMI = w / (h * h)
             return healthMetrics.BMI
         }
+
         fun calculateWeightThreshold(wA: Float, wT: Float, healthMetrics: HealthMetrics): Float {
             healthMetrics.weightThreshold = wA * (wT / 100.0f)
             return healthMetrics.weightThreshold
         }
-        fun graphDataJson(
+
+        fun writePersonInfoJson(
+            userName: String? = null,
+            gender: String? = null,
+            dob: String? = null,
+            bloodType: String? = null,
+            allergies: String? = null,
+            medicalHistory: String? = null,
+            vaccinationHistory: String? = null,
+            doctors: Map<String, DoctorInfo>? = null,
+            relatives: Map<String, RelativeInfo>? = null,
+            filesDir: File
+        ) {
+            val gson = Gson()
+
+            val personInfo = PersonInfo(
+                userName ?: "Jonathan Ho",
+                gender ?: "Male",
+                dob ?: "16 July 1953",
+                bloodType ?: "O+",
+                allergies ?: "None",
+                medicalHistory ?: "No major medical history",
+                vaccinationHistory ?: "Up to Date",
+                doctors?.toMutableMap() ?: mutableMapOf(),
+                relatives?.toMutableMap() ?: mutableMapOf()
+            )
+
+            val json = gson.toJson(personInfo)
+
+            try {
+                val file = File(filesDir, "personInfo.json")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun writeHealthMetricsJson(
+            weightThreshold: Float? = null,
+            weight: Float? = null,
+            weightAverage: Float? = null,
+            muscleMass: Float? = null,
+            heightCM: Float? = null,
+            heightMeter: Float? = null,
+            bloodPressureSystolic: Int? = null,
+            bloodPressureDiastolic: Int? = null,
+            heartRate: Float? = null,
+            BMI: Float? = null,
+            filesDir: File
+        ) {
+            val gson = Gson()
+
+            val healthMetrics = HealthMetrics(
+                weightThreshold ?: 0f,
+                weight ?: 0F,
+                weightAverage ?: 0F,
+                muscleMass ?: 35.8F,
+                heightCM ?: 169.50F,
+                heightMeter ?: heightCM?.div(100) ?: 0F,
+                bloodPressureSystolic ?: 0,
+                bloodPressureDiastolic ?: 0,
+                heartRate ?: 0F,
+                BMI ?: 0F
+            )
+
+            val json = gson.toJson(healthMetrics)
+
+            try {
+                val file = File(filesDir, "healthMetrics.json")
+                Log.d("FileCreation", "File path: ${file.absolutePath}")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun writeHealthStatusJson(
+            highBP: Boolean? = null,
+            grade1Hypertension: Boolean? = null,
+            grade2Hypertension: Boolean? = null,
+            grade3Hypertension: Boolean? = null,
+            grade4Hypertension: Boolean? = null,
+            lowBP: Boolean? = null,
+            isolatedSystolic: Boolean? = null,
+            isolatedDiastolic: Boolean? = null,
+            highRiskBmi: Boolean? = null,
+            moderateRiskBmi: Boolean? = null,
+            lowRiskBmi: Boolean? = null,
+            uWeight: Boolean? = null,
+            filesDir: File
+        ) {
+            val gson = Gson()
+
+            val healthStatus = HealthStatus(
+                highBP ?: false,
+                grade1Hypertension ?: false,
+                grade2Hypertension ?: false,
+                grade3Hypertension ?: false,
+                grade4Hypertension ?: false,
+                lowBP ?: false,
+                isolatedSystolic ?: false,
+                isolatedDiastolic ?: false,
+                highRiskBmi ?: false,
+                moderateRiskBmi ?: true,
+                lowRiskBmi ?: false,
+                uWeight ?: false
+            )
+
+            val json = gson.toJson(healthStatus)
+
+            try {
+                val file = File(filesDir, "healthStatus.json")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun writeHealthNotificationsJson(
+            firstRun: Boolean? = null,
+            bpNotificationOn: Boolean? = null,
+            weightNotificationOn: Boolean? = null,
+            hrNotificationOn: Boolean? = null,
+            muscleMassNotificationOn: Boolean? = null,
+            takeCareNotif: Boolean? = null,
+            filesDir: File
+        ) {
+            val gson = Gson()
+
+            val healthNotifications = HealthNotifications(
+                firstRun ?: true,
+                bpNotificationOn ?: true,
+                weightNotificationOn ?: true,
+                hrNotificationOn ?: true,
+                muscleMassNotificationOn ?: true,
+                takeCareNotif ?: false
+            )
+
+            val json = gson.toJson(healthNotifications)
+
+            try {
+                val file = File(filesDir, "healthNotifications.json")
+                file.writeText(json)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun writeGraphDataJson(
             systolic: List<Entry>? = null,
             diastolic: List<Entry>? = null,
             weightArray: List<Entry>? = null,
             timeList: List<String>? = null,
             filesDir: File
-        ){
+        ) {
             val gson = Gson()
 
-            // Convert ArrayLists to regular Lists before writing
             val systolicList = systolic?.toList()
             val diastolicList = diastolic?.toList()
             val weightList = weightArray?.toList()
@@ -298,73 +459,178 @@ class ImOKApp() : Application(){
                 "systolic" to systolicList,
                 "diastolic" to diastolicList,
                 "weight" to weightList,
-                "timeList" to timeList,
+                "timeList" to timeList
             )
 
             val json = gson.toJson(data)
 
             try {
-                val file = File(filesDir, "data.json")
+                val file = File(filesDir, "graphData.json")
                 file.writeText(json)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+        }
+
+
+        fun readPersonInfoJson(filesDir: File): PersonInfo? {
+            val gson = Gson()
+            try {
+                val file = File(filesDir, "personInfo.json")
+                if (file.exists()) {
+                    val json = file.readText()
+
+                    // Deserialize PersonInfo object
+                    val personInfo = gson.fromJson(json, PersonInfo::class.java)
+
+                    // Read and deserialize relatives
+                    try {
+                        val relativesFile = File(filesDir, "personInfo.json")
+                        if (relativesFile.exists()) {
+                            val relativesJson = relativesFile.readText()
+                            val typeToken = object : TypeToken<MutableMap<String, RelativeInfo>>() {}.type
+                            val deserializedRelatives: MutableMap<String, RelativeInfo> = gson.fromJson(relativesJson, typeToken)
+                            if (deserializedRelatives.isEmpty()) {
+                                val hardcodedRelatives = listOf("Mother", "Brother", "Cousin", "Aunt", "Uncle")
+                                val hardcodedRelativesMap = hardcodedRelatives.associateWith { relativeName -> getRelativeInfo(relativeName) }
+                                personInfo.relatives.putAll(hardcodedRelativesMap)
+                            } else {
+                                personInfo.relatives.putAll(deserializedRelatives)
+                            }
+                        }
+                    } catch (e: FileNotFoundException) {
+                        Log.d("addedRelatives", "not found")
+                    }
+
+                    return personInfo
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun readHealthMetricsJson(filesDir: File): HealthMetrics? {
+            val gson = Gson()
+            try {
+                val file = File(filesDir, "healthMetrics.json")
+                val json = file.readText()
+                return gson.fromJson(json, HealthMetrics::class.java)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun readHealthStatusJson(filesDir: File): HealthStatus? {
+            val gson = Gson()
+            try {
+                val file = File(filesDir, "healthStatus.json")
+                val json = file.readText()
+                return gson.fromJson(json, HealthStatus::class.java)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun readHealthNotificationsJson(filesDir: File): HealthNotifications? {
+            val gson = Gson()
+            try {
+                val file = File(filesDir, "healthNotifications.json")
+                val json = file.readText()
+                return gson.fromJson(json, HealthNotifications::class.java)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun readGraphDataJson(filesDir: File): GraphData? {
+            val gson = Gson()
+            try {
+                val file = File(filesDir, "graphData.json")
+                val json = file.readText()
+                return gson.fromJson(json, GraphData::class.java)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
+        }
+        data class InfoData(
+            val personInfo: PersonInfo?,
+            val healthMetrics: HealthMetrics?,
+            val healthStatus: HealthStatus?,
+            val healthNotifications: HealthNotifications?,
+            val graphData: GraphData?
+        )
+        fun pullInfo(filesDir: File): InfoData?{
+            val personInfo = readPersonInfoJson(filesDir)
+            val healthMetrics = readHealthMetricsJson(filesDir)
+            val healthStatus = readHealthStatusJson(filesDir)
+            val healthNotifications = readHealthNotificationsJson(filesDir)
+            val graphData = readGraphDataJson(filesDir)
+
+            return InfoData(personInfo, healthMetrics, healthStatus, healthNotifications, graphData)
         }
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        val profileInfo = PersonInfo()
+        val personInfo = PersonInfo()
         val healthMetrics = HealthMetrics()
         val healthStatus = HealthStatus()
         val notifications = HealthNotifications()
         val graphData = GraphData()
-        val gson = Gson()
-        var doctors: MutableMap<String , DoctorInfo> = (hardCodedDoctors + PersonInfo().addedDoctors).toMutableMap()
-        var relatives: MutableMap<String , RelativeInfo> = (hardCodedRelatives + PersonInfo().addedRelatives).toMutableMap()
-        try{
-            val file = File(this.filesDir, "addedRelatives.json")
-            val json = file.readText()
-            val typeToken = object : TypeToken<MutableMap<String, RelativeInfo>>() {}.type
-            val deserializedRelatives: MutableMap<String, RelativeInfo> = gson.fromJson(json, typeToken)
-            profileInfo.addedRelatives = deserializedRelatives
-            relatives.putAll(profileInfo.addedRelatives)
-        } catch (e: FileNotFoundException){
-            Log.d("addedRelatives", "not found" )
+        if (personInfo == null) {
+            writePersonInfoJson(filesDir = filesDir)
         }
-        try {
-            val file = File(filesDir, "data.json")
-            val json = file.readText()
-
-            val typeToken = object : TypeToken<Map<String, List<Any>>>() {}.type
-            val data: Map<String, List<Any>> = gson.fromJson(json, typeToken)
-
-            // Populate the variables from the retrieved data
-            val systolicList = data["systolic"] as List<Map<String, Float>>
-            val diastolicList = data["diastolic"] as List<Map<String, Float>>
-            val weightList = data["weight"] as List<Map<String, Float>>
-            healthMetrics.weight = data["weightStatic"] as Float
-            healthMetrics.weightAverage = data["weightAverageStatic"] as Float
-            healthMetrics.heartRate = data["heartRate"] as Float
-            healthMetrics.BMI = data["BMI"] as Float
-
-            graphData.systolic = ArrayList<Entry>(systolicList.map { Entry(it["x"]!!, it["y"]!!) })
-            graphData.diastolic = ArrayList<Entry>(diastolicList.map { Entry(it["x"]!!, it["y"]!!) })
-            graphData.weightArray = ArrayList<Entry>(weightList.map { Entry(it["x"]!!, it["y"]!!) })
-            graphData.timeList = ArrayList(data["timeList"] as List<String>)
-
-
-            // Extract values for ArrayLists if necessary
-            var systolicValues = ArrayList(graphData.systolic.map { it.y.toInt() })
-            var diastolicValues = ArrayList(graphData.diastolic.map { it.y.toInt() })
-            var weightValues = ArrayList(graphData.weightArray.map { it.y })
-
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
+        if (healthMetrics == null) {
+            writeHealthMetricsJson(filesDir = filesDir)
         }
+        if (healthStatus == null) {
+            writeHealthStatusJson(filesDir = filesDir)
+        }
+        if (notifications == null) {
+            writeHealthNotificationsJson(filesDir = filesDir)
+        }
+        if (graphData == null) {
+            writeGraphDataJson(filesDir = filesDir)
+        }
+        readPersonInfoJson(filesDir)
+        readHealthMetricsJson(filesDir)
+        readHealthStatusJson(filesDir)
+        readHealthNotificationsJson(filesDir)
+        readGraphDataJson(filesDir)
+//        try {
+//            val file = File(filesDir, "healthMetrics.json")
+//            val json = file.readText()
+//
+//            val typeToken = object : TypeToken<Map<String, List<Any>>>() {}.type
+//            val data: Map<String, List<Any>> = gson.fromJson(json, typeToken)
+//
+//            // Populate the variables from the retrieved data
+//            val systolicList = data["systolic"] as List<Map<String, Float>>
+//            val diastolicList = data["diastolic"] as List<Map<String, Float>>
+//            val weightList = data["weight"] as List<Map<String, Float>>
+//
+//            graphData.systolic = ArrayList<Entry>(systolicList.map { Entry(it["x"]!!, it["y"]!!) })
+//            graphData.diastolic = ArrayList<Entry>(diastolicList.map { Entry(it["x"]!!, it["y"]!!) })
+//            graphData.weightArray = ArrayList<Entry>(weightList.map { Entry(it["x"]!!, it["y"]!!) })
+//            graphData.timeList = ArrayList(data["timeList"] as List<String>)
+//
+//
+//            // Extract values for ArrayLists if necessary
+//            var systolicValues = ArrayList(graphData.systolic.map { it.y.toInt() })
+//            var diastolicValues = ArrayList(graphData.diastolic.map { it.y.toInt() })
+//            var weightValues = ArrayList(graphData.weightArray.map { it.y })
+//
+//        } catch (e: FileNotFoundException) {
+//            e.printStackTrace()
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
 //        val dbAdapter = MyDBAdapter(this)
 //        dbAdapter.open()
 //        personInfoHardcodedValues()

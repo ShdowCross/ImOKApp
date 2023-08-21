@@ -12,36 +12,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
-import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
-import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
-import com.example.imokapp.ImOKApp.Companion.diastolicValues
-import com.example.imokapp.ImOKApp.Companion.firstRun
-import com.example.imokapp.ImOKApp.Companion.heartRate
-import com.example.imokapp.ImOKApp.Companion.heightCM
-import com.example.imokapp.ImOKApp.Companion.heightMeter
-import com.example.imokapp.ImOKApp.Companion.muscleMass
-import com.example.imokapp.ImOKApp.Companion.weight
-import com.example.imokapp.ImOKApp.Companion.highBP
-import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
-import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
-import com.example.imokapp.ImOKApp.Companion.lowBP
-import com.example.imokapp.ImOKApp.Companion.systolic
-import com.example.imokapp.ImOKApp.Companion.systolicValues
-import com.example.imokapp.ImOKApp.Companion.takeCareNotif
-import com.example.imokapp.ImOKApp.Companion.uWeight
-import com.example.imokapp.ImOKApp.Companion.weightArray
-import com.example.imokapp.ImOKApp.Companion.weightAverage
-import com.example.imokapp.ImOKApp.Companion.weightNotificationOn
-import com.example.imokapp.ImOKApp.Companion.weightThreshold
-import com.example.imokapp.ImOKApp.Companion.weightValues
+import com.example.imokapp.ImOKApp.Companion.graphData
+import com.example.imokapp.ImOKApp.Companion.healthMetrics
+import com.example.imokapp.ImOKApp.Companion.healthNotification
+import com.example.imokapp.ImOKApp.Companion.healthStatus
+import com.example.imokapp.ImOKApp.Companion.personInfo
 import kotlinx.android.synthetic.main.activity_health_metrics.*
 
 class HealthMetrics : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_metrics)
+
+        val infoData = ImOKApp.pullInfo(filesDir)
+        personInfo = infoData?.personInfo ?: ImOKApp.Companion.PersonInfo()
+        healthMetrics = infoData?.healthMetrics ?: ImOKApp.Companion.HealthMetrics()
+        healthStatus = infoData?.healthStatus ?: ImOKApp.Companion.HealthStatus()
+        healthNotification = infoData?.healthNotifications ?: ImOKApp.Companion.HealthNotifications()
+        graphData = infoData?.graphData ?: ImOKApp.Companion.GraphData()
+
         val lowColor = ContextCompat.getColor(this, R.color.blue)
         val normalColor = ContextCompat.getColor(this, R.color.green)
         val highColor = ContextCompat.getColor(this, R.color.red)
@@ -74,19 +63,29 @@ class HealthMetrics : AppCompatActivity() {
         val profilePictureIV = findViewById<ImageView>(R.id.profilePictureIV)
         val surveyBtn = findViewById<Button>(R.id.surveyBtn)
 
-        bloodPressureSystolic = systolicValues.lastOrNull() ?: 0
-        bloodPressureDiastolic = diastolicValues.lastOrNull() ?: 0
-        weight = weightValues.lastOrNull() ?: 0.0f
+        val healthMetrics = ImOKApp.healthMetrics
+        val healthStatus = ImOKApp.healthStatus
+        val healthNotifications = ImOKApp.healthNotification
+        val graphData = ImOKApp.graphData
 
-        muscleTV.text = "$muscleMass%"
-        weightTV.text = weight.toString()
-        weightKgNormTV.text = "($weightAverage)"
-        heightTV.text = heightCM.toString()
-        var bmiVal = weight / (heightMeter * heightMeter)
+        if (graphData.systolic.isNotEmpty()) {
+            healthMetrics.bloodPressureSystolic = graphData.systolic.last().y.toInt()
+        }
+        if (graphData.diastolic.isNotEmpty()) {
+            healthMetrics.bloodPressureDiastolic = graphData.diastolic.last().y.toInt()
+        }
+        if (graphData.weightArray.isNotEmpty()){
+            healthMetrics.weight = (graphData.weightArray).last().y
+        }
+        muscleTV.text = "${healthMetrics.muscleMass}%"
+        weightTV.text = healthMetrics.weight.toString()
+        weightKgNormTV.text = "(${healthMetrics.weightAverage})"
+        heightTV.text = healthMetrics.heightCM.toString()
+        var bmiVal = healthMetrics.weight / (healthMetrics.heightMeter * healthMetrics.heightMeter)
         var formattedBMI = String.format("%.2f", bmiVal)
         bmiTV.text = formattedBMI
-        bpTV.text = "$bloodPressureSystolic / $bloodPressureDiastolic"
-        hrTV.text = "$heartRate bpm"
+        bpTV.text = "${healthMetrics.bloodPressureSystolic} / ${healthMetrics.bloodPressureDiastolic}"
+        hrTV.text = "${healthMetrics.heartRate} bpm"
         alertIV.visibility = View.INVISIBLE
         weightAlertIV.visibility = View.INVISIBLE
         weightKgNormTV.visibility = View.INVISIBLE
@@ -97,103 +96,103 @@ class HealthMetrics : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
         var message = ""
-        if (bloodPressureSystolic >= 130 && bloodPressureDiastolic < 80){
-            highBP = false
-            lowBP = false
-            isolatedSystolic = true
-            isolatedDiastolic = false
+        if (healthMetrics.bloodPressureSystolic >= 130 && healthMetrics.bloodPressureDiastolic < 80){
+            healthStatus.highBP = false
+            healthStatus.lowBP = false
+            healthStatus.isolatedSystolic = true
+            healthStatus.isolatedDiastolic = false
         }
-        else if(bloodPressureSystolic < 130 && bloodPressureDiastolic >= 80){
-            highBP = false
-            lowBP = false
-            isolatedSystolic = false
-            isolatedDiastolic = true
+        else if(healthMetrics.bloodPressureSystolic < 130 && healthMetrics.bloodPressureDiastolic >= 80){
+            healthStatus.highBP = false
+            healthStatus.lowBP = false
+            healthStatus.isolatedSystolic = false
+            healthStatus.isolatedDiastolic = true
         }
-        else if (bloodPressureSystolic >= 120 || bloodPressureDiastolic >= 80){
-            highBP = true
-            if ((bloodPressureSystolic >= 180 || bloodPressureDiastolic >= 120) || (bloodPressureSystolic >= 180 && bloodPressureDiastolic >= 120)){
-                ImOKApp.grade1Hypertension = false
-                ImOKApp.grade2Hypertension = false
-                ImOKApp.grade3Hypertension = false
-                ImOKApp.grade4Hypertension = true
+        else if (healthMetrics.bloodPressureSystolic >= 120 || healthMetrics.bloodPressureDiastolic >= 80){
+            healthStatus.highBP = true
+            if ((healthMetrics.bloodPressureSystolic >= 180 || healthMetrics.bloodPressureDiastolic >= 120) || (healthMetrics.bloodPressureSystolic >= 180 && healthMetrics.bloodPressureDiastolic >= 120)){
+                healthStatus.grade1Hypertension = false
+                healthStatus.grade2Hypertension = false
+                healthStatus.grade3Hypertension = false
+                healthStatus.grade4Hypertension = true
 
             }
-            else if (bloodPressureSystolic in 140..179 || bloodPressureDiastolic in 90..119){
-                ImOKApp.grade1Hypertension = false
-                ImOKApp.grade2Hypertension = false
-                ImOKApp.grade3Hypertension = true
-                ImOKApp.grade4Hypertension = false
+            else if (healthMetrics.bloodPressureSystolic in 140..179 || healthMetrics.bloodPressureDiastolic in 90..119){
+                healthStatus.grade1Hypertension = false
+                healthStatus.grade2Hypertension = false
+                healthStatus.grade3Hypertension = true
+                healthStatus.grade4Hypertension = false
             }
-            else if (bloodPressureSystolic in 130..139 || bloodPressureDiastolic in 80..89){
-                ImOKApp.grade1Hypertension = false
-                ImOKApp.grade2Hypertension = true
-                ImOKApp.grade3Hypertension = false
-                ImOKApp.grade4Hypertension = false
+            else if (healthMetrics.bloodPressureSystolic in 130..139 || healthMetrics.bloodPressureDiastolic in 80..89){
+                healthStatus.grade1Hypertension = false
+                healthStatus.grade2Hypertension = true
+                healthStatus.grade3Hypertension = false
+                healthStatus.grade4Hypertension = false
             }
-            else if (bloodPressureSystolic in 120..129 &&  bloodPressureDiastolic < 80){
-                ImOKApp.grade1Hypertension = true
-                ImOKApp.grade2Hypertension = false
-                ImOKApp.grade3Hypertension = false
-                ImOKApp.grade4Hypertension = false
+            else if (healthMetrics.bloodPressureSystolic in 120..129 &&  healthMetrics.bloodPressureDiastolic < 80){
+                healthStatus.grade1Hypertension = true
+                healthStatus.grade2Hypertension = false
+                healthStatus.grade3Hypertension = false
+                healthStatus.grade4Hypertension = false
             }
-            lowBP = false
-            isolatedSystolic = false
-            isolatedDiastolic = false
+            healthStatus.lowBP = false
+            healthStatus.isolatedSystolic = false
+            healthStatus.isolatedDiastolic = false
         }
         else{
-            if(bloodPressureSystolic < 90 || bloodPressureDiastolic < 60){
-                highBP = false
-                lowBP = true
-                isolatedSystolic = false
-                isolatedDiastolic = false
+            if(healthMetrics.bloodPressureSystolic < 90 || healthMetrics.bloodPressureDiastolic < 60){
+                healthStatus.highBP = false
+                healthStatus.lowBP = true
+                healthStatus.isolatedSystolic = false
+                healthStatus.isolatedDiastolic = false
             }
             else{
-                highBP = false
-                lowBP = false
-                isolatedSystolic = false
-                isolatedDiastolic = false
+                healthStatus.highBP = false
+                healthStatus.lowBP = false
+                healthStatus.isolatedSystolic = false
+                healthStatus.isolatedDiastolic = false
             }
         }
-        if (systolic.isNotEmpty()){
-            if (highBP){
-                if (ImOKApp.grade1Hypertension){
+        if (graphData.systolic.isNotEmpty()){
+            if (healthStatus.highBP){
+                if (healthStatus.grade1Hypertension){
                     bpAlertIV.visibility = View.VISIBLE
                     surveyBtn.visibility = View.VISIBLE
                     bpDiagnosis.text = "Slightly High BP"
                     bpDiagnosis.setTextColor(grade1HypertensionColor)
-                    if (bpNotificationOn) {
+                    if (healthNotifications.bpNotificationOn) {
                         message += "There's a slight increase in blood pressure, take it easy.\n"
-                        bpNotificationOn = true
+                        healthNotifications.bpNotificationOn = true
                     }
                 }
-                else if(ImOKApp.grade2Hypertension){
+                else if(healthStatus.grade2Hypertension){
                     bpAlertIV.visibility = View.VISIBLE
                     surveyBtn.visibility = View.VISIBLE
                     bpDiagnosis.text = "High BP"
                     bpDiagnosis.setTextColor(grade2HypertensionColor)
-                    if (bpNotificationOn) {
+                    if (healthNotifications.bpNotificationOn) {
                         message += "Your blood pressure is high, take it easy and monitor your condition..\n"
-                        bpNotificationOn = true
+                        healthNotifications.bpNotificationOn = true
                     }
                 }
-                else if(ImOKApp.grade3Hypertension){
+                else if(healthStatus.grade3Hypertension){
                     bpAlertIV.visibility = View.VISIBLE
                     surveyBtn.visibility = View.VISIBLE
                     bpDiagnosis.text = "Very High BP"
                     bpDiagnosis.setTextColor(grade3HypertensionColor)
-                    if (bpNotificationOn) {
+                    if (healthNotifications.bpNotificationOn) {
                         message += "Your Blood Pressure is rising pretty high, we recommend you go see a clinic for medical advice.\n"
-                        bpNotificationOn = true
+                        healthNotifications.bpNotificationOn = true
                     }
                 }
-                else if(ImOKApp.grade4Hypertension){
+                else if(healthStatus.grade4Hypertension){
                     bpAlertIV.visibility = View.VISIBLE
                     surveyBtn.visibility = View.VISIBLE
                     bpDiagnosis.text = "GO TO A HOSPITAL"
                     bpDiagnosis.setTextColor(grade4HypertensionColor)
-                    if (bpNotificationOn) {
+                    if (healthNotifications.bpNotificationOn) {
                         message += "Your Blood Pressure is too high, Please Head To A Hospital Now. \n"
-                        bpNotificationOn = true
+                        healthNotifications.bpNotificationOn = true
                     }
                 }
                 else{
@@ -201,139 +200,139 @@ class HealthMetrics : AppCompatActivity() {
                     surveyBtn.visibility = View.VISIBLE
                     bpDiagnosis.text = "High BP (Unspecified)"
                     bpDiagnosis.setTextColor(highColor)
-                    if (bpNotificationOn) {
+                    if (healthNotifications.bpNotificationOn) {
                         message += "There's a slight increase in blood pressure, take it easy.\n"
-                        bpNotificationOn = false
+                        healthNotifications.bpNotificationOn = false
                     }
                 }
             }
-            else if (lowBP){
+            else if (healthStatus.lowBP){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "Low BP"
                 bpDiagnosis.setTextColor(lowColor)
-                if (bpNotificationOn){
+                if (healthNotifications.bpNotificationOn){
                     message += "There's a decrease in blood pressure, are you feeling ok?\n Take a survey for some recommendations."
-                    bpNotificationOn = false
+                    healthNotifications.bpNotificationOn = false
                 }
             }
-            else if (isolatedSystolic){
+            else if (healthStatus.isolatedSystolic){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "Isolated Systolic"
                 bpDiagnosis.setTextColor(halfColor)
-                if (bpNotificationOn){
+                if (healthNotifications.bpNotificationOn){
                     message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
-                    bpNotificationOn = false
+                    healthNotifications.bpNotificationOn = false
                 }
             }
-            else if (isolatedDiastolic){
+            else if (healthStatus.isolatedDiastolic){
                 bpAlertIV.visibility = View.VISIBLE
                 surveyBtn.visibility = View.VISIBLE
                 bpDiagnosis.text = "Isolated Diastolic"
                 bpDiagnosis.setTextColor(halfColor)
-                if (bpNotificationOn){
+                if (healthNotifications.bpNotificationOn){
                     message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
-                    bpNotificationOn = false
+                    healthNotifications.bpNotificationOn = false
                 }
             }
             else{
                 bpDiagnosis.text = "Normal BP"
                 bpDiagnosis.setTextColor(normalColor)
-                bpNotificationOn = false
+                healthNotifications.bpNotificationOn = false
             }
         }
-        var bmiValue = ImOKApp.calculateBMI(weight, heightMeter)
+        var bmiValue = ImOKApp.calculateBMI(healthMetrics.weight, healthMetrics.heightMeter, healthMetrics)
         if (bmiValue >= "27.5".toFloat()) {
-            ImOKApp.highRiskBmi = true
-            ImOKApp.moderateRiskBmi = false
-            ImOKApp.lowRiskBmi = false
-            uWeight = false
+            healthStatus.highRiskBmi = true
+            healthStatus.moderateRiskBmi = false
+            healthStatus.lowRiskBmi = false
+            healthStatus.uWeight = false
         }
         else if (bmiValue.toInt() >= 23 && bmiValue.toInt() < 27.5) {
-            ImOKApp.highRiskBmi = false
-            ImOKApp.moderateRiskBmi = true
-            ImOKApp.lowRiskBmi = false
-            uWeight = false
+            healthStatus.highRiskBmi = false
+            healthStatus.moderateRiskBmi = true
+            healthStatus.lowRiskBmi = false
+            healthStatus.uWeight = false
         }
         else if (bmiValue.toInt() >= 18.5 && bmiValue.toInt() < 23) {
-            ImOKApp.highRiskBmi = false
-            ImOKApp.moderateRiskBmi = false
-            ImOKApp.lowRiskBmi = true
-            uWeight = false
+            healthStatus.highRiskBmi = false
+            healthStatus.moderateRiskBmi = false
+            healthStatus.lowRiskBmi = true
+            healthStatus.uWeight = false
         }
         else{
-            ImOKApp.highRiskBmi = false
-            ImOKApp.moderateRiskBmi = false
-            ImOKApp.lowRiskBmi = false
-            uWeight = true
+            healthStatus.highRiskBmi = false
+            healthStatus.moderateRiskBmi = false
+            healthStatus.lowRiskBmi = false
+            healthStatus.uWeight = true
         }
-        if(weightArray.isNotEmpty()){
-            if (ImOKApp.highRiskBmi) {
+        if(graphData.weightArray.isNotEmpty()){
+            if (healthStatus.highRiskBmi) {
                 bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "High Risk BMI"
                 bmiWarningTV.setTextColor(highRiskBmiColor)
-                if (weightNotificationOn) {
+                if (healthNotifications.weightNotificationOn) {
                     message += "You're BMI is becoming high risk, go see a doctor for medical advice. \n Take our survey as well to get some recommendations!"
-                    weightNotificationOn = true
+                    healthNotifications.weightNotificationOn = true
                 }
-            } else if (ImOKApp.moderateRiskBmi) {
+            } else if (healthStatus.moderateRiskBmi) {
                 bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "Moderate Risk BMI"
                 bmiWarningTV.setTextColor(moderateRiskBmiColor)
-                if (weightNotificationOn) {
+                if (healthNotifications.weightNotificationOn) {
                     message += "You're BMI is getting a little high, which resulted in an increase in BMI. What changed? \n Take our survey to get some recommendations"
-                    weightNotificationOn = false
+                    healthNotifications.weightNotificationOn = false
                 }
             }
-            else if (ImOKApp.lowRiskBmi) {
+            else if (healthStatus.lowRiskBmi) {
                 bmiWarningTV.text = "Normal BMI"
                 bmiWarningTV.setTextColor(normalColor)
-                weightNotificationOn = false
+                healthNotifications.weightNotificationOn = false
             }
-            else if (uWeight) {
+            else if (healthStatus.uWeight) {
                 bmiAlertIV.visibility = View.VISIBLE
                 bmiWarningTV.text = "Underweight"
                 bmiWarningTV.setTextColor(lowColor)
-                if (weightNotificationOn) {
+                if (healthNotifications.weightNotificationOn) {
                     message += "Your BMI is going a little low"
-                    weightNotificationOn = false
+                    healthNotifications.weightNotificationOn = false
                 }
             }
             else {
                 bmiWarningTV.text = "Unspecified"
                 bmiWarningTV.setTextColor(normalColor)
-                weightNotificationOn = true
+                healthNotifications.weightNotificationOn = true
             }
-            if(weightValues.size >= 5){
-                if (weight >= ImOKApp.weightAverage + weightThreshold) {
+            if(graphData.weightArray.size >= 5){
+                if (healthMetrics.weight >= healthMetrics.weightAverage + healthMetrics.weightThreshold) {
                     // The weight is far above the person's norm
                     weightAlertIV.visibility = View.VISIBLE
                     weightKgNormTV.visibility = View.VISIBLE
                     weightWarningTV.text = "Weight Above Norm"
                     weightWarningTV.setTextColor(highColor)
-                    if (weightNotificationOn) {
+                    if (healthNotifications.weightNotificationOn) {
                         message += "Your weight is significantly higher than your norm. If this is not normal, go see a doctor. \nTake our survey as well to get some recommendations!"
-                        weightNotificationOn = true
+                        healthNotifications.weightNotificationOn = true
                     }
-                } else if (weight <= ImOKApp.weightAverage - weightThreshold) {
+                } else if (healthMetrics.weight <= healthMetrics.weightAverage + healthMetrics.weightThreshold) {
                     // The weight is far below the person's norm
                     weightAlertIV.visibility = View.VISIBLE
                     weightKgNormTV.visibility = View.VISIBLE
                     weightWarningTV.text = "Weight Below Norm"
                     weightWarningTV.setTextColor(lowColor)
-                    if (weightNotificationOn) {
+                    if (healthNotifications.weightNotificationOn) {
                         message += "Your weight is significantly lower than your norm. If this is not normal, go see a doctor. \nTake our survey to get some recommendations!"
-                        weightNotificationOn = true
+                        healthNotifications.weightNotificationOn = true
                     }
                 } else {
                     // The weight is within the person's norm
                     weightWarningTV.text = "Weight is Normal"
-                    weightNotificationOn = false
+                    healthNotifications.weightNotificationOn = false
                 }
             }
         }
-        if(takeCareNotif){
+        if(healthNotifications.takeCareNotif){
             message += "Monitor your condition, drink water and eat healthily! You should be fine in a few days."
             surveyBtn.visibility = View.GONE
         }

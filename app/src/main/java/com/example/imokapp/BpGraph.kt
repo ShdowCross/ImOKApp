@@ -13,30 +13,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.example.imokapp.ImOKApp.Companion.BMI
 import com.example.imokapp.ImOKApp.Companion.addBpData
-import com.example.imokapp.ImOKApp.Companion.bloodPressureDiastolic
-import com.example.imokapp.ImOKApp.Companion.bloodPressureSystolic
-import com.example.imokapp.ImOKApp.Companion.bpNotificationOn
-import com.example.imokapp.ImOKApp.Companion.diastolic
-import com.example.imokapp.ImOKApp.Companion.diastolicValues
 import com.example.imokapp.ImOKApp.Companion.generateTimeLabels
-import com.example.imokapp.ImOKApp.Companion.grade1Hypertension
-import com.example.imokapp.ImOKApp.Companion.grade2Hypertension
-import com.example.imokapp.ImOKApp.Companion.grade3Hypertension
-import com.example.imokapp.ImOKApp.Companion.grade4Hypertension
-import com.example.imokapp.ImOKApp.Companion.heartRate
-import com.example.imokapp.ImOKApp.Companion.highBP
-import com.example.imokapp.ImOKApp.Companion.isolatedDiastolic
-import com.example.imokapp.ImOKApp.Companion.isolatedSystolic
-import com.example.imokapp.ImOKApp.Companion.lowBP
-import com.example.imokapp.ImOKApp.Companion.systolic
-import com.example.imokapp.ImOKApp.Companion.systolicValues
-import com.example.imokapp.ImOKApp.Companion.timeList
-import com.example.imokapp.ImOKApp.Companion.updateDataJson
-import com.example.imokapp.ImOKApp.Companion.weight
-import com.example.imokapp.ImOKApp.Companion.weightArray
-import com.example.imokapp.ImOKApp.Companion.weightAverage
+import com.example.imokapp.ImOKApp.Companion.graphData
+import com.example.imokapp.ImOKApp.Companion.healthMetrics
+import com.example.imokapp.ImOKApp.Companion.healthNotification
+import com.example.imokapp.ImOKApp.Companion.healthStatus
+import com.example.imokapp.ImOKApp.Companion.personInfo
+import com.example.imokapp.ImOKApp.Companion.pullInfo
+import com.example.imokapp.ImOKApp.Companion.writeGraphDataJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthMetricsJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthNotificationsJson
+import com.example.imokapp.ImOKApp.Companion.writeHealthStatusJson
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -52,9 +40,18 @@ import java.io.File
 import java.io.IOException
 
 class BpGraph : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bp_graph)
+        val infoData = pullInfo(filesDir)
+        personInfo = infoData?.personInfo ?: ImOKApp.Companion.PersonInfo()
+        healthMetrics = infoData?.healthMetrics ?: ImOKApp.Companion.HealthMetrics()
+        healthStatus = infoData?.healthStatus ?: ImOKApp.Companion.HealthStatus()
+        healthNotification = infoData?.healthNotifications ?: ImOKApp.Companion.HealthNotifications()
+        graphData = infoData?.graphData ?: ImOKApp.Companion.GraphData()
+
+
         var warningLL = findViewById<LinearLayout>(R.id.diagnosisLL)
         var warningView = findViewById<TextView>(R.id.diagnosisTV)
         var warningSurveyView = findViewById<TextView>(R.id.diagnosisSurveyTV)
@@ -72,58 +69,59 @@ class BpGraph : AppCompatActivity() {
         var message = ""
         var surveyClassName = ""
 
-        if(systolic.isNotEmpty()){
-            var systolicSize = systolicValues.size
-            var diastolicSize = diastolicValues.size
-            lastReadingSystolicTV.text = systolicValues[systolicSize - 1].toString()
-            lastReadingDiastolicTV.text = diastolicValues[diastolicSize - 1].toString()
-            if (highBP){
-                if (grade1Hypertension){
+
+        if(graphData.systolic.isNotEmpty()){
+            var systolicSize = graphData.systolic.size
+            var diastolicSize = graphData.systolic.size
+            lastReadingSystolicTV.text = (graphData.systolic).last().y.toString()
+            lastReadingDiastolicTV.text = (graphData.diastolic).last().y.toString()
+            if (healthStatus.highBP){
+                if (healthStatus.grade1Hypertension){
                     warningView.text = "Slightly High BP"
                     warningView.setTextColor(grade1HypertensionColor)
                     warningSurveyView.text = "Click here to tell us how you're feeling!"
                     warningSurveyView.setTextColor(halfColor)
                     warningLL.isVisible = true
-                    if (bpNotificationOn) {
+                    if (healthNotification.bpNotificationOn) {
                         message += "There's a slight increase in blood pressure, take it easy.\n"
                         surveyClassName = "com.example.imokapp.Survey"
-                        bpNotificationOn = false
+                        healthNotification.bpNotificationOn = false
                     }
                 }
-                else if(grade2Hypertension){
+                else if(healthStatus.grade2Hypertension){
                     warningView.text = "High BP"
                     warningView.setTextColor(grade2HypertensionColor)
                     warningSurveyView.text = "Click here to tell us how you're feeling!"
                     warningSurveyView.setTextColor(halfColor)
                     warningLL.isVisible = true
-                    if (bpNotificationOn) {
+                    if (healthNotification.bpNotificationOn) {
                         message += "Your blood pressure is high. \n Take it easy and monitor your condition.\n"
                         surveyClassName = "com.example.imokapp.Survey"
-                        bpNotificationOn = false
+                        healthNotification.bpNotificationOn = false
                     }
                 }
-                else if(grade3Hypertension){
+                else if(healthStatus.grade3Hypertension){
                     warningView.text = "Very High BP"
                     warningView.setTextColor(grade3HypertensionColor)
                     warningSurveyView.text = "Please click here to tell us how you're feeling."
                     warningSurveyView.setTextColor(highColor)
                     warningLL.isVisible = true
-                    if (bpNotificationOn) {
+                    if (healthNotification.bpNotificationOn) {
                         message += "Your Blood Pressure is rising pretty high. \n We recommend you go see a clinic for medical advice.\n"
                         surveyClassName = "com.example.imokapp.Survey"
-                        bpNotificationOn = true
+                        healthNotification.bpNotificationOn = true
                     }
                 }
-                else if(grade4Hypertension){
+                else if(healthStatus.grade4Hypertension){
                     warningView.text = "GO TO A HOSPITAL"
                     warningView.setTextColor(grade4HypertensionColor)
                     warningSurveyView.text = "Fill in this survey for recommendations"
                     warningSurveyView.setTextColor(highColor)
                     warningLL.isVisible = true
-                    if (bpNotificationOn) {
+                    if (healthNotification.bpNotificationOn) {
                         message += "Your Blood Pressure is too high. \n Please Seek Immediate Medical Attention. \n Call 995 or Head Straight To A Hospital. \n"
                         surveyClassName = "com.example.imokapp.Survey"
-                        bpNotificationOn = true
+                        healthNotification.bpNotificationOn = true
                     }
                 }
                 else{
@@ -131,53 +129,53 @@ class BpGraph : AppCompatActivity() {
                     warningView.setTextColor(highColor)
                     warningSurveyView.text = "Click here to tell us how you're feeling!"
                     warningLL.isVisible = true
-                    if (bpNotificationOn) {
+                    if (healthNotification.bpNotificationOn) {
                         message += "There's a slight increase in blood pressure, take it easy.\n"
                         surveyClassName = "com.example.imokapp.Survey"
-                        bpNotificationOn = false
+                        healthNotification.bpNotificationOn = false
                     }
                 }
             }
-            else if (lowBP){
+            else if (healthStatus.lowBP){
                 warningView.text = "Low BP"
                 warningView.setTextColor(lowColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningSurveyView.setTextColor(highColor)
                 warningLL.isVisible = true
-                if (bpNotificationOn){
+                if (healthNotification.bpNotificationOn){
                     message += "There's a decrease in blood pressure, are you feeling ok? \n"
                     surveyClassName = "com.example.imokapp.Survey"
-                    bpNotificationOn = false
+                    healthNotification.bpNotificationOn = false
                 }
             }
-            else if (isolatedSystolic){
+            else if (healthStatus.isolatedSystolic){
                 warningView.text = "Go see a doctor"
                 warningView.setTextColor(halfColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningSurveyView.setTextColor(halfColor)
                 warningLL.isVisible = true
-                if (bpNotificationOn){
+                if (healthNotification.bpNotificationOn){
                     message += "Your Blood Pressure is a little strange. \n Please seek medical advice at your local clinic. \n"
                     surveyClassName = "com.example.imokapp.Survey"
-                    bpNotificationOn = false
+                    healthNotification.bpNotificationOn = false
                 }
             }
-            else if (isolatedDiastolic){
+            else if (healthStatus.isolatedDiastolic){
                 warningView.text = "Isolated Diastolic"
                 warningView.setTextColor(halfColor)
                 warningSurveyView.text = "Click here to tell us how you're feeling!"
                 warningLL.isVisible = true
-                if (bpNotificationOn){
+                if (healthNotification.bpNotificationOn){
                     message += "Your Blood Pressure is a little strange, please seek medical advice. \n"
                     surveyClassName = "com.example.imokapp.Survey"
-                    bpNotificationOn = false
+                    healthNotification.bpNotificationOn = false
                 }
             }
             else{
                 warningView.text = "Normal BP"
                 warningView.setTextColor(normalColor)
                 warningLL.isInvisible = true
-                bpNotificationOn = false
+                healthNotification.bpNotificationOn = false
             }
             message += ""
             alertDialogBuilder.setMessage(message)
@@ -225,77 +223,96 @@ class BpGraph : AppCompatActivity() {
                 }
             }
             else {
-                grade1Hypertension = false
-                grade2Hypertension = false
-                grade3Hypertension = false
-                grade4Hypertension = false
+                healthStatus.grade1Hypertension = false
+                healthStatus.grade2Hypertension = false
+                healthStatus.grade3Hypertension = false
+                healthStatus.grade4Hypertension = false
                 if (systolicText.toInt() >= 130 && diastolicText.toInt() < 80){
-                    highBP = false
-                    lowBP = false
-                    isolatedSystolic = true
-                    isolatedDiastolic = false
+                    healthStatus.highBP = false
+                    healthStatus.lowBP = false
+                    healthStatus.isolatedSystolic = true
+                    healthStatus.isolatedDiastolic = false
                 }
                 else if(systolicText.toInt() < 130 && diastolicText.toInt() >= 80){
-                    highBP = false
-                    lowBP = false
-                    isolatedSystolic = false
-                    isolatedDiastolic = true
+                    healthStatus.highBP = false
+                    healthStatus.lowBP = false
+                    healthStatus.isolatedSystolic = false
+                    healthStatus.isolatedDiastolic = true
                 }
                 else if (systolicText.toInt() >= 120 || diastolicText.toInt() >= 80){
-                    highBP = true
+                    healthStatus.highBP = true
                     if ((systolicText.toInt() >= 180 || diastolicText.toInt() >= 120) || (systolicText.toInt() >= 180 && diastolicText.toInt() >= 120)){
-                        grade1Hypertension = false
-                        grade2Hypertension = false
-                        grade3Hypertension = false
-                        grade4Hypertension = true
+                        healthStatus.grade1Hypertension = false
+                        healthStatus.grade2Hypertension = false
+                        healthStatus.grade3Hypertension = false
+                        healthStatus.grade4Hypertension = true
 
                     }
                     else if (systolicText.toInt() in 140..179 || diastolicText.toInt() in 90..119){
-                        grade1Hypertension = false
-                        grade2Hypertension = false
-                        grade3Hypertension = true
-                        grade4Hypertension = false
+                        healthStatus.grade1Hypertension = false
+                        healthStatus.grade2Hypertension = false
+                        healthStatus.grade3Hypertension = true
+                        healthStatus.grade4Hypertension = false
                     }
                     else if (systolicText.toInt() in 130..139 || diastolicText.toInt() in 80..89){
-                        grade1Hypertension = false
-                        grade2Hypertension = true
-                        grade3Hypertension = false
-                        grade4Hypertension = false
+                        healthStatus.grade1Hypertension = false
+                        healthStatus.grade2Hypertension = true
+                        healthStatus.grade3Hypertension = false
+                        healthStatus.grade4Hypertension = false
                     }
                     else if (systolicText.toInt() in 120..129 &&  diastolicText.toInt() < 80){
-                        grade1Hypertension = true
-                        grade2Hypertension = false
-                        grade3Hypertension = false
-                        grade4Hypertension = false
+                        healthStatus.grade1Hypertension = true
+                        healthStatus.grade2Hypertension = false
+                        healthStatus.grade3Hypertension = false
+                        healthStatus.grade4Hypertension = false
                     }
-                    lowBP = false
-                    isolatedSystolic = false
-                    isolatedDiastolic = false
+                    healthStatus.lowBP = false
+                    healthStatus.isolatedSystolic = false
+                    healthStatus.isolatedDiastolic = false
                 }
                 else{
                     if(systolicText.toInt() < 90 || diastolicText.toInt() < 60){
-                        highBP = false
-                        lowBP = true
-                        isolatedSystolic = false
-                        isolatedDiastolic = false
+                        healthStatus.highBP = false
+                        healthStatus.lowBP = true
+                        healthStatus.isolatedSystolic = false
+                        healthStatus.isolatedDiastolic = false
                     }
                     else{
-                        highBP = false
-                        lowBP = false
-                        isolatedSystolic = false
-                        isolatedDiastolic = false
+                        healthStatus.highBP = false
+                        healthStatus.lowBP = false
+                        healthStatus.isolatedSystolic = false
+                        healthStatus.isolatedDiastolic = false
                     }
                 }
-                bloodPressureSystolic = systolicText.toInt()
-                bloodPressureDiastolic = diastolicText.toInt()
-                addBpData(bloodPressureSystolic, bloodPressureDiastolic)
-                systolicValues.add(bloodPressureSystolic)
-                diastolicValues.add(bloodPressureDiastolic)
-                bpNotificationOn = true
-                timeList.add(generateTimeLabels())
-                updateDataJson(
-                    systolic = systolic,
-                    diastolic = diastolic,
+                healthMetrics.bloodPressureSystolic = systolicText.toInt()
+                healthMetrics.bloodPressureDiastolic = diastolicText.toInt()
+                addBpData(healthMetrics.bloodPressureSystolic, healthMetrics.bloodPressureDiastolic, graphData)
+                healthNotification.bpNotificationOn = true
+                graphData.timeList.add(generateTimeLabels())
+                writeHealthMetricsJson(
+                    bloodPressureSystolic = healthMetrics.bloodPressureSystolic,
+                    bloodPressureDiastolic = healthMetrics.bloodPressureDiastolic,
+                    filesDir = filesDir
+                )
+                writeHealthStatusJson(
+                    highBP = healthStatus.highBP,
+                    grade1Hypertension = healthStatus.grade1Hypertension,
+                    grade2Hypertension = healthStatus.grade2Hypertension,
+                    grade3Hypertension = healthStatus.grade3Hypertension,
+                    grade4Hypertension = healthStatus.grade4Hypertension,
+                    lowBP = healthStatus.lowBP,
+                    isolatedSystolic = healthStatus.isolatedSystolic,
+                    isolatedDiastolic = healthStatus.isolatedDiastolic,
+                    filesDir = filesDir
+                )
+                writeHealthNotificationsJson(
+                    bpNotificationOn = healthNotification.bpNotificationOn,
+                    filesDir = filesDir
+                )
+                writeGraphDataJson(
+                    systolic = graphData.systolic,
+                    diastolic = graphData.diastolic,
+                    timeList = graphData.timeList,
                     filesDir = filesDir
                 )
                 recreate()
@@ -338,11 +355,11 @@ class BpGraph : AppCompatActivity() {
     }
 
     inner class MyAxisFormatter : IndexAxisValueFormatter() {
-
+        private val graphData = ImOKApp.Companion.GraphData()
         override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
             val index = value.toInt()
-            return if (index in timeList.indices) {
-                timeList[index]
+            return if (index in graphData.timeList.indices) {
+                graphData.timeList[index]
             } else {
                 ""
             }
@@ -350,7 +367,7 @@ class BpGraph : AppCompatActivity() {
     }
 
     private fun setDataToBpChart() {
-        val systolicDataset = LineDataSet(systolic, "Systolic")
+        val systolicDataset = LineDataSet(graphData.systolic, "Systolic")
         systolicDataset.lineWidth = 3f
         systolicDataset.valueTextSize = 12f
         systolicDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -359,7 +376,7 @@ class BpGraph : AppCompatActivity() {
 //        systolicDataset.enableDashedLine(20F, 10F, 0F)
 //        systolicDataset.disableDashedLine()
 
-        val diastolicDataset = LineDataSet(diastolic, "Diastolic")
+        val diastolicDataset = LineDataSet(graphData.diastolic, "Diastolic")
         diastolicDataset.lineWidth = 3f
         diastolicDataset.valueTextSize = 12f
         diastolicDataset.mode = LineDataSet.Mode.CUBIC_BEZIER
