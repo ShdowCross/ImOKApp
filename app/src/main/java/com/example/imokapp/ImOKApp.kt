@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.github.mikephil.charting.data.Entry
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.io.File
 import java.io.FileNotFoundException
@@ -286,6 +287,9 @@ class ImOKApp() : Application(){
         }
 
         fun calculateBMI(w: Float, h: Float, healthMetrics: HealthMetrics): Float {
+            if (h <= 0.0F) {
+                return 0.0F
+            }
             healthMetrics.BMI = w / (h * h)
             return healthMetrics.BMI
         }
@@ -307,7 +311,7 @@ class ImOKApp() : Application(){
             relatives: Map<String, RelativeInfo>? = null,
             filesDir: File
         ) {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
 
             val personInfo = PersonInfo(
                 userName ?: "Jonathan Ho",
@@ -344,15 +348,15 @@ class ImOKApp() : Application(){
             BMI: Float? = null,
             filesDir: File
         ) {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
 
             val healthMetrics = HealthMetrics(
-                weightThreshold ?: 0f,
+                weightThreshold ?: 5f,
                 weight ?: 0F,
                 weightAverage ?: 0F,
                 muscleMass ?: 35.8F,
                 heightCM ?: 169.50F,
-                heightMeter ?: heightCM?.div(100) ?: 0F,
+                heightMeter ?:if (heightCM != null && heightCM > 0) heightCM / 100 else 0F,
                 bloodPressureSystolic ?: 0,
                 bloodPressureDiastolic ?: 0,
                 heartRate ?: 0F,
@@ -385,7 +389,7 @@ class ImOKApp() : Application(){
             uWeight: Boolean? = null,
             filesDir: File
         ) {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
 
             val healthStatus = HealthStatus(
                 highBP ?: false,
@@ -421,7 +425,7 @@ class ImOKApp() : Application(){
             takeCareNotif: Boolean? = null,
             filesDir: File
         ) {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
 
             val healthNotifications = HealthNotifications(
                 firstRun ?: true,
@@ -449,7 +453,7 @@ class ImOKApp() : Application(){
             timeList: List<String>? = null,
             filesDir: File
         ) {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
 
             val systolicList = systolic?.toList()
             val diastolicList = diastolic?.toList()
@@ -474,7 +478,7 @@ class ImOKApp() : Application(){
 
 
         fun readPersonInfoJson(filesDir: File): PersonInfo? {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
             try {
                 val file = File(filesDir, "personInfo.json")
                 if (file.exists()) {
@@ -511,7 +515,7 @@ class ImOKApp() : Application(){
         }
 
         fun readHealthMetricsJson(filesDir: File): HealthMetrics? {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
             try {
                 val file = File(filesDir, "healthMetrics.json")
                 val json = file.readText()
@@ -523,7 +527,7 @@ class ImOKApp() : Application(){
         }
 
         fun readHealthStatusJson(filesDir: File): HealthStatus? {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
             try {
                 val file = File(filesDir, "healthStatus.json")
                 val json = file.readText()
@@ -535,7 +539,7 @@ class ImOKApp() : Application(){
         }
 
         fun readHealthNotificationsJson(filesDir: File): HealthNotifications? {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
             try {
                 val file = File(filesDir, "healthNotifications.json")
                 val json = file.readText()
@@ -547,7 +551,7 @@ class ImOKApp() : Application(){
         }
 
         fun readGraphDataJson(filesDir: File): GraphData? {
-            val gson = Gson()
+            val gson = GsonBuilder().serializeSpecialFloatingPointValues().create()
             try {
                 val file = File(filesDir, "graphData.json")
                 val json = file.readText()

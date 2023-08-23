@@ -116,7 +116,7 @@ class WeightGraph : AppCompatActivity() {
                 warningView1.setTextColor(normalColor)
                 warningLL.isInvisible = true
             }
-            if ((graphData.weightArray).size >= 5){
+            if (weightSize >= 5){
                 var wThreshold = calculateWeightThreshold(healthMetrics.weightAverage, 5f, healthMetrics)
                 if (healthMetrics.weight >= healthMetrics.weightAverage + wThreshold) {
                     // The weight is far above the person's norm
@@ -235,7 +235,7 @@ class WeightGraph : AppCompatActivity() {
                     filesDir = filesDir
                 )
                 writeGraphDataJson(
-                    systolic = graphData.weightArray,
+                    weightArray = graphData.weightArray,
                     timeList = graphData.timeList,
                     filesDir = filesDir
                 )
