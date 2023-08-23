@@ -20,6 +20,7 @@ import com.example.imokapp.ImOKApp.Companion.healthMetrics
 import com.example.imokapp.ImOKApp.Companion.healthNotification
 import com.example.imokapp.ImOKApp.Companion.healthStatus
 import com.example.imokapp.ImOKApp.Companion.personInfo
+import com.example.imokapp.ImOKApp.Companion.pullInfo
 import com.example.imokapp.ImOKApp.Companion.writeGraphDataJson
 import com.example.imokapp.ImOKApp.Companion.writeHealthMetricsJson
 import com.example.imokapp.ImOKApp.Companion.writeHealthNotificationsJson
@@ -65,11 +66,6 @@ class WeightGraph : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Alert")
         var message = ""
-
-        val healthMetrics = ImOKApp.healthMetrics
-        val healthStatus = ImOKApp.healthStatus
-        val healthNotification = ImOKApp.healthNotification
-        val graphData = ImOKApp.graphData
 
         // TODO make the normal threshold for the person
         healthMetrics.weightAverage = graphData.weightArray.map { it.y }.average().toFloat()
@@ -179,6 +175,7 @@ class WeightGraph : AppCompatActivity() {
 
         var submitBtn = findViewById<Button>(R.id.weightSubmitBtn)
         submitBtn.setOnClickListener {
+            Log.d("weightSubmit", "true")
             var weightET = findViewById<EditText>(R.id.weightEntryET)
             var weightText = weightET.text.toString()
             weightET.setText("")
@@ -224,6 +221,7 @@ class WeightGraph : AppCompatActivity() {
                     weightThreshold = healthMetrics.weightThreshold,
                     weight = healthMetrics.weight,
                     weightAverage = healthMetrics.weightAverage,
+                    BMI = bmiValue,
                     filesDir = filesDir
                 )
                 writeHealthStatusJson(
@@ -239,7 +237,16 @@ class WeightGraph : AppCompatActivity() {
                     timeList = graphData.timeList,
                     filesDir = filesDir
                 )
-
+                val updatedInfoData = pullInfo(filesDir)
+                val infoData = pullInfo(filesDir)
+                if (infoData != null) {
+                    graphData = infoData.graphData ?: ImOKApp.Companion.GraphData()
+                    // Reset other necessary variables here
+                } else {
+                    graphData = ImOKApp.Companion.GraphData()
+                    // Reset other necessary variables here
+                }
+                Log.d("Updated Info", updatedInfoData.toString())
                 recreate()
             }
         }

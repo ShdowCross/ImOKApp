@@ -81,7 +81,7 @@ class HealthMetrics : AppCompatActivity() {
         weightTV.text = healthMetrics.weight.toString()
         weightKgNormTV.text = "(${healthMetrics.weightAverage})"
         heightTV.text = healthMetrics.heightCM.toString()
-        var bmiVal = healthMetrics.weight / (healthMetrics.heightMeter * healthMetrics.heightMeter)
+        var bmiVal = healthMetrics.BMI
         var formattedBMI = String.format("%.2f", bmiVal)
         bmiTV.text = formattedBMI
         bpTV.text = "${healthMetrics.bloodPressureSystolic} / ${healthMetrics.bloodPressureDiastolic}"

@@ -69,7 +69,6 @@ class BpGraph : AppCompatActivity() {
         var message = ""
         var surveyClassName = ""
 
-
         if(graphData.systolic.isNotEmpty()){
             var systolicSize = graphData.systolic.size
             var diastolicSize = graphData.systolic.size
