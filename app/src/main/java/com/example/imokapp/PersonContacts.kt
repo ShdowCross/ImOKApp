@@ -10,16 +10,21 @@ import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.example.imokapp.ImOKApp.Companion.addedRelatives
+import com.example.imokapp.ImOKApp.Companion.doctors
+import com.example.imokapp.ImOKApp.Companion.relatives
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_medical_contacts.*
 import java.util.ArrayList
 
 
 class PersonContacts : AppCompatActivity() {
-    var doctor = arrayListOf("Cardiologist", "Dermatologist", "Neurologist", "Pediatrician")
-    var relative = arrayListOf("Brother", "Cousin", "Aunt", "Uncle")
+    var doctor = arrayListOf<String>()
+    var relative = arrayListOf<String>()
     var doctorAdapter: ArrayAdapter<String>? = null
     var relativeAdapter: ArrayAdapter<String>? = null
+    val defaultImageResourceId = R.drawable.profile // Replace with the actual resource ID of your default image
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +35,16 @@ class PersonContacts : AppCompatActivity() {
             val intent = Intent(this, PatientProfile::class.java)
             startActivity(intent)
         }
-
+        for (entry in doctors){
+            if (entry.key != "General Doctor"){
+                doctor.add(entry.key)
+            }
+        }
+        for (entry in relatives){
+            if (entry.key != "Mother"){
+                relative.add(entry.key)
+            }
+        }
         val paths = getPaths()
         val main1Doctor = "General Doctor"
         val main1Info = getDoctorInfo(main1Doctor)
@@ -38,7 +52,6 @@ class PersonContacts : AppCompatActivity() {
         val main2Info = getRelativeInfo(main2Doctor)
         Picasso.get().load(resources.getIdentifier(main1Info.imageUrl, "drawable", packageName))
         Picasso.get().load(resources.getIdentifier(main2Info.imageUrl, "drawable", packageName))
-        hideFields(paths.selectedDoctor)
         hideFields(paths.selectedRelative)
         showFields(paths.unselectedDoctor)
         showFields(paths.unselectedRelative)
@@ -59,19 +72,24 @@ class PersonContacts : AppCompatActivity() {
             showFields(paths.selectedDoctor)
             val selectedDoctor = "General Doctor"
             displayToast("You have selected your main doctor")
-            var doctorInfo = getDoctorInfo(selectedDoctor)
+            var doctorInfo = doctors[selectedDoctor]
             val imageResourceId =
-                resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
+                resources.getIdentifier(doctorInfo?.imageUrl, "drawable", packageName)
             selectedDoctorNickname.text = selectedDoctor
-            selectedDoctorName.text = doctorInfo.name
-            selectedDoctorTitle.text = doctorInfo.title
-            medicalProfileWebsite.text = doctorInfo.website
-            Picasso.get().load(imageResourceId).into(paths.selectedDoctorProfileImg)
-            selectedDoctorEmail.text = doctorInfo.email
-            selectedDoctorPhoneNumber.text = doctorInfo.phoneNumber
-            selectedDoctorStreet.text = doctorInfo.street
-            selectedDoctorUnit.text = doctorInfo.unit
-            selectedDoctorPostal.text = doctorInfo.postal
+            selectedDoctorName.text = doctorInfo?.name
+            selectedDoctorTitle.text = doctorInfo?.title
+            medicalProfileWebsite.text = doctorInfo?.website
+            val imageRequest = if (imageResourceId != 0) {
+                Picasso.get().load(imageResourceId)
+            } else {
+                Picasso.get().load(defaultImageResourceId)
+            }
+            imageRequest.error(defaultImageResourceId).into(paths.selectedDoctorProfileImg)
+            selectedDoctorEmail.text = doctorInfo?.email
+            selectedDoctorPhoneNumber.text = doctorInfo?.phoneNumber
+            selectedDoctorStreet.text = doctorInfo?.street
+            selectedDoctorUnit.text = doctorInfo?.unit
+            selectedDoctorPostal.text = doctorInfo?.postal
         }
         doctorAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, doctor)
         medicalSelectionRight.adapter = doctorAdapter
@@ -80,37 +98,47 @@ class PersonContacts : AppCompatActivity() {
                 hideFields(paths.unselectedDoctor)
                 showFields(paths.selectedDoctor)
                 val selectedDoctor = parent?.adapter?.getItem(position).toString()
-                val doctorInfo = getDoctorInfo(selectedDoctor)
+                val doctorInfo = doctors[selectedDoctor]
                 val imageResourceId =
-                    resources.getIdentifier(doctorInfo.imageUrl, "drawable", packageName)
+                    resources.getIdentifier(doctorInfo?.imageUrl, "drawable", packageName)
                 displayToast("You have selected " + parent?.adapter?.getItem(position) + " of doctor")
                 selectedDoctorNickname.text = selectedDoctor
-                selectedDoctorName.text = doctorInfo.name
-                selectedDoctorTitle.text = doctorInfo.title
-                medicalProfileWebsite.text = doctorInfo.website
-                Picasso.get().load(imageResourceId).into(paths.selectedDoctorProfileImg)
-                selectedDoctorEmail.text = doctorInfo.email
-                selectedDoctorPhoneNumber.text = doctorInfo.phoneNumber
-                selectedDoctorStreet.text = doctorInfo.street
-                selectedDoctorUnit.text = doctorInfo.unit
-                selectedDoctorPostal.text = doctorInfo.postal
+                selectedDoctorName.text = doctorInfo?.name
+                selectedDoctorTitle.text = doctorInfo?.title
+                medicalProfileWebsite.text = doctorInfo?.website
+                val imageRequest = if (imageResourceId != 0) {
+                    Picasso.get().load(imageResourceId)
+                } else {
+                    Picasso.get().load(defaultImageResourceId)
+                }
+                imageRequest.error(defaultImageResourceId).into(paths.selectedDoctorProfileImg)
+                selectedDoctorEmail.text = doctorInfo?.email
+                selectedDoctorPhoneNumber.text = doctorInfo?.phoneNumber
+                selectedDoctorStreet.text = doctorInfo?.street
+                selectedDoctorUnit.text = doctorInfo?.unit
+                selectedDoctorPostal.text = doctorInfo?.postal
             }
         relativeSelectionLeft.setOnClickListener {
             hideFields(paths.unselectedRelative)
             showFields(paths.selectedRelative)
             val selectedRelative = "Mother"
-            val relativeInfo = getRelativeInfo(selectedRelative)
+            val relativeInfo = relatives[selectedRelative]
             val imageResourceId =
-                resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
+                resources.getIdentifier(relativeInfo?.imageUrl, "drawable", packageName)
             selectedRelativeNickname.text = selectedRelative
-            selectedRelativeName.text = relativeInfo.name
-            selectedRelativeTitle.text = relativeInfo.title
-            Picasso.get().load(imageResourceId).into(paths.selectedRelativeProfileImg)
-            selectedRelativeEmail.text = relativeInfo.email
-            selectedRelativePhoneNumber.text = relativeInfo.phoneNumber
-            selectedRelativeStreet.text = relativeInfo.street
-            selectedRelativeUnit.text = relativeInfo.unit
-            selectedRelativePostal.text = relativeInfo.postal
+            selectedRelativeName.text = relativeInfo?.name
+            selectedRelativeTitle.text = relativeInfo?.title
+            val imageRequest = if (imageResourceId != 0) {
+                Picasso.get().load(imageResourceId)
+            } else {
+                Picasso.get().load(defaultImageResourceId)
+            }
+            imageRequest.error(defaultImageResourceId).into(paths.selectedRelativeProfileImg)
+            selectedRelativeEmail.text = relativeInfo?.email
+            selectedRelativePhoneNumber.text = relativeInfo?.phoneNumber
+            selectedRelativeStreet.text = relativeInfo?.street
+            selectedRelativeUnit.text = relativeInfo?.unit
+            selectedRelativePostal.text = relativeInfo?.postal
             displayToast("You have selected your $selectedRelative")
         }
         relativeAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, relative)
@@ -120,18 +148,23 @@ class PersonContacts : AppCompatActivity() {
                 hideFields(paths.unselectedRelative)
                 showFields(paths.selectedRelative)
                 val selectedRelative = parent?.adapter?.getItem(position).toString()
-                val relativeInfo = getRelativeInfo(selectedRelative)
+                val relativeInfo = relatives[selectedRelative]
                 val imageResourceId =
-                    resources.getIdentifier(relativeInfo.imageUrl, "drawable", packageName)
+                    resources.getIdentifier(relativeInfo?.imageUrl, "drawable", packageName)
                 selectedRelativeNickname.text = selectedRelative
-                selectedRelativeName.text = relativeInfo.name
-                selectedRelativeTitle.text = relativeInfo.title
-                Picasso.get().load(imageResourceId).into(paths.selectedRelativeProfileImg)
-                selectedRelativeEmail.text = relativeInfo.email
-                selectedRelativePhoneNumber.text = relativeInfo.phoneNumber
-                selectedRelativeStreet.text = relativeInfo.street
-                selectedRelativeUnit.text = relativeInfo.unit
-                selectedRelativePostal.text = relativeInfo.postal
+                selectedRelativeName.text = relativeInfo?.name
+                selectedRelativeTitle.text = relativeInfo?.title
+                val imageRequest = if (imageResourceId != 0) {
+                    Picasso.get().load(imageResourceId)
+                } else {
+                    Picasso.get().load(defaultImageResourceId)
+                }
+                imageRequest.error(defaultImageResourceId).into(paths.selectedRelativeProfileImg)
+                selectedRelativeEmail.text = relativeInfo?.email
+                selectedRelativePhoneNumber.text = relativeInfo?.phoneNumber
+                selectedRelativeStreet.text = relativeInfo?.street
+                selectedRelativeUnit.text = relativeInfo?.unit
+                selectedRelativePostal.text = relativeInfo?.postal
                 displayToast("You have selected your " + parent?.adapter?.getItem(position))
             }
         addPeopleBtn.setOnClickListener {
@@ -148,6 +181,25 @@ class PersonContacts : AppCompatActivity() {
             .setTitle("Modal Form") // Set the title of the dialog
 
         dialogBuilder.setPositiveButton("Submit", DialogInterface.OnClickListener { dialog, which ->
+            var formName = dialogView.findViewById<EditText>(R.id.editTextName)
+            var formTitle = dialogView.findViewById<EditText>(R.id.editTextTitle)
+            var formPhoneNumber = dialogView.findViewById<EditText>(R.id.editTextPhoneNumber)
+            var formEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
+            var formStreet = dialogView.findViewById<EditText>(R.id.editTextStreet)
+            var formUnit = dialogView.findViewById<EditText>(R.id.editTextUnit)
+            var formPostal = dialogView.findViewById<EditText>(R.id.editTextPostal)
+            val newRelativeData = RelativeInfo(
+                name = formName.text.toString(),
+                title = formTitle.text.toString(),
+                imageUrl = "null",
+                phoneNumber = formPhoneNumber.text.toString(),
+                email = formEmail.text.toString(),
+                street = formStreet.text.toString(),
+                unit = formUnit.text.toString(),
+                postal = formPostal.text.toString()
+            )
+            relatives[formTitle.text.toString()] = newRelativeData
+            addedRelatives[formTitle.text.toString()] = newRelativeData
             recreate()
         })
 

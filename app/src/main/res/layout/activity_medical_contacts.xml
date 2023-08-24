@@ -69,30 +69,30 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="Gastroenterologist"/>
+                            android:text=""/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="---------------------------------"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/selectedDoctorName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="Dr Seng"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/selectedDoctorTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="15dp"
-                            android:text="Stomach &amp; Intestine Specialist"/>
+                            android:text=""/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="--------------------------------------"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/medicalProfileWebsite"
                             android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                             android:textSize="15dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="www.JushaMedical.com.sg"/>
+                            android:text=""/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/medicalProfileFace"
@@ -115,8 +115,7 @@
                             android:layout_width="160dp"
                             android:layout_height="160dp"
                             android:layout_gravity="center"
-                            android:padding="10px"
-                            android:src="@mipmap/profile"/>
+                            android:padding="10px" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -130,19 +129,19 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="15dp"
-                            android:text="DrSeng@JushaMedical.com.sg"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/selectedDoctorPhoneNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="+65 6614 3218"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/selectedDoctorStreet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
-                            android:text="Parkway Street 13"/>
+                            android:text=""/>
                         <LinearLayout
                             android:id="@+id/selectedDoctorAddress2"
                             android:layout_width="wrap_content"
@@ -154,14 +153,14 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="15dp"
                                 android:layout_marginRight="10dp"
-                                android:text="#01-35"/>
+                                android:text=""/>
                             <TextView
                                 android:id="@+id/selectedDoctorPostal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:textSize="15dp"
-                                android:text="S420183"/>
+                                android:text=""/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -287,12 +286,13 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.35"
+                        android:gravity="center"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/chosenRelativeProfileImg"
                             android:layout_width="160dp"
                             android:layout_height="160dp"
-                            android:gravity="center"
+                            android:layout_gravity="center"
                             android:padding="10px"
                             android:src="@mipmap/profile"/>
                     </LinearLayout>

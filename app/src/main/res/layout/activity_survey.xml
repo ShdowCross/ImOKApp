@@ -1079,13 +1079,500 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <TextView
+                        android:text="Isolated Systolic"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
+
+                    <!-- Question 1: Nausea -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c4q1_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you experienced nausea or vomiting in the past month?" />
+
+                        <RadioGroup
+                            android:id="@+id/c4q1_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c4q1_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c4q1_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 2: Shortness of Breath -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c4q2_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you had shortness of breath in the past month?" />
+
+                        <RadioGroup
+                            android:id="@+id/c4q2_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c4q2_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c4q2_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 3: Headaches -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c4q3_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Do you experience headaches?" />
+
+                        <RadioGroup
+                            android:id="@+id/c4q3_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c4q3_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c4q3_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 4: Confusion -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c4q4_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you noticed increased confusion recently?" />
+
+                        <RadioGroup
+                            android:id="@+id/c4q4_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c4q4_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c4q4_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 5: Vision Issues -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c4q5_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Do you have any issues with your vision, such as blurriness?" />
+
+                        <RadioGroup
+                            android:id="@+id/c4q5_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c4q5_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c4q5_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/category5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <TextView
+                        android:text="Isolated Diastolic"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"/>
 
+                    <!-- Question 1: Swelling of Feet or Ankles -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c5q1_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you noticed swelling in your feet or ankles?" />
+
+                        <RadioGroup
+                            android:id="@+id/c5q1_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c5q1_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c5q1_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 2: Tiredness -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c5q2_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Do you often feel excessively tired?" />
+
+                        <RadioGroup
+                            android:id="@+id/c5q2_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c5q2_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c5q2_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 3: Dizziness -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c5q3_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you experienced dizziness in the past month?" />
+
+                        <RadioGroup
+                            android:id="@+id/c5q3_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c5q3_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c5q3_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 4: Falls -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c5q4_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Have you had any falls in the last 6 months?" />
+
+                        <RadioGroup
+                            android:id="@+id/c5q4_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c5q4_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c5q4_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <!-- Question 5: General Mobility -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/bubble_border">
+
+                        <TextView
+                            android:id="@+id/c5q5_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:text="Would you say your mobility is generally good?" />
+
+                        <RadioGroup
+                            android:id="@+id/c5q5_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="30dp">
+                            <RadioButton
+                                android:id="@+id/c5q5_yes"
+                                android:text="Yes"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"/>
+                            <RadioButton
+                                android:id="@+id/c5q5_no"
+                                android:text="No"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:background="@drawable/bubble_border"
+                                android:gravity="center"/>
+                        </RadioGroup>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

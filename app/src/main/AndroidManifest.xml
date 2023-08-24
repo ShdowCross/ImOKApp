@@ -48,15 +48,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".WLRecommendationComplication"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".HBPRecommendationComplication"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".LBPRecommendationComplication"
+            android:name=".Recommendations"
             android:exported="true"
             android:screenOrientation="landscape" />
     </application>
